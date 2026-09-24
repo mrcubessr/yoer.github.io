@@ -368,6 +368,8 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
 .syl-item b { font-size: 15px; color: var(--text); }
 .syl-item span { font-size: 13px; color: var(--brand); font-weight: 600; }
 .syl-item span.no-count { color: var(--muted); font-weight: 500; }
+.syl-item em { font-style: normal; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.syl-callout.kinder { color: #047857; background: #ecfdf5; border-color: #a7f3d0; }
 .syl-total { margin-top: 12px; font-size: 13px; color: var(--text); }
 .syl-total b { color: var(--brand); font-size: 16px; }
 .syl-link.kinder-link b { color: #2563eb; }

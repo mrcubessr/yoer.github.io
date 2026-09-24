@@ -67,7 +67,7 @@
           <em>${track.audience}</em>
           <p>${track.desc}</p>
           ${stats}
-          ${isHome && track.planNote ? `<div class="track-note">${track.planNote}</div>` : ''}
+          ${track.planNote ? `<div class="track-note">${track.planNote}</div>` : ''}
           <ul>${track.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
         </div>`;
     }
@@ -111,6 +111,8 @@
       const bothTracks = !!(p.homeTrack && p.kindergartenTrack);
       const homeSyl = p.homeTrack && p.homeTrack.syllabus ? p.homeTrack.syllabus : null;
       const sylTotal = homeSyl ? homeSyl.filter(s => s.lessons != null).reduce((a, b) => a + b.lessons, 0) : 0;
+      const kinderSyl = p.kindergartenTrack && p.kindergartenTrack.syllabus ? p.kindergartenTrack.syllabus : null;
+      const kinderTotal = kinderSyl ? kinderSyl.reduce((a, b) => a + (b.lessons || 0), 0) : 0;
       PANES.curriculum = `
         ${bothTracks ? `
         <div class="d-sec full-span">
@@ -157,6 +159,25 @@
           <p class="syl-disclaimer">注：家庭版课程为视频在线学习形式，不含幼儿园版的标准教案与配套课件；该大纲内容由 AI 生成，仅供参考，实际课程以官方发布为准。</p>
         </div>` : ''}
 
+        ${kinderSyl ? `
+        <div class="d-sec full-span">
+          <h2>幼儿园版课程大纲（含教案课件）</h2>
+          <div class="syl-callout kinder">按季度排课 · ${p.kindergartenTrack.lessonPlans} 份标准教案 + ${p.kindergartenTrack.courseware} 份配套课件</div>
+          <div class="syl-board">
+            ${kinderSyl.map(s => `
+              <div class="syl-item">
+                <b>${s.name}</b>
+                <span>${s.lessons} 课</span>
+                <em>${s.note || ''}</em>
+              </div>`).join('')}
+          </div>
+          <div class="syl-total">共 <b>${kinderTotal}</b> 个教学主题，两学期完整排课 · 盒内教具、材料与家庭版完全共用</div>
+          <a class="syl-link kinder-link" href="syllabus.html?lv=${p.level}">
+            <b>查看 ${p.level} 幼儿园版逐课明细表（含标准教案与配套课件）→</b>
+            <span>按${p.level === 'L3' ? '学期 / 季度' : '月份'}列出每一节课的核心内容、主要游戏与所需材料</span>
+          </a>
+        </div>` : ''}
+
         ${p.modules ? `
         <div class="d-sec full-span">
           <h2>${p.modulesTitle || '8 大能力模块（层层递进）'}</h2>
@@ -171,12 +192,12 @@
             </div>`).join('')}
         </div>` : ''}
 
-        ${p.homeTrack ? `
+        ${p.kindergartenTrack ? `
         <div class="d-sec full-span">
           <h2>幼儿园版完整大纲（含教案课件）</h2>
           <a class="syl-link kinder-link" href="syllabus.html?lv=${p.level}">
             <b>查看 ${p.level} 幼儿园逐课明细表（含标准教案与配套课件）→</b>
-            <span>按月份列出每一节课的核心内容、主要游戏与所需材料，供园所集体教学使用</span>
+            <span>${p.kindergartenTrack.lessonPlans} 份标准教案 + ${p.kindergartenTrack.courseware} 份配套课件，供园所集体教学使用</span>
           </a>
         </div>` : `
         <div class="d-sec full-span">
