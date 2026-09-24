@@ -56,7 +56,9 @@
       if (!track) return '';
       const isHome = type === 'home';
       const stats = isHome
-        ? `<div class="track-stats"><span><b>${track.videoLessons}</b><em>节视频课</em></span></div>`
+        ? (track.videoLessons != null
+            ? `<div class="track-stats"><span><b>${track.videoLessons}</b><em>节视频课</em></span></div>`
+            : `<div class="track-stats"><span class="badge-video">视频在线课</span></div>`)
         : `<div class="track-stats"><span><b>${track.lessonPlans}</b><em>份标准教案</em></span><span><b>${track.courseware}</b><em>份配套课件</em></span></div>`;
       return `
         <div class="track ${isHome ? 'home' : 'kinder'}">
@@ -65,6 +67,7 @@
           <em>${track.audience}</em>
           <p>${track.desc}</p>
           ${stats}
+          ${isHome && track.planNote ? `<div class="track-note">${track.planNote}</div>` : ''}
           <ul>${track.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
         </div>`;
     }
@@ -105,7 +108,11 @@
 
     /* 课程体系：共享教具 + 两条主线（家庭 / 园所）各自介绍 */
     if (hasTracks) {
+      const bothTracks = !!(p.homeTrack && p.kindergartenTrack);
+      const homeSyl = p.homeTrack && p.homeTrack.syllabus ? p.homeTrack.syllabus : null;
+      const sylTotal = homeSyl ? homeSyl.filter(s => s.lessons != null).reduce((a, b) => a + b.lessons, 0) : 0;
       PANES.curriculum = `
+        ${bothTracks ? `
         <div class="d-sec full-span">
           <h2>一套教具 · 两套课程体系</h2>
           <p>盒内的教具、材料与图鉴是<b>共享</b>的；但在「家庭亲子」与「幼儿园集体教学」两种场景下，课程内容、课程大纲与配套形式各不相同。请按你的使用场景，选择对应的体系查看。</p>
@@ -115,7 +122,36 @@
             ${trackCol(p.homeTrack, 'home')}
             ${trackCol(p.kindergartenTrack, 'kinder')}
           </div>
+        </div>` : p.homeTrack ? `
+        <div class="d-sec full-span">
+          <h2>家庭亲子版 · 视频在线课程</h2>
+          <p>本套盒提供完整的家庭亲子视频课程体系，家长跟着真人视频课即可在家启蒙；<b>不提供课件与教案</b>，通过在线视频课程逐节学习。</p>
         </div>
+        <div class="d-sec full-span">
+          <div class="track-grid">
+            ${trackCol(p.homeTrack, 'home')}
+          </div>
+        </div>` : `
+        <div class="d-sec full-span">
+          <div class="track-grid">
+            ${trackCol(p.kindergartenTrack, 'kinder')}
+          </div>
+        </div>`}
+
+        ${homeSyl ? `
+        <div class="d-sec full-span">
+          <h2>家庭版课程大纲（视频在线课）</h2>
+          <div class="syl-callout">纯视频在线学习 · 无课件 · 无教案</div>
+          <div class="syl-board">
+            ${homeSyl.map(s => `
+              <div class="syl-item">
+                <b>${s.name}</b>
+                ${s.lessons != null ? `<span>${s.lessons} 节</span>` : `<span class="no-count">视频课</span>`}
+              </div>`).join('')}
+          </div>
+          ${sylTotal > 0 ? `<div class="syl-total">合计 <b>${sylTotal}</b> 节真人视频课，按上方板块顺序在线学习</div>` : `<div class="syl-total">按上方板块顺序在线学习，逐步解锁</div>`}
+        </div>` : ''}
+
         ${p.modules ? `
         <div class="d-sec full-span">
           <h2>${p.modulesTitle || '8 大能力模块（层层递进）'}</h2>
@@ -129,13 +165,23 @@
               </div>
             </div>`).join('')}
         </div>` : ''}
+
+        ${p.homeTrack ? `
+        <div class="d-sec full-span">
+          <h2>幼儿园版完整大纲（含教案课件）</h2>
+          <a class="syl-link kinder-link" href="syllabus.html?lv=${p.level}">
+            <b>查看 ${p.level} 幼儿园逐课明细表（含标准教案与配套课件）→</b>
+            <span>按月份列出每一节课的核心内容、主要游戏与所需材料，供园所集体教学使用</span>
+          </a>
+        </div>` : `
         <div class="d-sec full-span">
           <h2>完整课程大纲</h2>
           <a class="syl-link" href="syllabus.html?lv=${p.level}">
             <b>查看 ${p.level} 逐课明细表 →</b>
             <span>按月份列出每一节课的核心内容、主要游戏与所需材料</span>
           </a>
-        </div>
+        </div>`}
+
         ${p.sevenSteps ? `
         <div class="d-sec full-span">
           <h2>7 步启蒙路径</h2>

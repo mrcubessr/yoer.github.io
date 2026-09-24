@@ -340,9 +340,37 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
 .track-stats em { font-size: 12px; color: var(--muted); font-style: normal; margin: 0; }
 .track ul { margin: 0; padding-left: 18px; font-size: 13px; color: var(--text); line-height: 1.7; }
 .track ul li { margin-bottom: 2px; }
+.track-note {
+  display: inline-block; font-size: 12px; font-weight: 600;
+  color: var(--brand); background: #fff7ed;
+  border: 1px dashed #fdba74; border-radius: 999px;
+  padding: 4px 12px; margin-bottom: 10px;
+}
+.badge-video {
+  font-size: 14px !important; font-weight: 700; color: var(--brand) !important;
+}
 @media (min-width: 560px) {
   .track-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* 家庭版课程大纲（视频在线课）区块 */
+.syl-callout {
+  display: inline-block; font-size: 12px; font-weight: 600;
+  color: #2563eb; background: #eff6ff;
+  border: 1px solid #bfdbfe; border-radius: 999px;
+  padding: 4px 12px; margin-bottom: 12px;
+}
+.syl-board { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.syl-item {
+  border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px;
+  background: #fff; display: flex; flex-direction: column; gap: 4px;
+}
+.syl-item b { font-size: 15px; color: var(--text); }
+.syl-item span { font-size: 13px; color: var(--brand); font-weight: 600; }
+.syl-item span.no-count { color: var(--muted); font-weight: 500; }
+.syl-total { margin-top: 12px; font-size: 13px; color: var(--text); }
+.syl-total b { color: var(--brand); font-size: 16px; }
+.syl-link.kinder-link b { color: #2563eb; }
 
 /* ===== 两条产品线对比表 ===== */
 .cmp-table {

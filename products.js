@@ -92,11 +92,18 @@ const PRODUCTS = {
       title: '家庭亲子套装',
       audience: '家长购买 · 家庭一对一陪玩',
       videoLessons: 74,
+      planNote: '纯视频在线学习 · 无课件 · 无教案',
       desc: '专为家庭设计的 74 节真人视频课，Kevin 老师领衔出镜，家长零基础即可上手。每天 10-15 分钟，在游戏中自然启蒙，无需刷题背记。',
       highlights: [
         '74 节真人视频课，家长跟着视频就能引导',
         '每天 10-15 分钟，贴合幼儿注意力规律',
         '一盒教具 + 一套视频，在家就能完成启蒙'
+      ],
+      syllabus: [
+        { name: '数量概念', lessons: 24 },
+        { name: '空间几何', lessons: 3 },
+        { name: '逻辑思维', lessons: 11 },
+        { name: '思维训练', lessons: 36 }
       ]
     },
     kindergartenTrack: {
@@ -195,6 +202,25 @@ const PRODUCTS = {
       '园所小班下/中班组数学区',
       '幼小衔接思维铺垫'
     ],
+    /* ===== 家庭亲子体系（视频在线课，无课件无教案）===== */
+    homeTrack: {
+      title: '家庭亲子套装',
+      audience: '家长购买 · 家庭一对一陪玩',
+      videoLessons: 68,
+      planNote: '纯视频在线学习 · 无课件 · 无教案',
+      desc: '专为家庭设计的真人视频课程体系，在 L1 基础上从"认识数字"进阶到"理解运算"。家长跟着视频引导，每天 15-20 分钟在家启蒙。',
+      highlights: [
+        '真人视频课逐节引导，家长零基础也能带',
+        '每天 15-20 分钟，进阶理解加减本质',
+        '一盒教具 + 一套视频，在家完成启蒙'
+      ],
+      syllabus: [
+        { name: '数量概念', lessons: 24 },
+        { name: '空间几何', lessons: 1 },
+        { name: '逻辑思维', lessons: 7 },
+        { name: '游戏模块', lessons: 36 }
+      ]
+    },
     purchase: [
       '单园采购：按班级起订',
       '批量采购：10 套起享批发价',
@@ -268,6 +294,28 @@ const PRODUCTS = {
       '园所中/大班数学区',
       '幼小衔接专项训练'
     ],
+    /* ===== 家庭亲子体系（视频在线课，无课件无教案）===== */
+    homeTrack: {
+      title: '家庭亲子套装',
+      audience: '家长购买 · 家庭一对一陪玩',
+      videoLessons: null,
+      planNote: '纯视频在线学习 · 无课件 · 无教案',
+      desc: '专为家庭设计的 24 算主题视频课程体系，从运算进阶到数学推理。家长跟着视频引导，在家完成四则混合运算与策略对战启蒙。',
+      highlights: [
+        '24 算主题视频课，家长跟着引导陪玩',
+        '从运算进阶到推理，衔接小学数学',
+        '主题算战棋盘 + 视频，沉浸式对战'
+      ],
+      syllabus: [
+        { name: '24算', lessons: null },
+        { name: '百里驰援', lessons: null },
+        { name: '官渡算战', lessons: null },
+        { name: '三国谋算', lessons: null },
+        { name: '神机妙算', lessons: null },
+        { name: '九九争霸', lessons: null },
+        { name: '课前导入 · 家长必读', lessons: null }
+      ]
+    },
     purchase: [
       '单园采购：按班级起订',
       '批量采购：10 套起享批发价',
