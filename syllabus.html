@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>课程大纲 · L1/L2/L3 完整课程体系 — 优尔数学思维启蒙盒</title>
-<meta name="description" content="优尔 L1/L2/L3 三阶段课程大纲：132 条逐课明细，按月份列出核心内容、主要游戏与所需材料。">
+<meta name="description" content="优尔 L1/L2/L3 三阶段课程大纲：幼儿园版（标准教案 + 配套课件）逐课明细，与家庭版（真人视频在线课、无课件无教案）版块结构，按版本切换查看。">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -30,7 +30,39 @@
 .syl-hero p { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
 
 .syl-switch { background: #fff; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.ver-tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 10px; }
+.ver-tab {
+  display: block; text-align: center; padding: 10px 8px;
+  border: 2px solid var(--line); border-radius: 14px; background: #fff;
+  transition: border-color .2s, background .2s;
+}
+.ver-tab b { display: block; font-size: 15px; color: var(--ink); }
+.ver-tab span { display: block; font-size: 11px; color: var(--ink-2); margin-top: 3px; }
+.ver-tab.on.kinder { border-color: var(--brand); background: #fff7ed; }
+.ver-tab.on.kinder b { color: var(--brand); }
+.ver-tab.on.home { border-color: #2563eb; background: #eff6ff; }
+.ver-tab.on.home b { color: #2563eb; }
 .lv-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+/* ===== 家庭版（视频在线课）视图 ===== */
+.syl-home-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+.syl-home-board {
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px;
+  padding: 12px 10px; text-align: center;
+}
+.syl-home-board b { display: block; font-size: 14px; color: #1e3a8a; line-height: 1.4; }
+.syl-home-board em { display: block; font-style: normal; font-size: 12px; font-weight: 700; color: #2563eb; margin-top: 4px; }
+.syl-home-total {
+  margin-top: 12px; background: #fff; border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px; text-align: center;
+}
+.syl-home-total b { display: block; font-size: 19px; color: #2563eb; line-height: 1.3; }
+.syl-home-total span { font-size: 11px; color: var(--ink-2); }
+.syl-home-callout {
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 14px 16px;
+}
+.syl-home-callout b { display: block; font-size: 14px; color: #1e3a8a; }
+.syl-home-callout span { display: block; font-size: 12px; color: #1e40af; line-height: 1.8; margin-top: 5px; }
 .lv-tab {
   display: block; text-align: center; padding: 12px 8px;
   border: 2px solid var(--line); border-radius: 14px; background: #fff;
@@ -122,6 +154,10 @@
   .syl-stats { grid-template-columns: repeat(6, 1fr); gap: 12px; }
   .syl-mods { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .syl-next { grid-template-columns: repeat(2, 1fr); }
+  .ver-tab { padding: 12px 10px; }
+  .ver-tab b { font-size: 16px; }
+  .ver-tab span { font-size: 12px; }
+  .syl-home-grid { gap: 12px; }
 }
 
 /* 宽屏横版 */
@@ -149,6 +185,17 @@
   .syl-note { font-size: 13px; }
   .syl-mods { grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .syl-mod { padding: 16px 18px; }
+  .ver-tab { padding: 16px 14px; border-radius: 16px; }
+  .ver-tab b { font-size: 18px; }
+  .ver-tab span { font-size: 13px; }
+  .ver-tabs { gap: 18px; margin-bottom: 18px; }
+  .syl-home-grid { gap: 16px; }
+  .syl-home-board { padding: 18px 16px; }
+  .syl-home-board b { font-size: 16px; }
+  .syl-home-board em { font-size: 13px; }
+  .syl-home-callout { padding: 20px 24px; }
+  .syl-home-callout b { font-size: 16px; }
+  .syl-home-callout span { font-size: 13px; }
   .syl-mod b { font-size: 15px; }
   .syl-group > summary { padding: 14px 18px; font-size: 15px; }
   .syl-table { font-size: 13px; }
@@ -185,12 +232,13 @@
 <header class="syl-hero">
   <div class="syl-wrap">
     <h1>课程大纲</h1>
-    <p>L1 → L2 → L3 完整课程体系 · 学什么、学多久、用什么教具，一页看清</p>
+    <p>L1 → L2 → L3 完整课程体系 · 同一套教具，家庭版 / 幼儿园版两套课程 · 一页看清</p>
   </div>
 </header>
 
 <section class="syl-switch">
   <div class="syl-wrap">
+    <div class="ver-tabs" id="verTabs"></div>
     <div class="lv-tabs" id="lvTabs"></div>
   </div>
 </section>
@@ -222,15 +270,32 @@
     const q = (new URLSearchParams(location.search).get('lv') || '').toUpperCase();
     return SYLLABUS[q] ? q : 'L1';
   }
+  function verParam() {
+    const v = (new URLSearchParams(location.search).get('v') || '').toLowerCase();
+    return v === 'home' ? 'home' : 'kinder';
+  }
+  function verName(k) { return k === 'home' ? '家庭版' : '幼儿园版'; }
+  function lvHref(lv, ver) { return '?lv=' + lv + (ver === 'home' ? '&v=home' : ''); }
+  function renderVerTabs(active) {
+    const list = [
+      { k: 'kinder', t: '幼儿园版', s: '标准教案 + 配套课件 · 集体教学' },
+      { k: 'home', t: '家庭版', s: '真人视频在线课 · 无课件无教案' }
+    ];
+    document.getElementById('verTabs').innerHTML = list.map(function (x) {
+      return '<a class="ver-tab ' + x.k + (x.k === active ? ' on' : '') + '" href="' +
+        lvHref(lvParam(), x.k) + '" data-v="' + x.k + '">' +
+        '<b>' + x.t + '</b><span>' + x.s + '</span></a>';
+    }).join('');
+  }
   function unitOf(lv) { return lv === 'L3' ? '个学期' : '个月'; }
   function groupUnit(lv) { return lv === 'L3' ? '学期' : '月份'; }
   function toolsPage(lv) { return lv === 'L1' ? 'tools.html' : 'tools-' + lv.toLowerCase() + '.html'; }
 
-  function renderTabs(active) {
+  function renderTabs(active, ver) {
     document.getElementById('lvTabs').innerHTML = SYLLABUS_ORDER.map(function (lv) {
       const s = SYLLABUS[lv];
       const cls = 'lv-tab lv-' + lv.toLowerCase() + (lv === active ? ' on' : '');
-      return '<a class="' + cls + '" href="?lv=' + lv + '" data-lv="' + lv + '">' +
+      return '<a class="' + cls + '" href="' + lvHref(lv, ver) + '" data-lv="' + lv + '">' +
         '<b>' + esc(s.level) + '</b>' +
         '<span>' + esc(s.name.replace(/^L\d\s*/, '')) + '</span>' +
         '<em>' + esc(s.age) + ' · ' + totalItems(s) + ' 课</em>' +
@@ -238,8 +303,52 @@
     }).join('');
   }
 
-  function renderBody(lv) {
+  /* 家庭版视图：视频在线课，无课件无教案，仅展示版块结构 */
+  function renderHome(lv, s) {
+    const h = s.home;
+    const boards = h.boards.map(function (b) {
+      return '<div class="syl-home-board"><b>' + esc(b.name) + '</b>' +
+        (b.count ? '<em>' + esc(b.count) + '</em>' : '') + '</div>';
+    }).join('');
+    const total = h.total
+      ? '<div class="syl-home-total"><b>' + esc(h.total) + '</b><span>家庭版视频课总量</span></div>'
+      : '';
+
+    document.getElementById('sylBody').innerHTML =
+      '<section class="syl-block">' +
+        '<div class="syl-stage-head">' +
+          '<div><h2>' + esc(s.name) + ' · 家庭版</h2>' +
+          '<p>' + esc(s.age) + ' · ' + esc(h.title) + ' · 家长在家陪玩</p></div>' +
+          '<a class="syl-go" href="detail.html?id=' + esc(s.productId) + '&tab=curriculum">查看产品详情 →</a>' +
+        '</div>' +
+      '</section>' +
+
+      '<section class="syl-block">' +
+        '<h2 class="syl-h2">版块结构</h2>' +
+        '<p class="syl-note">' + esc(h.planNote) + ' · 盒内教具、材料与图鉴与幼儿园版完全共享</p>' +
+        '<div class="syl-home-grid">' + boards + '</div>' +
+        total +
+      '</section>' +
+
+      '<section class="syl-block">' +
+        '<div class="syl-home-callout">' +
+          '<b>' + esc(h.planNote) + '</b>' +
+          '<span>家庭版课程为<b>视频在线学习</b>，<b>不含</b>幼儿园版那样的标准教案与配套课件；家长跟着视频引导即可，无需备课。' +
+          '<br>' + esc(h.disclaimer) + '</span>' +
+        '</div>' +
+      '</section>' +
+
+      '<section class="syl-block syl-next">' +
+        '<a class="syl-next-card" href="' + toolsPage(lv) + '"><b>' + esc(s.level) + ' 教具图鉴 &amp; 材料明细</b>' +
+        '<span>每件教具、每个游戏对应材料一目了然</span></a>' +
+        '<a class="syl-next-card" href="detail.html?id=' + esc(s.productId) + '&tab=curriculum"><b>' + esc(s.name) + ' · 产品详情</b>' +
+        '<span>家庭版 / 幼儿园版两套课程体系对比</span></a>' +
+      '</section>';
+  }
+
+  function renderBody(lv, ver) {
     const s = SYLLABUS[lv];
+    if (ver === 'home' && s.home) { renderHome(lv, s); return; }
     const items = totalItems(s);
     const groups = s.groups.length;
 
@@ -284,8 +393,8 @@
       '</section>' +
 
       '<section class="syl-block">' +
-        '<h2 class="syl-h2">逐课明细表（共 ' + items + ' 课）</h2>' +
-        '<p class="syl-note">按' + groupUnit(lv) + '分组，点击标题可展开 / 收起</p>' +
+        '<h2 class="syl-h2">幼儿园版 · 逐课明细表（共 ' + items + ' 课）</h2>' +
+        '<p class="syl-note">本表为<b>幼儿园版</b>课程体系（含标准教案与配套课件），按' + groupUnit(lv) + '分组，点击标题可展开 / 收起</p>' +
         groupsHtml +
       '</section>' +
 
@@ -297,11 +406,13 @@
       '</section>';
   }
 
-  function go(lv, push) {
-    if (push) history.pushState({ lv: lv }, '', '?lv=' + lv);
+  function go(lv, push, ver) {
+    ver = ver || verParam();
+    if (push) history.pushState({ lv: lv, v: ver }, '', lvHref(lv, ver));
     document.body.className = 'syl syl-' + lv.toLowerCase();
-    renderTabs(lv);
-    renderBody(lv);
+    renderVerTabs(ver);
+    renderTabs(lv, ver);
+    renderBody(lv, ver);
     window.scrollTo({ top: 0, behavior: push ? 'smooth' : 'auto' });
   }
 
@@ -310,11 +421,19 @@
     if (!a) return;
     e.preventDefault();
     if (a.dataset.lv === lvParam()) return;
-    go(a.dataset.lv, true);
+    go(a.dataset.lv, true, verParam());
+  });
+
+  document.getElementById('verTabs').addEventListener('click', function (e) {
+    const a = e.target.closest('a[data-v]');
+    if (!a) return;
+    e.preventDefault();
+    if (a.dataset.v === verParam()) return;
+    go(lvParam(), true, a.dataset.v);
   });
 
   window.addEventListener('popstate', function (e) {
-    go((e.state && e.state.lv) || lvParam(), false);
+    go((e.state && e.state.lv) || lvParam(), false, (e.state && e.state.v) || verParam());
   });
 
   go(lvParam(), false);

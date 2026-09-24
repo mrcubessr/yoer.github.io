@@ -371,6 +371,12 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
 .syl-total { margin-top: 12px; font-size: 13px; color: var(--text); }
 .syl-total b { color: var(--brand); font-size: 16px; }
 .syl-link.kinder-link b { color: #2563eb; }
+.syl-link.home-link { margin-top: 12px; }
+.syl-link.home-link b { color: #2563eb; }
+.syl-disclaimer {
+  margin-top: 10px; font-size: 12px; line-height: 1.7; color: var(--muted);
+  background: #f8fafc; border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px;
+}
 
 /* ===== 两条产品线对比表 ===== */
 .cmp-table {

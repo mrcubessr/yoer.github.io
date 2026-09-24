@@ -150,6 +150,11 @@
               </div>`).join('')}
           </div>
           ${sylTotal > 0 ? `<div class="syl-total">合计 <b>${sylTotal}</b> 节真人视频课，按上方板块顺序在线学习</div>` : `<div class="syl-total">按上方板块顺序在线学习，逐步解锁</div>`}
+          <a class="syl-link home-link" href="syllabus.html?lv=${p.level}&v=home">
+            <b>查看 ${p.level} 家庭版完整大纲 →</b>
+            <span>版块结构与节数明细 · 纯视频在线学习，无课件无教案</span>
+          </a>
+          <p class="syl-disclaimer">注：家庭版课程为视频在线学习形式，不含幼儿园版的标准教案与配套课件；该大纲内容由 AI 生成，仅供参考，实际课程以官方发布为准。</p>
         </div>` : ''}
 
         ${p.modules ? `

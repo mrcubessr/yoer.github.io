@@ -10,6 +10,18 @@ const SYLLABUS = {
     "age": "2–3 岁起",
     "goal": "认识数字 · 建立数感",
     "theme": "orange",
+    "home": {
+      "title": "家庭版课程大纲（视频在线课）",
+      "planNote": "纯视频在线学习 · 无课件 · 无教案",
+      "disclaimer": "内容由 AI 生成，仅供参考，实际课程以官方发布为准",
+      "boards": [
+        { "name": "数量概念", "count": "24 节" },
+        { "name": "空间几何", "count": "3 节" },
+        { "name": "逻辑思维", "count": "11 节" },
+        { "name": "思维训练", "count": "36 节" }
+      ],
+      "total": "74 节视频课"
+    },
     "stats": [
       {
         "n": "8",
@@ -528,6 +540,18 @@ const SYLLABUS = {
     "age": "3–4 岁",
     "goal": "从数数到运算",
     "theme": "green",
+    "home": {
+      "title": "家庭版课程大纲（视频在线课）",
+      "planNote": "纯视频在线学习 · 无课件 · 无教案",
+      "disclaimer": "内容由 AI 生成，仅供参考，实际课程以官方发布为准",
+      "boards": [
+        { "name": "数量概念", "count": "24 节" },
+        { "name": "空间几何", "count": "1 节" },
+        { "name": "逻辑思维", "count": "7 节" },
+        { "name": "游戏模块", "count": "36 节" }
+      ],
+      "total": "68 节视频课"
+    },
     "stats": [
       {
         "n": "69",
@@ -1329,6 +1353,21 @@ const SYLLABUS = {
     "age": "4–5 岁",
     "goal": "从运算到推理",
     "theme": "red",
+    "home": {
+      "title": "家庭版课程大纲（视频在线课）",
+      "planNote": "纯视频在线学习 · 无课件 · 无教案",
+      "disclaimer": "内容由 AI 生成，仅供参考，实际课程以官方发布为准",
+      "boards": [
+        { "name": "24 算", "count": null },
+        { "name": "百里驰援", "count": null },
+        { "name": "官渡算战", "count": null },
+        { "name": "三国谋算", "count": null },
+        { "name": "神机妙算", "count": null },
+        { "name": "九九争霸", "count": null },
+        { "name": "课前导入 · 家长必读", "count": null }
+      ],
+      "total": null
+    },
     "stats": [
       {
         "n": "31",
