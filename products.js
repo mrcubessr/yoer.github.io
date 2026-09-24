@@ -20,9 +20,10 @@ const PRODUCTS = {
     ],
     audience: '家庭亲子数学启蒙与园所小班/托班数学区首选；零基础入门款，家长无需懂数学，跟着视频课即可引导。',
     theme: 'orange',
-    mainImg: 'images/C01/L1-photo-01.jpg',
-    cardImg: 'images/C01/L1-photo-01.jpg',
+    mainImg: 'images/C01/L1-main.jpg',
+    cardImg: 'images/C01/L1-main.jpg',
     gallery: [
+      'images/C01/L1-main.jpg',
       'images/C01/L1-photo-01.jpg',
       'images/C01/L1-photo-02.jpg',
       'images/C01/L1-photo-03.jpg',
