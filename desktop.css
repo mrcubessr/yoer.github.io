@@ -170,40 +170,26 @@
   /* ===================== 页脚 ===================== */
   .footer { font-size: 13px; padding: 30px 16px 34px; }
 
-  /* ===================== 详情页：宽屏横版产品介绍页 ===================== */
+  /* ===================== 详情页：左图集吸顶 + 右侧界面切换横版 ===================== */
   #detailRoot {
-    display: grid;
-    grid-template-columns: 600px 1fr;
-    grid-template-areas:
-      "gallery head"
-      "gallery content";
-    grid-template-rows: auto 1fr;
-    gap: 44px;
-    align-items: start;
+    grid-template-columns: 520px 1fr;
+    gap: 0 44px;
     max-width: 1480px;
-    margin: 0 auto;
-    padding: 28px 32px 40px;
+    padding: 28px 32px 0;
   }
-  #detailRoot > .gallery {
-    position: sticky;
-    top: 84px;
+  #detailRoot > .gallery { top: 84px; }
+  #detailRoot > .d-panes { padding-bottom: 36px; }
+  #detailRoot .d-tabs { top: 64px; padding: 0 0 18px; }
+  #detailRoot .d-tabs a { padding: 10px 20px; font-size: 14px; }
+  /* 界面内容：宽屏下双列铺开，跨栏板块独占整行 */
+  #detailRoot .d-pane .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
   }
-  #detailRoot > .d-head {
-    grid-area: head;
-    padding: 0 0 18px;
-  }
-  #detailRoot > .d-head .wrap { max-width: none; padding: 0; }
-  /* 内容区：双栏横向铺开，取代竖排长条 */
-  #detailRoot > .wrap {
-    grid-area: content;
-    max-width: none;
-    padding: 0;
-    column-count: 2;
-    column-gap: 20px;
-  }
-  #detailRoot > .wrap > .d-sec { break-inside: avoid; margin-bottom: 14px; }
-  #detailRoot > .wrap > .full-span,
-  #detailRoot > .wrap > .long-img { column-span: all; }
+  #detailRoot .d-pane .wrap > .full-span { grid-column: 1 / -1; }
+  #detailRoot .d-pane .wrap > .d-sec h2 { font-size: 18px; }
 
   .buybar-inner { max-width: 1480px; }
 }

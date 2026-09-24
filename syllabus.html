@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>课程大纲 · L1/L2/L3 完整课程体系 — 优尔数学思维启蒙盒</title>
+<meta name="description" content="优尔 L1/L2/L3 三阶段课程大纲：132 条逐课明细，按月份列出核心内容、主要游戏与所需材料。">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="theme-color" content="#ea580c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="优尔启蒙">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="desktop.css">
+<style>
+/* ===== 课程大纲页专用样式 ===== */
+.syl-l1 { --lv: #ea580c; --lv-soft: #fff7ed; --lv-line: #fed7aa; }
+.syl-l2 { --lv: #16a34a; --lv-soft: #f0fdf4; --lv-line: #bbf7d0; }
+.syl-l3 { --lv: #dc2626; --lv-soft: #fef2f2; --lv-line: #fecaca; }
+
+.syl-wrap { max-width: 520px; margin: 0 auto; padding: 0 16px; }
+
+.syl-hero {
+  background: linear-gradient(160deg, #fff7ed 0%, #ffe4c7 100%);
+  padding: 28px 0 24px; text-align: center;
+}
+.syl-hero h1 { font-size: 25px; color: var(--ink); }
+.syl-hero p { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
+
+.syl-switch { background: #fff; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.lv-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.lv-tab {
+  display: block; text-align: center; padding: 12px 8px;
+  border: 2px solid var(--line); border-radius: 14px; background: #fff;
+  transition: border-color .2s, background .2s;
+}
+.lv-tab b { display: block; font-size: 17px; color: var(--ink); }
+.lv-tab span { display: block; font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+.lv-tab em { display: block; font-size: 11px; color: var(--ink-2); font-style: normal; margin-top: 5px; }
+.lv-tab.on.lv-l1 { border-color: var(--brand); background: #fff7ed; }
+.lv-tab.on.lv-l1 b { color: var(--brand); }
+.lv-tab.on.lv-l2 { border-color: #16a34a; background: #f0fdf4; }
+.lv-tab.on.lv-l2 b { color: #16a34a; }
+.lv-tab.on.lv-l3 { border-color: #dc2626; background: #fef2f2; }
+.lv-tab.on.lv-l3 b { color: #dc2626; }
+
+.syl-main { padding: 20px 0 10px; }
+.syl-block { margin-bottom: 26px; }
+.syl-stage-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.syl-stage-head h2 { font-size: 20px; color: var(--lv); }
+.syl-stage-head p { font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+.syl-go { font-size: 13px; font-weight: 700; color: var(--lv); white-space: nowrap; }
+
+.syl-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.syl-stat { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 8px; text-align: center; }
+.syl-stat b { display: block; font-size: 19px; color: var(--lv); line-height: 1.3; }
+.syl-stat span { font-size: 11px; color: var(--ink-2); }
+
+.syl-h2 { font-size: 17px; margin-bottom: 6px; padding-left: 10px; border-left: 4px solid var(--lv); line-height: 1.3; }
+.syl-note { font-size: 12px; color: var(--ink-2); margin: 0 0 12px 14px; }
+
+.syl-mods { display: grid; gap: 10px; }
+.syl-mod { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.syl-mod b { display: block; font-size: 14px; }
+.syl-mod em { display: block; font-size: 11px; color: var(--lv); font-style: normal; margin-top: 3px; }
+.syl-mod span { display: block; font-size: 12px; color: var(--ink-2); margin-top: 5px; line-height: 1.7; }
+
+.syl-group { background: #fff; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 12px; overflow: hidden; }
+.syl-group > summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; background: var(--lv-soft);
+  font-weight: 700; font-size: 14px; color: var(--ink);
+}
+.syl-group > summary::-webkit-details-marker { display: none; }
+.syl-group > summary::after {
+  content: "▾"; flex: none; color: var(--lv); font-size: 12px; transition: transform .2s;
+}
+.syl-group[open] > summary::after { transform: rotate(180deg); }
+.sg-title { flex: 1; min-width: 0; }
+.sg-count { font-style: normal; font-size: 11px; font-weight: 700; color: var(--lv); background: #fff; border-radius: 999px; padding: 2px 9px; flex: none; }
+
+.syl-tablewrap { overflow-x: auto; }
+.syl-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 660px; }
+.syl-table th {
+  background: #f9fafb; text-align: left; font-weight: 700; color: var(--ink-2);
+  padding: 9px 10px; border-bottom: 2px solid var(--line); white-space: nowrap;
+}
+.syl-table td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.65; }
+.syl-table tbody tr:last-child td { border-bottom: none; }
+.syl-table td:first-child { color: var(--ink-2); width: 34px; }
+
+.syl-next { display: grid; gap: 12px; }
+.syl-next-card {
+  display: block; background: #fff; border: 1px solid var(--line);
+  border-radius: 14px; padding: 16px 18px; transition: box-shadow .2s, transform .2s;
+}
+.syl-next-card b { display: block; font-size: 15px; }
+.syl-next-card span { display: block; font-size: 12px; color: var(--ink-2); margin-top: 3px; }
+.syl-next-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.07); transform: translateY(-2px); }
+
+.syl-foot { text-align: center; padding: 26px 16px 34px; font-size: 12px; color: var(--ink-2); }
+
+/* 手机端：表格转卡片式 */
+@media (max-width: 759px) {
+  .syl-table { min-width: 0; }
+  .syl-table thead { display: none; }
+  .syl-table, .syl-table tbody, .syl-table tr, .syl-table td { display: block; width: 100%; }
+  .syl-table tr { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  .syl-table tr:last-child { border-bottom: none; }
+  .syl-table td { border: none; padding: 3px 0; display: flex; gap: 10px; }
+  .syl-table td::before { content: attr(data-label); flex: none; width: 58px; color: var(--ink-2); font-size: 12px; }
+  .syl-table td:first-child { width: auto; }
+}
+
+/* 平板 */
+@media (min-width: 760px) {
+  .syl-wrap { max-width: 900px; padding: 0 24px; }
+  .syl-hero { padding: 34px 0 28px; }
+  .syl-hero h1 { font-size: 30px; }
+  .syl-stats { grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .syl-mods { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .syl-next { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* 宽屏横版 */
+@media (min-width: 1200px) {
+  .syl-wrap { max-width: 1360px; padding: 0 32px; }
+  .syl-hero { padding: 48px 0 40px; }
+  .syl-hero h1 { font-size: 38px; }
+  .syl-hero p { font-size: 15px; }
+  .syl-switch { padding: 22px 0; }
+  .lv-tabs { gap: 18px; }
+  .lv-tab { padding: 18px 14px; border-radius: 18px; }
+  .lv-tab b { font-size: 22px; }
+  .lv-tab span { font-size: 14px; }
+  .lv-tab em { font-size: 12px; }
+  .syl-main { padding: 30px 0 20px; }
+  .syl-block { margin-bottom: 34px; }
+  .syl-stage-head h2 { font-size: 26px; }
+  .syl-stage-head p { font-size: 14px; }
+  .syl-go { font-size: 15px; }
+  .syl-stats { gap: 16px; margin-top: 20px; }
+  .syl-stat { padding: 16px 12px; border-radius: 14px; }
+  .syl-stat b { font-size: 26px; }
+  .syl-stat span { font-size: 12px; }
+  .syl-h2 { font-size: 21px; margin-bottom: 8px; }
+  .syl-note { font-size: 13px; }
+  .syl-mods { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .syl-mod { padding: 16px 18px; }
+  .syl-mod b { font-size: 15px; }
+  .syl-group > summary { padding: 14px 18px; font-size: 15px; }
+  .syl-table { font-size: 13px; }
+  .syl-table th { padding: 11px 14px; }
+  .syl-table td { padding: 11px 14px; }
+  .syl-next { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .syl-next-card { padding: 22px 24px; }
+  .syl-next-card b { font-size: 17px; }
+}
+</style>
+</head>
+<body class="syl syl-l1">
+<div class="offline-tip" id="offlineTip">当前处于离线模式 · 内容已缓存</div>
+
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="logo">优</a>
+    <div class="titles">
+      <b>优尔思维启蒙商城</b>
+      <span>2–5 岁 · 数学思维分级套盒</span>
+    </div>
+    <nav class="nav-menu">
+      <a href="index.html#products">产品总览</a>
+      <a href="index.html#games">经典桌游</a>
+      <a href="index.html#path">学习路径</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a href="index.html#tools">教具图鉴</a>
+      <a href="index.html#why">品牌背书</a>
+      <a href="index.html#buy" class="nav-cta">咨询选购</a>
+    </nav>
+  </div>
+</nav>
+
+<header class="syl-hero">
+  <div class="syl-wrap">
+    <h1>课程大纲</h1>
+    <p>L1 → L2 → L3 完整课程体系 · 学什么、学多久、用什么教具，一页看清</p>
+  </div>
+</header>
+
+<section class="syl-switch">
+  <div class="syl-wrap">
+    <div class="lv-tabs" id="lvTabs"></div>
+  </div>
+</section>
+
+<main class="syl-main">
+  <div class="syl-wrap" id="sylBody"></div>
+</main>
+
+<footer class="syl-foot">© 优尔教育 · 沈阳优尔教育集团 · 客服 400-108-1087</footer>
+
+<script src="syllabus-data.js"></script>
+<script>
+(function () {
+  const COL_LABEL = { seq: '#', month: '月份', course: '课程', content: '核心内容', games: '主要游戏', materials: '所需材料' };
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function cell(it, c) {
+    const v = it[c];
+    if (v === null || v === undefined || v === '') return '—';
+    return esc(v);
+  }
+  function totalItems(s) {
+    return s.groups.reduce(function (a, g) { return a + g.items.length; }, 0);
+  }
+  function lvParam() {
+    const q = (new URLSearchParams(location.search).get('lv') || '').toUpperCase();
+    return SYLLABUS[q] ? q : 'L1';
+  }
+  function unitOf(lv) { return lv === 'L3' ? '个学期' : '个月'; }
+  function groupUnit(lv) { return lv === 'L3' ? '学期' : '月份'; }
+  function toolsPage(lv) { return lv === 'L1' ? 'tools.html' : 'tools-' + lv.toLowerCase() + '.html'; }
+
+  function renderTabs(active) {
+    document.getElementById('lvTabs').innerHTML = SYLLABUS_ORDER.map(function (lv) {
+      const s = SYLLABUS[lv];
+      const cls = 'lv-tab lv-' + lv.toLowerCase() + (lv === active ? ' on' : '');
+      return '<a class="' + cls + '" href="?lv=' + lv + '" data-lv="' + lv + '">' +
+        '<b>' + esc(s.level) + '</b>' +
+        '<span>' + esc(s.name.replace(/^L\d\s*/, '')) + '</span>' +
+        '<em>' + esc(s.age) + ' · ' + totalItems(s) + ' 课</em>' +
+        '</a>';
+    }).join('');
+  }
+
+  function renderBody(lv) {
+    const s = SYLLABUS[lv];
+    const items = totalItems(s);
+    const groups = s.groups.length;
+
+    const statsHtml = s.stats.map(function (x) {
+      return '<div class="syl-stat"><b>' + esc(x.n) + '</b><span>' + esc(x.l) + '</span></div>';
+    }).join('');
+
+    const modulesHtml = s.modules.map(function (m) {
+      return '<div class="syl-mod"><b>' + esc(m.name) + '</b>' +
+        (m.sub ? '<em>' + esc(m.sub) + '</em>' : '') +
+        '<span>' + esc(m.items) + '</span></div>';
+    }).join('');
+
+    const groupsHtml = s.groups.map(function (g, i) {
+      const head = s.columns.map(function (c) { return '<th>' + COL_LABEL[c] + '</th>'; }).join('');
+      const rows = g.items.map(function (it) {
+        return '<tr>' + s.columns.map(function (c) {
+          return '<td data-label="' + COL_LABEL[c] + '">' + cell(it, c) + '</td>';
+        }).join('') + '</tr>';
+      }).join('');
+      return '<details class="syl-group"' + (i === 0 ? ' open' : '') + '>' +
+        '<summary><span class="sg-title">' + esc(g.title) + '</span>' +
+        '<em class="sg-count">' + g.items.length + ' 课</em></summary>' +
+        '<div class="syl-tablewrap"><table class="syl-table">' +
+        '<thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+        '</details>';
+    }).join('');
+
+    document.getElementById('sylBody').innerHTML =
+      '<section class="syl-block">' +
+        '<div class="syl-stage-head">' +
+          '<div><h2>' + esc(s.name) + '</h2>' +
+          '<p>' + esc(s.age) + ' · ' + esc(s.goal) + ' · ' + groups + ' ' + unitOf(lv) + ' · ' + items + ' 课明细</p></div>' +
+          '<a class="syl-go" href="detail.html?id=' + esc(s.productId) + '">查看产品详情 →</a>' +
+        '</div>' +
+        '<div class="syl-stats">' + statsHtml + '</div>' +
+      '</section>' +
+
+      '<section class="syl-block">' +
+        '<h2 class="syl-h2">' + esc(s.modulesTitle) + '</h2>' +
+        '<div class="syl-mods">' + modulesHtml + '</div>' +
+      '</section>' +
+
+      '<section class="syl-block">' +
+        '<h2 class="syl-h2">逐课明细表（共 ' + items + ' 课）</h2>' +
+        '<p class="syl-note">按' + groupUnit(lv) + '分组，点击标题可展开 / 收起</p>' +
+        groupsHtml +
+      '</section>' +
+
+      '<section class="syl-block syl-next">' +
+        '<a class="syl-next-card" href="' + toolsPage(lv) + '"><b>' + esc(s.level) + ' 教具图鉴 &amp; 材料明细</b>' +
+        '<span>每件教具、每个游戏对应材料一目了然</span></a>' +
+        '<a class="syl-next-card" href="detail.html?id=' + esc(s.productId) + '"><b>' + esc(s.name) + ' · 产品详情</b>' +
+        '<span>玩法、卖点、盒内清单、采购服务</span></a>' +
+      '</section>';
+  }
+
+  function go(lv, push) {
+    if (push) history.pushState({ lv: lv }, '', '?lv=' + lv);
+    document.body.className = 'syl syl-' + lv.toLowerCase();
+    renderTabs(lv);
+    renderBody(lv);
+    window.scrollTo({ top: 0, behavior: push ? 'smooth' : 'auto' });
+  }
+
+  document.getElementById('lvTabs').addEventListener('click', function (e) {
+    const a = e.target.closest('a[data-lv]');
+    if (!a) return;
+    e.preventDefault();
+    if (a.dataset.lv === lvParam()) return;
+    go(a.dataset.lv, true);
+  });
+
+  window.addEventListener('popstate', function (e) {
+    go((e.state && e.state.lv) || lvParam(), false);
+  });
+
+  go(lvParam(), false);
+
+  if (navigator.onLine === false) document.getElementById('offlineTip').style.display = 'block';
+  window.addEventListener('online', function () { document.getElementById('offlineTip').style.display = 'none'; });
+  window.addEventListener('offline', function () { document.getElementById('offlineTip').style.display = 'block'; });
+
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+})();
+</script>
+</body>
+</html>

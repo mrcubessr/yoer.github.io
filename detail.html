@@ -23,6 +23,12 @@
         <b id="dTitle">产品详情</b>
         <span>优尔思维启蒙商城</span>
       </div>
+      <nav class="nav-menu">
+        <a href="index.html#products">产品总览</a>
+        <a href="syllabus.html">课程大纲</a>
+        <a href="index.html#tools">教具图鉴</a>
+        <a href="index.html#buy" class="nav-cta">咨询选购</a>
+      </nav>
     </div>
   </header>
 
@@ -50,9 +56,210 @@
 
     document.title = p.name + ' · 优尔数学思维启蒙盒';
     document.getElementById('dTitle').textContent = p.name;
+    document.body.className = 'dpage d-' + p.id.toLowerCase();
 
-    const lvClass = p.theme === 'green' ? ' lv-green' : p.theme === 'red' ? ' lv-red' : '';
-    const slides = [...p.gallery, p.detailImg].filter(Boolean);
+    /* 轮播图：仅使用图集，不再挂载「图文详情」长图 */
+    const slides = p.gallery.slice();
+    const toolsHref = p.id === 'C01' ? 'tools.html' : 'tools-' + p.level.toLowerCase() + '.html';
+
+    /* ===== 五个界面的内容 ===== */
+    const PANES = {};
+
+    PANES.overview = `
+      <div class="d-sec">
+        <h2>产品说明</h2>
+        <p>${p.desc}</p>
+      </div>
+
+      ${p.sellTags ? `
+      <div class="d-sec">
+        <h2>${p.stats ? '课程体系速览' : '核心卖点'}</h2>
+        <ul class="sell-list">${p.sellTags.map(s => `<li>${s}</li>`).join('')}</ul>
+        ${p.stats ? `
+        <div class="stats-grid">
+          <div class="stat"><b>${p.stats.modules}</b><span>大能力模块</span></div>
+          <div class="stat"><b>${p.stats.themes}</b><span>大课程主题</span></div>
+          <div class="stat"><b>${p.stats.lessons}</b><span>个游戏课时</span></div>
+          <div class="stat"><b>${p.stats.plans}</b><span>份标准教案</span></div>
+          <div class="stat"><b>${p.stats.courseware}</b><span>份配套课件</span></div>
+          <div class="stat"><b>${p.stats.videoLessons}</b><span>节真人视频课</span></div>
+        </div>` : ''}
+      </div>` : ''}
+
+      <div class="d-sec">
+        <h2>配套视频课</h2>
+        <div class="course-box">
+          <img src="${p.gallery[1] || p.mainImg}" alt="配套视频课" loading="lazy">
+          <p>${p.courseNote}</p>
+        </div>
+      </div>
+    `;
+
+    PANES.curriculum = `
+      ${p.modules ? `
+      <div class="d-sec">
+        <h2>${p.modulesTitle || '8 大能力模块（层层递进）'}</h2>
+        ${p.modules.map((m, i) => `
+          <div class="module">
+            <div class="m-no">${(p.modulesTitle || '模块').includes('板块') ? '板块' : '模块'}${i + 1}</div>
+            <div>
+              <b>${m.name}${m.lessons ? `<em>${m.themes} 主题 · ${m.lessons} 课时</em>` : ''}</b>
+              <span>${m.items}</span>
+            </div>
+          </div>`).join('')}
+      </div>` : ''}
+
+      <div class="d-sec">
+        <h2>完整课程大纲</h2>
+        <a class="syl-link" href="syllabus.html?lv=${p.level}">
+          <b>查看 ${p.level} 逐课明细表 →</b>
+          <span>按月份列出每一节课的核心内容、主要游戏与所需材料</span>
+        </a>
+      </div>
+
+      ${p.sevenSteps ? `
+      <div class="d-sec">
+        <h2>7 步启蒙路径</h2>
+        <div class="d-steps">
+          ${p.sevenSteps.map((s, i) => `
+            <div class="d-step">
+              <div class="no">${i + 1}</div>
+              <div><b>${s.t}</b><span>${s.d}</span></div>
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+    `;
+
+    PANES.play = `
+      <div class="d-sec">
+        <h2>玩法四步</h2>
+        <div class="d-steps">
+          ${p.steps.map((s, i) => `
+            <div class="d-step">
+              <div class="no">${i + 1}</div>
+              <div><b>${s.t}</b><span>${s.d}</span></div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <div class="d-sec">
+        <h2>培养能力点</h2>
+        <div class="chips">${p.abilities.map(a => `<span>${a}</span>`).join('')}</div>
+      </div>
+
+      ${p.outcomes ? `
+      <div class="d-sec full-span">
+        <h2>学完 ${p.level}，孩子将获得</h2>
+        ${p.outcomes.map(o => `
+          <div class="outcome-group">
+            <b>${o.g}</b>
+            <p>${o.items}</p>
+          </div>`).join('')}
+      </div>` : ''}
+
+      ${p.highlights ? `
+      <div class="d-sec full-span">
+        <h2>${p.highlights.length} 大产品亮点</h2>
+        ${p.highlights.map(h => `
+          <div class="hl"><b>${h.t}</b><span>${h.d}</span></div>`).join('')}
+      </div>` : ''}
+    `;
+
+    PANES.contents = `
+      <div class="d-sec full-span">
+        <h2>盒内教具清单（100+ 玩/教具）</h2>
+        <div class="contents-grid">${p.contents.map(c => `<span>${c}</span>`).join('')}</div>
+        <a class="tools-link" href="${toolsHref}">查看教具图鉴 &amp; 课程材料明细表 →</a>
+      </div>
+    `;
+
+    PANES.purchase = `
+      ${p.comparison ? `
+      <div class="d-sec full-span">
+        <h2>两条产品线 · 对比一览</h2>
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th class="dim-h">对比维度</th>
+              <th class="home-h">${p.homeTrack ? p.homeTrack.title : '家庭场景'}</th>
+              <th class="kinder-h">${p.kindergartenTrack ? p.kindergartenTrack.title : '园所场景'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${p.comparison.map(r => `
+            <tr>
+              <td class="dim">${r.dim}</td>
+              <td class="home-c">${r.home}</td>
+              <td class="kinder-c">${r.kinder}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>` : (p.homeTrack || p.kindergartenTrack) ? `
+      <div class="d-sec full-span">
+        <h2>两条产品线 · 针对不同场景</h2>
+        <div class="track-grid">
+          ${p.homeTrack ? `
+          <div class="track home">
+            <div class="track-tag">家庭场景</div>
+            <b>${p.homeTrack.title}</b>
+            <em>${p.homeTrack.audience}</em>
+            <p>${p.homeTrack.desc}</p>
+            <div class="track-stats">
+              <span><b>${p.homeTrack.videoLessons}</b><em>节视频课</em></span>
+            </div>
+            <ul>${p.homeTrack.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+          </div>` : ''}
+          ${p.kindergartenTrack ? `
+          <div class="track kinder">
+            <div class="track-tag">园所场景</div>
+            <b>${p.kindergartenTrack.title}</b>
+            <em>${p.kindergartenTrack.audience}</em>
+            <p>${p.kindergartenTrack.desc}</p>
+            <div class="track-stats">
+              <span><b>${p.kindergartenTrack.lessonPlans}</b><em>份标准教案</em></span>
+              <span><b>${p.kindergartenTrack.courseware}</b><em>份配套课件</em></span>
+            </div>
+            <ul>${p.kindergartenTrack.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+          </div>` : ''}
+        </div>
+      </div>` : ''}
+
+      ${p.scenarios ? `
+      <div class="d-sec">
+        <h2>使用场景</h2>
+        <ul class="dot-list">${p.scenarios.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>` : ''}
+
+      <div class="d-sec">
+        <h2>适合谁</h2>
+        <div class="audience-box">${p.audience}</div>
+      </div>
+
+      ${p.purchase ? `
+      <div class="d-sec">
+        <h2>采购与服务</h2>
+        <ul class="dot-list">${p.purchase.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>` : ''}
+
+      <div class="d-sec full-span">
+        <h2>查看其他级别</h2>
+        <div class="switch-row">
+          ${PRODUCT_ORDER.map(other => {
+            const o = PRODUCTS[other];
+            return `<a href="detail.html?id=${o.id}" class="${o.id === p.id ? 'cur' : ''}">${o.level} · ${o.age}</a>`;
+          }).join('')}
+        </div>
+      </div>
+    `;
+
+    /* ===== 界面导航 ===== */
+    const TABS = [
+      { k: 'overview', t: '总览' },
+      { k: 'curriculum', t: '课程体系' },
+      { k: 'play', t: '玩法能力' },
+      { k: 'contents', t: '盒内清单' },
+      { k: 'purchase', t: '场景采购' }
+    ];
 
     document.getElementById('detailRoot').innerHTML = `
       <!-- 轮播图 -->
@@ -79,188 +286,55 @@
         </div>
       </div>
 
-      <!-- 产品说明 -->
-      <div class="wrap">
-        <div class="d-sec">
-          <h2>产品说明</h2>
-          <p>${p.desc}</p>
-        </div>
+      <!-- 界面导航 -->
+      <nav class="d-tabs" id="dTabs" aria-label="详情页分区导航">
+        ${TABS.map(t => `<a href="?id=${p.id}&tab=${t.k}" data-k="${t.k}" class="${t.k === 'overview' ? 'on' : ''}">${t.t}</a>`).join('')}
+      </nav>
 
-        ${p.sellTags ? `
-        <div class="d-sec">
-          <h2>${p.stats ? '课程体系速览' : '核心卖点'}</h2>
-          <ul class="sell-list">${p.sellTags.map(s => `<li>${s}</li>`).join('')}</ul>
-          ${p.stats ? `
-          <div class="stats-grid">
-            <div class="stat"><b>${p.stats.modules}</b><span>大能力模块</span></div>
-            <div class="stat"><b>${p.stats.themes}</b><span>大课程主题</span></div>
-            <div class="stat"><b>${p.stats.lessons}</b><span>个游戏课时</span></div>
-            <div class="stat"><b>${p.stats.plans}</b><span>份标准教案</span></div>
-            <div class="stat"><b>${p.stats.courseware}</b><span>份配套课件</span></div>
-            <div class="stat"><b>${p.stats.videoLessons}</b><span>节真人视频课</span></div>
-          </div>` : ''}
-        </div>` : ''}
-
-        ${p.modules ? `
-        <div class="d-sec">
-          <h2>${p.modulesTitle || '8 大能力模块（层层递进）'}</h2>
-          ${p.modules.map((m, i) => `
-            <div class="module">
-              <div class="m-no">${(p.modulesTitle || '模块').includes('板块') ? '板块' : '模块'}${i + 1}</div>
-              <div>
-                <b>${m.name}${m.lessons ? `<em>${m.themes} 主题 · ${m.lessons} 课时</em>` : ''}</b>
-                <span>${m.items}</span>
-              </div>
-            </div>`).join('')}
-        </div>` : ''}
-
-        <div class="d-sec">
-          <h2>培养能力点</h2>
-          <div class="chips">${p.abilities.map(a => `<span>${a}</span>`).join('')}</div>
-        </div>
-
-        ${p.sevenSteps ? `
-        <div class="d-sec">
-          <h2>7 步启蒙路径</h2>
-          <div class="d-steps">
-            ${p.sevenSteps.map((s, i) => `
-              <div class="d-step">
-                <div class="no">${i + 1}</div>
-                <div><b>${s.t}</b><span>${s.d}</span></div>
-              </div>`).join('')}
-          </div>
-        </div>` : ''}
-
-        <div class="d-sec">
-          <h2>玩法四步</h2>
-          <div class="d-steps">
-            ${p.steps.map((s, i) => `
-              <div class="d-step">
-                <div class="no">${i + 1}</div>
-                <div><b>${s.t}</b><span>${s.d}</span></div>
-              </div>`).join('')}
-          </div>
-        </div>
-
-        <div class="d-sec">
-          <h2>适合谁</h2>
-          <div class="audience-box">${p.audience}</div>
-        </div>
-
-        ${p.outcomes ? `
-        <div class="d-sec">
-          <h2>学完 ${p.level}，孩子将获得</h2>
-          ${p.outcomes.map(o => `
-            <div class="outcome-group">
-              <b>${o.g}</b>
-              <p>${o.items}</p>
-            </div>`).join('')}
-        </div>` : ''}
-
-        ${p.highlights ? `
-        <div class="d-sec">
-          <h2>${p.highlights.length} 大产品亮点</h2>
-          ${p.highlights.map(h => `
-            <div class="hl"><b>${h.t}</b><span>${h.d}</span></div>`).join('')}
-        </div>` : ''}
-
-        ${p.comparison ? `
-        <div class="d-sec full-span">
-          <h2>两条产品线 · 对比一览</h2>
-          <table class="cmp-table">
-            <thead>
-              <tr>
-                <th class="dim-h">对比维度</th>
-                <th class="home-h">${p.homeTrack ? p.homeTrack.title : '家庭场景'}</th>
-                <th class="kinder-h">${p.kindergartenTrack ? p.kindergartenTrack.title : '园所场景'}</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${p.comparison.map(r => `
-              <tr>
-                <td class="dim">${r.dim}</td>
-                <td class="home-c">${r.home}</td>
-                <td class="kinder-c">${r.kinder}</td>
-              </tr>`).join('')}
-            </tbody>
-          </table>
-        </div>` : (p.homeTrack || p.kindergartenTrack) ? `
-        <div class="d-sec">
-          <h2>两条产品线 · 针对不同场景</h2>
-          <div class="track-grid">
-            ${p.homeTrack ? `
-            <div class="track home">
-              <div class="track-tag">家庭场景</div>
-              <b>${p.homeTrack.title}</b>
-              <em>${p.homeTrack.audience}</em>
-              <p>${p.homeTrack.desc}</p>
-              <div class="track-stats">
-                <span><b>${p.homeTrack.videoLessons}</b><em>节视频课</em></span>
-              </div>
-              <ul>${p.homeTrack.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
-            </div>` : ''}
-            ${p.kindergartenTrack ? `
-            <div class="track kinder">
-              <div class="track-tag">园所场景</div>
-              <b>${p.kindergartenTrack.title}</b>
-              <em>${p.kindergartenTrack.audience}</em>
-              <p>${p.kindergartenTrack.desc}</p>
-              <div class="track-stats">
-                <span><b>${p.kindergartenTrack.lessonPlans}</b><em>份标准教案</em></span>
-                <span><b>${p.kindergartenTrack.courseware}</b><em>份配套课件</em></span>
-              </div>
-              <ul>${p.kindergartenTrack.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
-            </div>` : ''}
-          </div>
-        </div>` : `
-        ${p.scenarios ? `
-        <div class="d-sec">
-          <h2>使用场景</h2>
-          <ul class="dot-list">${p.scenarios.map(s => `<li>${s}</li>`).join('')}</ul>
-        </div>` : ''}
-
-        <div class="d-sec">
-          <h2>配套视频课</h2>
-          <div class="course-box">
-            <img src="${p.gallery[1] || p.mainImg}" alt="配套视频课" loading="lazy">
-            <p>${p.courseNote}</p>
-          </div>
-        </div>
-        `}
-
-        <div class="d-sec full-span">
-          <h2>盒内教具清单（100+ 玩/教具）</h2>
-          <div class="contents-grid">${p.contents.map(c => `<span>${c}</span>`).join('')}</div>
-          ${p.id === 'C01' ? '<a href="tools.html" style="display:inline-block;margin-top:12px;color:var(--brand);font-size:14px;font-weight:600;">查看教具图鉴 &amp; 课程材料明细表 →</a>' : ''}
-          ${p.id === 'C02' ? '<a href="tools-l2.html" style="display:inline-block;margin-top:12px;color:#16a34a;font-size:14px;font-weight:600;">查看教具图鉴 &amp; 课程材料明细表 →</a>' : ''}
-          ${p.id === 'C03' ? '<a href="tools-l3.html" style="display:inline-block;margin-top:12px;color:#7c3aed;font-size:14px;font-weight:600;">查看教具图鉴 &amp; 课程材料明细表 →</a>' : ''}
-        </div>
-
-        ${p.purchase ? `
-        <div class="d-sec full-span">
-          <h2>采购与服务</h2>
-          <ul class="dot-list">${p.purchase.map(s => `<li>${s}</li>`).join('')}</ul>
-        </div>` : ''}
-
-        ${p.detailImg ? `
-        <div class="d-sec long-img">
-          <h2>图文详情</h2>
-          <img src="${p.detailImg}" alt="${p.name} 图文详情" loading="lazy">
-        </div>` : ''}
-
-        <div class="d-sec full-span">
-          <h2>查看其他级别</h2>
-          <div class="switch-row">
-            ${PRODUCT_ORDER.map(other => {
-              const o = PRODUCTS[other];
-              return `<a href="detail.html?id=${o.id}" class="${o.id === p.id ? 'cur' : ''}">${o.level} · ${o.age}</a>`;
-            }).join('')}
-          </div>
-        </div>
+      <!-- 界面内容 -->
+      <div class="d-panes" id="dPanes">
+        ${TABS.map(t => `<div class="d-pane${t.k === 'overview' ? ' on' : ''}" data-k="${t.k}"><div class="wrap">${PANES[t.k]}</div></div>`).join('')}
       </div>
     `;
 
-    // 轮播计数
+    /* ===== 界面切换（可直达 / 可分享 / 支持后退） ===== */
+    function tabFromUrl() {
+      const t = new URLSearchParams(location.search).get('tab');
+      return TABS.some(x => x.k === t) ? t : 'overview';
+    }
+
+    function showTab(k, push) {
+      const panes = document.querySelectorAll('.d-pane');
+      const tabs = document.querySelectorAll('.d-tabs a');
+      panes.forEach(el => el.classList.toggle('on', el.dataset.k === k));
+      tabs.forEach(el => el.classList.toggle('on', el.dataset.k === k));
+
+      if (push) {
+        const u = new URL(location.href);
+        u.searchParams.set('tab', k);
+        history.pushState({ tab: k }, '', u);
+
+        const anchor = document.getElementById('dTabs');
+        const top = anchor.getBoundingClientRect().top + window.scrollY - 64;
+        if (window.scrollY > top) window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    }
+
+    document.getElementById('dTabs').addEventListener('click', e => {
+      const a = e.target.closest('a[data-k]');
+      if (!a) return;
+      e.preventDefault();
+      if (a.dataset.k === tabFromUrl()) return;
+      showTab(a.dataset.k, true);
+    });
+
+    window.addEventListener('popstate', e => {
+      showTab((e.state && e.state.tab) || tabFromUrl(), false);
+    });
+
+    showTab(tabFromUrl(), false);
+
+    /* ===== 轮播计数 ===== */
     const slidesEl = document.getElementById('slides');
     const counter = document.getElementById('slideCounter');
     slidesEl.addEventListener('scroll', () => {
@@ -268,7 +342,7 @@
       counter.textContent = `${Math.min(i, slides.length)}/${slides.length}`;
     }, { passive: true });
 
-    // 购买栏
+    /* ===== 购买栏 ===== */
     document.getElementById('buybarPrice').innerHTML =
       `<span class="cur">¥</span><span class="num">${p.price}</span><span class="unit">/盒</span>`;
 
