@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L1 教具图鉴 & 课程材料明细 — 优尔启蒙</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#ea580c">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ===== 教具图鉴页专用样式 ===== */
+.tools-hero {
+  background: linear-gradient(135deg, #fff7ed 0%, #fff 100%);
+  padding: 24px 16px 16px;
+  text-align: center;
+}
+.tools-hero h1 { font-size: 22px; color: var(--ink); margin-bottom: 6px; }
+.tools-hero p { font-size: 13px; color: var(--muted); }
+
+.tools-section { max-width: 1200px; margin: 0 auto; padding: 0 16px 24px; }
+.tools-section > h2 {
+  font-size: 18px; margin: 20px 0 14px; color: var(--ink);
+  display: flex; align-items: center; gap: 8px;
+}
+.tools-section > h2::before {
+  content: ""; width: 4px; height: 18px; border-radius: 2px;
+  background: linear-gradient(var(--brand-light), var(--brand));
+}
+
+/* 教具网格 */
+.tool-grid {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+.tool-card {
+  border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+  background: #fff; transition: box-shadow .2s;
+}
+.tool-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+.tool-card .tool-img {
+  width: 100%; aspect-ratio: 1/1; background: #f9fafb;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.tool-card .tool-img img { width: 100%; height: 100%; object-fit: contain; }
+.tool-card .tool-info { padding: 10px 12px 12px; }
+.tool-card .tool-info b { font-size: 14px; color: var(--ink); display: block; margin-bottom: 4px; }
+.tool-card .tool-info .aka { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+/* 月份分组卡片 */
+.month-group { margin-bottom: 20px; }
+.month-group > h3 {
+  font-size: 15px; color: var(--brand); margin-bottom: 10px;
+  padding: 8px 14px; background: #fff7ed; border-radius: 8px; border-left: 3px solid var(--brand);
+}
+.theme-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.theme-table thead th {
+  background: #f3f4f6; padding: 8px 10px; text-align: left; font-weight: 600;
+  color: var(--ink-2); white-space: nowrap; border-bottom: 2px solid var(--line);
+}
+.theme-table tbody td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
+.theme-table tbody tr:hover { background: #fafafa; }
+.theme-table .seq { color: var(--muted); width: 32px; text-align: center; }
+.theme-table .course { font-weight: 600; color: var(--ink); white-space: nowrap; }
+.theme-table .games { color: var(--brand); }
+.theme-table .materials { color: #4b5563; }
+
+@media (min-width: 760px) {
+  .tool-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .tools-section { padding: 0 24px 32px; }
+  .tools-hero h1 { font-size: 28px; }
+}
+
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--brand); text-decoration: none; font-size: 14px;
+  margin: 16px 0 0 16px;
+}
+.back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="offline-tip" id="offlineTip">当前处于离线模式 · 内容已缓存</div>
+<nav class="topbar"><div class="topbar-inner">
+  <a href="index.html" class="logo">优尔启蒙</a>
+  <span class="nav-links">
+    <a href="index.html">首页</a>
+    <a href="index.html#products">产品</a>
+    <a href="index.html#about">关于</a>
+  </span>
+</div></nav>
+
+<div class="tools-hero">
+  <h1>L1 教具图鉴 &amp; 课程材料明细</h1>
+  <p>17 件核心教具 · 32 个课程主题 · 每个游戏对应材料一目了然</p>
+</div>
+
+<a href="detail.html?id=C01" class="back-link">← 返回 L1 详情页</a>
+
+<!-- ===== 教具图鉴 ===== -->
+<div class="tools-section">
+  <h2>教具图鉴（17 件）</h2>
+  <div class="tool-grid" id="toolGrid"></div>
+</div>
+
+<!-- ===== 课程主题与材料对应表 ===== -->
+<div class="tools-section">
+  <h2>课程主题与材料对应表（32 个主题）</h2>
+  <div id="themeList"></div>
+</div>
+
+<a href="detail.html?id=C01" class="back-link">← 返回 L1 详情页</a>
+
+<script>
+/* ===== 教具数据（从 xlsx 教学工具 sheet 提取） ===== */
+const TOOLS = [
+  { games: '糖果铺子、房子游戏板', aka: '糖果铺子正反面棋子一张、房子游戏板', name: '糖果铺子游戏板', img: 'images/C01/tools/糖果铺子游戏板.jpg' },
+  { games: '像素积木块、颜色积木、积木', aka: '积木块（颜色/形状）一套、颜色积木、积木', name: '像素积木块', img: 'images/C01/tools/像素积木块.jpg' },
+  { games: '十格阵游戏', aka: '磁扣/磁贴（红蓝）一套、磁扣', name: '磁力红蓝棋子', img: 'images/C01/tools/磁力红蓝棋子.jpg' },
+  { games: '磁扣/磁贴（卡通）', aka: '动物磁贴、卡通磁贴', name: '磁力实物棋子', img: 'images/C01/tools/磁力实物棋子.jpg' },
+  { games: '磁力白板', aka: '磁力白板一个、游戏板', name: '磁力白板', img: 'images/C01/tools/磁力白板.jpg' },
+  { games: '数字贴', aka: '数字贴（1-10）磁力数字贴一套、数字卡', name: '磁力数字贴', img: 'images/C01/tools/磁力数字贴.jpg' },
+  { games: '十格阵', aka: '十格阵磁力贴一套（两个）', name: '十格阵磁力贴', img: 'images/C01/tools/十格阵磁力贴.jpg' },
+  { games: '格米扑克牌、格米扑克', aka: '格米扑克牌一副', name: '格米扑克牌', img: 'images/C01/tools/格米扑克牌.jpg' },
+  { games: '城市飞行棋、城市飞行棋学具', aka: '城市飞行棋棋盘一个、城市飞行棋学具', name: '城市飞行棋棋盘', img: 'images/C01/tools/城市飞行棋棋盘.jpg' },
+  { games: '城市飞行棋', aka: '四种颜色汽车棋子四个', name: '汽车棋子', img: 'images/C01/tools/汽车棋子.jpg' },
+  { games: '城市飞行棋', aka: '飞行棋骰子一套（红黄绿骰子一个，数字骰子一个）', name: '飞行棋骰子', img: 'images/C01/tools/飞行棋骰子.jpg' },
+  { games: '形色碰碰、形状游戏板', aka: '形色碰碰棋盘四张', name: '形色碰碰棋盘', img: 'images/C01/tools/形色碰碰棋盘.jpg' },
+  { games: '形色碰碰', aka: '红黄蓝骰子一个、形状骰子一个（大骰子、小骰子）', name: '红黄蓝骰子', img: 'images/C01/tools/红黄蓝骰子.jpg' },
+  { games: '疯狂大请客', aka: '疯狂大请客一套', name: '疯狂大请客卡牌', img: 'images/C01/tools/疯狂大请客卡牌.jpg' },
+  { games: '小鱼总动员', aka: '小鱼总动员卡牌一套、小鱼卡', name: '小鱼总动员卡牌', img: 'images/C01/tools/小鱼总动员卡牌.jpg' },
+  { games: '小鱼总动员', aka: '小鱼总动员棋子一套', name: '小鱼总动员棋子', img: 'images/C01/tools/小鱼总动员棋子.jpg' },
+  { games: '抢答铃', aka: '抢答铃一个', name: '抢答铃', img: 'images/C01/tools/抢答铃.jpg' }
+];
+
+/* ===== 课程主题数据（从 xlsx 主题列表 sheet 提取） ===== */
+const THEMES = [
+  {
+    month: '9月', title: '颜色形状认知与分类启蒙（7 个主题）',
+    items: [
+      { seq:1, course:'认识颜色', content:'认识红、黄、蓝三原色，能按指令指认并区分颜色', games:'颜色指认、颜色分类', materials:'自制色卡、卡通图片、颜色积木、动物磁贴' },
+      { seq:2, course:'缺失的颜色', content:'复习三色并完成颜色分类拼搭，判断行列空缺方位补全颜色', games:'搭高楼、颜色数独', materials:'自制色卡、房子游戏板、颜色积木' },
+      { seq:3, course:'空间几何（1）', content:'认识三角形、方形、圆形及生活中的图形，辨别特征并分类', games:'形状分类、摸箱辨形', materials:'自制形状图卡、形状积木块、不透明袋子、形状游戏板、PPT' },
+      { seq:4, course:'形色碰碰', content:'综合颜色与形状认知，按骰子指令快速匹配', games:'颜色骰子、形状骰子', materials:'游戏板、积木块、大骰子、小骰子' },
+      { seq:5, course:'集合与分类', content:'按颜色、形状等属性对物品分类与配对，完成图形拼搭复刻', games:'分类游戏、配对游戏、小小建筑师', materials:'颜色/图形积木块、动物磁贴、磁扣、数字贴、游戏板、PPT' },
+      { seq:6, course:'量感', content:'感知长短、高矮差异，学会一端对齐比较并排序', games:'围巾比长短、高矮排队', materials:'颜色积木块、吸管、地垫、PPT' },
+      { seq:7, course:'找规律 1', content:'发现 ABAB/ABB 排列规律并按规律续排', games:'排排站找规律', materials:'颜色积木块、形状积木块、动物磁贴、PPT' }
+    ]
+  },
+  {
+    month: '10月', title: '点数与数感建立（6 个主题）',
+    items: [
+      { seq:1, course:'感知数量', content:'手口一致点数 1-3 的物品，建立数量概念', games:'手指谣、点数游戏', materials:'颜色积木块、动物磁贴、PPT' },
+      { seq:2, course:'点数', content:'手口一致点数 1-5 实物并说出总数，感知数量与数字对应', games:'动物做客、分类点数、按群计数', materials:'颜色积木块、动物磁贴、自制大动物卡、音乐、食物玩具、磁扣、小鱼卡、PPT' },
+      { seq:3, course:'城市飞行棋', content:'掌握城市飞行棋规则，按骰子点数行进完成数量对应', games:'城市飞行棋', materials:'城市飞行棋学具、数字卡、大骰子、PPT' },
+      { seq:4, course:'认识数字', content:'认读数字 1-3，建立数字符号与数量的对应关系', games:'数字精灵手指谣、数字找卡', materials:'数字卡、积木、卡通贴、动物磁贴、PPT' },
+      { seq:5, course:'倒数', content:'感知从大到小的数数顺序，练习 5-1 倒数', games:'积木送回家', materials:'数字卡、积木、卡通磁贴、PPT' },
+      { seq:6, course:'数序', content:'按 1-5 顺序正确排列数字卡片，巩固数序', games:'火车排列、数字排序', materials:'数字卡、小鱼卡、数字贴、积木块、自制火车头、PPT' }
+    ]
+  },
+  {
+    month: '11月', title: '数感强化与专注力训练（5 个主题）',
+    items: [
+      { seq:1, course:'数字追缉', content:'掌握数字追缉游戏规则，强化数字辨认与轮流游戏意识', games:'数字追缉（赛车比赛）', materials:'格米扑克、PPT' },
+      { seq:2, course:'谁不见了', content:'复习数字 1-5 及排序，锻炼观察力与专注力', games:'谁不见了', materials:'积木、数字卡、自制动物图卡、PPT' },
+      { seq:3, course:'盖数字', content:'按指令快速找到对应数字，锻炼视听觉专注与快速反应', games:'盖数字（初阶/进阶）', materials:'数字卡、PPT' },
+      { seq:4, course:'金钩钓鱼', content:'掌握金钩钓鱼接龙规则，强化数感与规则意识', games:'数字拍拍乐、金钩钓鱼', materials:'格米扑克牌、PPT' },
+      { seq:5, course:'舒尔特方格', content:'认识 3×3 方格，按序指认 1-10 数字，提升专注力', games:'舒尔特方格', materials:'数字卡、游戏板、PPT' }
+    ]
+  },
+  {
+    month: '12月', title: '数量对应与空间方位（8 个主题）',
+    items: [
+      { seq:1, course:'毛毛虫散步', content:'复习手口一致点数，按动物数量匹配数字 1-5', games:'动物园故事、毛毛虫点数', materials:'数字卡、磁力板、动物磁贴、小鱼卡、PPT' },
+      { seq:2, course:'按数取物', content:'根据数字取出对应数量物品，强化数量对应', games:'按数取物、糖果卡', materials:'数字卡、积木块、卡通磁贴、教师自制糖果卡、PPT' },
+      { seq:3, course:'糖果铺子', content:'通过售卖糖果情境强化 1-5 数量对应', games:'糖果铺子', materials:'糖果铺子操作板、积木块、PPT' },
+      { seq:4, course:'空间几何（2）', content:'感知上、下、前、后基本空间方位，结合生活场景判断位置', games:'帮小兔找朋友、方位转盘', materials:'玩偶、卡通磁贴、积木块、转盘、PPT' },
+      { seq:5, course:'空间几何（3）', content:'通过动物城堡情境完成空间方位对应摆放', games:'小动物住城堡', materials:'房子操作板、动物磁贴、PPT' },
+      { seq:6, course:'颜色数独', content:'按空间位置摆放颜色，初步理解数独行列不重复规则', games:'颜色魔法卡、颜色数独', materials:'积木块、操作板、PPT' },
+      { seq:7, course:'堆高楼', content:'根据游戏板指定数字叠加对应数量积木搭建高楼', games:'堆高楼', materials:'积木块、操作板、PPT' },
+      { seq:8, course:'小鱼总动员', content:'认读数字 1-6，点数小鱼并完成数量匹配', games:'小鱼配对、点数比赛', materials:'小鱼游戏底板、小鱼配对卡、数字大卡、奖励贴纸、拍铃、PPT' }
+    ]
+  },
+  {
+    month: '1月', title: '数字建形、分合与加减法（12 个主题）',
+    items: [
+      { seq:1, course:'一眼识数', content:'认识十格阵结构，摆出 1-5 建形并整体识别数量', games:'十格阵摆数、识数超人', materials:'十格阵、红蓝磁贴、操作板、PPT' },
+      { seq:2, course:'数字建形', content:'掌握十格阵摆放规则，完成 1-10 标准数字建形', games:'数字宝宝找家、我说你摆、闪卡认一认', materials:'十格阵、红蓝磁贴、操作板、PPT' },
+      { seq:3, course:'认识数字 11-20', content:'用十格阵理解"1 个十+几个一"，认读并摆出 11-20', games:'十格阵拼两位数', materials:'十格阵、红蓝磁贴、操作板、PPT' },
+      { seq:4, course:'10 的分解组合', content:'操作中感知 10 的分解与组合，理解总数与部分的变化关系', games:'搭建城堡分积木', materials:'积木块、操作板、PPT' },
+      { seq:5, course:'5 的分解组合', content:'掌握 5 的有序分解方法，发现分解交换位置规律', games:'汉堡分一分', materials:'卡通磁贴、雪花片、操作板、PPT' },
+      { seq:6, course:'5 以内的减法', content:'认识减号，理解"拿走求剩"含义，计算 5 以内减法', games:'小熊蜂蜜派对', materials:'卡通磁贴、红蓝磁扣、操作板、PPT' },
+      { seq:7, course:'5 以内的加法', content:'借助十格阵理解"合起来求总数"，计算 5 以内加法', games:'十格阵摆蜂蜜', materials:'卡通磁贴、红蓝磁扣、操作板、PPT' },
+      { seq:8, course:'疯狂大请客', content:'通过"疯狂大请客"找相同食物卡牌，巩固 5 以内凑数', games:'疯狂大请客', materials:'疯狂大请客卡牌' },
+      { seq:9, course:'10 以内的减法', content:'借助十格阵完成 6-10 减法建形与心算闯关', games:'小松鼠分饼干、心算闯关', materials:'十格阵操作卡、彩色磁力贴片、减法练习卡、磁性十格阵、大号贴片、心算闯关卡、情景 PPT' },
+      { seq:10, course:'格米减法', content:'掌握"同时出牌、抢算结果"规则，开展 5/10 以内减法对战', games:'格米减法对战', materials:'1-5/1-10 数字卡牌、小组抢答铃' },
+      { seq:11, course:'10 以内的加法', content:'借助十格阵完成 5/10 以内加法建形与心算闯关', games:'小熊野餐、心算闯关', materials:'十格阵操作卡、彩色贴片、磁性十格阵、大号贴片、加法题卡、心算闯关卡、情景 PPT' },
+      { seq:12, course:'格米加法', content:'掌握格米加法对战规则，开展 5/10 以内加法对战', games:'格米加法对战', materials:'1-5/1-10 数字卡牌、小组抢答铃' }
+    ]
+  },
+  {
+    month: '2月', title: '比较、逻辑与数概念拓展（6 个主题）',
+    items: [
+      { seq:1, course:'比较大小', content:'比较 10 以内数的大小，认识并使用 >、<、= 符号', games:'摘苹果比大小、加法比大小', materials:'1-10 数字卡、大于小于等于号操作卡、符号卡片、练习卡' },
+      { seq:2, course:'找规律 2', content:'识别三种元素组合的排序规律并按规律续排', games:'花园种花找规律', materials:'彩色圆片、规律操作板、雪花片、空白操作底板、彩笔' },
+      { seq:3, course:'基数与序数', content:'区分基数（几个）与序数（第几），回答排队问题', games:'动物园排队', materials:'动物排队磁贴、1-5 数字卡、彩色小圆片、水果卡、交通工具卡、方向指示卡' },
+      { seq:4, course:'单双数的认知', content:'通过两两配对理解单双数含义，区分 1-10 单双数', games:'好朋友房子、数字大转盘', materials:'1-10 数字大卡片、动物磁贴、好朋友房子贴板、水果贴卡、单双数分类大底板' },
+      { seq:5, course:'认识点线', content:'认识点与直线、曲线、折线，在生活中辨认对应形态', games:'笔宝宝跳舞、点线组合画', materials:'生活实景图、点线示范卡、粗马克笔、大画纸、磁性点线拼块、彩笔' },
+      { seq:6, course:'数字连击', content:'认识 1-10 数字扑克，掌握数字连击游戏规则', games:'数字连击', materials:'格米扑克牌' }
+    ]
+  }
+];
+
+/* ===== 渲染教具图鉴 ===== */
+document.getElementById('toolGrid').innerHTML = TOOLS.map(function(t) {
+  return '<div class="tool-card">' +
+    '<div class="tool-img"><img src="' + t.img + '" alt="' + t.name + '" loading="lazy"></div>' +
+    '<div class="tool-info"><b>' + t.name + '</b>' +
+    '<div class="aka">别名：' + t.aka + '</div>' +
+    '<div class="aka" style="margin-top:3px;color:var(--brand);">用于：' + t.games + '</div>' +
+    '</div></div>';
+}).join('');
+
+/* ===== 渲染课程主题表 ===== */
+document.getElementById('themeList').innerHTML = THEMES.map(function(g) {
+  return '<div class="month-group"><h3>' + g.month + '：' + g.title + '</h3>' +
+    '<div style="overflow-x:auto;"><table class="theme-table"><thead><tr>' +
+    '<th class="seq">#</th><th>课程</th><th>核心内容</th><th>主要游戏</th><th>所需材料</th>' +
+    '</tr></thead><tbody>' +
+    g.items.map(function(it) {
+      return '<tr><td class="seq">' + it.seq + '</td>' +
+        '<td class="course">' + it.course + '</td>' +
+        '<td>' + it.content + '</td>' +
+        '<td class="games">' + it.games + '</td>' +
+        '<td class="materials">' + it.materials + '</td></tr>';
+    }).join('') +
+    '</tbody></table></div></div>';
+}).join('');
+
+/* ===== 离线提示 ===== */
+if (navigator.onLine === false) {
+  document.getElementById('offlineTip').style.display = 'block';
+}
+window.addEventListener('online', function() { document.getElementById('offlineTip').style.display = 'none'; });
+window.addEventListener('offline', function() { document.getElementById('offlineTip').style.display = 'block'; });
+
+/* ===== Service Worker 注册 ===== */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
+</body>
+</html>

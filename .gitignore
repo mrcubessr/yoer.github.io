@@ -1,0 +1,8 @@
+# 未使用的临时素材（网页未引用，体积大，约 74MB）
+images/C01/游戏短视频.mp4
+images/C01/豆包*.png
+
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+*.log

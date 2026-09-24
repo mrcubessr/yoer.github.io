@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>游戏详情 · 优尔经典桌游</title>
+  <meta name="description" content="优尔经典桌游：格米数学派对、疯狂大请客、智趣方格。">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="优尔启蒙">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* 游戏页专属：英文副标 + 主题徽章 */
+    .en-name { font-size: 12px; letter-spacing: 3px; font-weight: 700; opacity: .55; margin-bottom: 4px; }
+    .level-tag {
+      display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 600;
+      color: var(--brand); background: var(--brand-bg); border: 1px solid color-mix(in srgb, var(--brand) 25%, transparent);
+      padding: 4px 12px; border-radius: 999px;
+    }
+    .price-text { color: var(--brand); font-weight: 800; font-size: 26px; line-height: 1; }
+    .game-switch img { width: 100%; border-radius: 8px; aspect-ratio: 16/10; object-fit: cover; background: #f9fafb; }
+    .game-switch {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .game-switch a {
+      border: 1px solid var(--line); border-radius: 12px; padding: 8px; text-align: center;
+      text-decoration: none; color: var(--ink); font-size: 12.5px; font-weight: 600; background: #fff;
+    }
+    .game-switch a.cur { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand); }
+    .game-switch a span { display: block; margin-top: 5px; }
+    .contents-note { margin-top: 10px; font-size: 12px; color: var(--ink-2); }
+    @media (min-width: 900px) {
+      .game-page { max-width: 1152px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="back-btn" id="backBtn" aria-label="返回">‹</button>
+      <div class="titles">
+        <b id="dTitle">游戏详情</b>
+        <span>优尔经典桌游</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="detailRoot" class="game-page">
+    <!-- JS 渲染 -->
+  </main>
+
+  <div class="buybar-spacer"></div>
+  <div class="buybar">
+    <div class="buybar-inner">
+      <div class="p-info">
+        <div class="price" id="buybarPrice"></div>
+        <em id="buybarNote"></em>
+      </div>
+      <button class="cta" id="buyBtn">咨询 / 购买</button>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script src="games.js"></script>
+  <script>
+    const id = new URLSearchParams(location.search).get('id') || 'party';
+    const g = GAMES[id];
+    if (!g) { location.replace('index.html'); throw new Error('bad game id'); }
+
+    // 主题色注入
+    const LIGHT = { party: '#4ade80', feast: '#fb7185', grid: '#fbbf24' };
+    const root = document.documentElement.style;
+    root.setProperty('--brand', g.themeColor);
+    root.setProperty('--brand-light', LIGHT[id]);
+    root.setProperty('--brand-bg', g.themeColorSoft);
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', g.themeColor);
+
+    document.title = g.name + ' · 优尔经典桌游';
+    document.getElementById('dTitle').textContent = g.name;
+
+    const slides = g.gallery;
+
+    document.getElementById('detailRoot').innerHTML = `
+      <!-- 轮播图 -->
+      <div class="gallery">
+        <div class="slides" id="slides">
+          ${slides.map(s => `<img src="${s}" alt="${g.name} 展示图" loading="lazy">`).join('')}
+        </div>
+        <span class="counter" id="slideCounter">1/${slides.length}</span>
+      </div>
+
+      <!-- 标题价格 -->
+      <div class="d-head">
+        <div class="wrap">
+          <div class="en-name">${g.enName}</div>
+          <h1>${g.name}</h1>
+          <p class="tagline">${g.tagline}</p>
+          <div class="meta">
+            ${g.meta.map(m => `<span>${m}</span>`).join('')}
+          </div>
+          <div class="d-price-row">
+            ${g.priceLabel
+              ? `<div class="price"><span class="cur">¥</span><span class="num">${g.priceLabel}</span><span class="unit">${g.priceSuffix || ''}</span></div>`
+              : `<div class="price-text">${g.priceText || '详询客服'}</div>`}
+            <span class="sold">${g.levelTag}</span>
+          </div>
+          <span class="level-tag">${g.tagline}</span>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <!-- 产品说明 -->
+        <div class="d-sec">
+          <h2>游戏介绍</h2>
+          <p>${g.desc}</p>
+        </div>
+
+        <!-- 核心卖点 -->
+        <div class="d-sec">
+          <h2>核心卖点</h2>
+          <ul class="sell-list">${g.sellTags.map(s => `<li>${s}</li>`).join('')}</ul>
+          ${g.stats ? `
+          <div class="stats-grid">
+            ${g.stats.map(s => `<div class="stat"><b>${s.n}</b><span>${s.label}</span></div>`).join('')}
+          </div>` : ''}
+        </div>
+
+        <!-- 游戏模块 -->
+        ${g.modules ? `
+        <div class="d-sec">
+          <h2>${g.modulesTitle}</h2>
+          ${g.modules.map((m, i) => `
+            <div class="module">
+              <div class="m-no">${i + 1}</div>
+              <div>
+                <b>${m.name}${m.em ? `<em>${m.em}</em>` : ''}</b>
+                <span>${m.items}</span>
+              </div>
+            </div>`).join('')}
+        </div>` : ''}
+
+        <!-- 培养能力 -->
+        <div class="d-sec">
+          <h2>培养能力点</h2>
+          <div class="chips">${g.abilities.map(a => `<span>${a}</span>`).join('')}</div>
+        </div>
+
+        <!-- 玩法路径 -->
+        ${g.steps ? `
+        <div class="d-sec">
+          <h2>${g.stepsTitle || '玩法步骤'}</h2>
+          <div class="d-steps">
+            ${g.steps.map((s, i) => `
+              <div class="d-step">
+                <div class="no">${i + 1}</div>
+                <div><b>${s.t}</b><span>${s.d}</span></div>
+              </div>`).join('')}
+          </div>
+        </div>` : ''}
+
+        <!-- 适合谁 -->
+        <div class="d-sec">
+          <h2>适合谁</h2>
+          <div class="audience-box">${g.audience}</div>
+        </div>
+
+        <!-- 玩完收获 -->
+        ${g.outcomes ? `
+        <div class="d-sec">
+          <h2>玩过之后，孩子将获得</h2>
+          ${g.outcomes.map(o => `
+            <div class="outcome-group">
+              <b>${o.g}</b>
+              <p>${o.items}</p>
+            </div>`).join('')}
+        </div>` : ''}
+
+        <!-- 产品亮点 -->
+        ${g.highlights ? `
+        <div class="d-sec">
+          <h2>${g.highlightsTitle || g.highlights.length + ' 大产品亮点'}</h2>
+          ${g.highlights.map(h => `
+            <div class="hl"><b>${h.t}</b><span>${h.d}</span></div>`).join('')}
+        </div>` : ''}
+
+        <!-- 使用场景 -->
+        ${g.scenarios ? `
+        <div class="d-sec">
+          <h2>使用场景</h2>
+          <ul class="dot-list">${g.scenarios.map(s => `<li>${s}</li>`).join('')}</ul>
+        </div>` : ''}
+
+        <!-- 配套视频课 -->
+        <div class="d-sec">
+          <h2>配套视频课 / 教案</h2>
+          <div class="course-box">
+            <img src="${g.courseImg || g.gallery[0]}" alt="配套课程" loading="lazy">
+            <p>${g.courseNote}</p>
+          </div>
+        </div>
+
+        <!-- 配置清单 -->
+        <div class="d-sec full-span">
+          <h2>${g.contentsTitle || '配置清单'}</h2>
+          <div class="contents-grid">${g.contents.map(c => `<span>${c}</span>`).join('')}</div>
+          ${g.contentsNote ? `<p class="contents-note">${g.contentsNote}</p>` : ''}
+        </div>
+
+        <!-- 购买与服务 -->
+        ${g.purchase ? `
+        <div class="d-sec full-span">
+          <h2>购买与服务</h2>
+          <ul class="dot-list">${g.purchase.map(s => `<li>${s}</li>`).join('')}</ul>
+        </div>` : ''}
+
+        <!-- 其他游戏 -->
+        <div class="d-sec full-span">
+          <h2>优尔其他经典游戏</h2>
+          <div class="game-switch">
+            ${GAME_ORDER.map(oid => {
+              const o = GAMES[oid];
+              return `<a href="game.html?id=${o.id}" class="${o.id === g.id ? 'cur' : ''}">
+                <img src="${o.cardImg}" alt="${o.name}" loading="lazy">
+                <span>${o.name}</span></a>`;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+
+    // 轮播计数
+    const slidesEl = document.getElementById('slides');
+    const counter = document.getElementById('slideCounter');
+    slidesEl.addEventListener('scroll', () => {
+      const i = Math.round(slidesEl.scrollLeft / slidesEl.clientWidth) + 1;
+      counter.textContent = `${Math.min(i, slides.length)}/${slides.length}`;
+    }, { passive: true });
+
+    // 购买栏
+    document.getElementById('buybarPrice').innerHTML = g.priceLabel
+      ? `<span class="cur">¥</span><span class="num">${g.priceLabel}</span><span class="unit">${g.priceSuffix || ''}</span>`
+      : `<span style="font-size:18px;font-weight:800;">${g.priceText || '详询客服'}</span>`;
+    document.getElementById('buybarNote').textContent = g.priceNote || '';
+
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    document.getElementById('buyBtn').addEventListener('click', () => {
+      toast.textContent = '已收到您的咨询意向，客服将尽快与您联系';
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+    });
+
+    document.getElementById('backBtn').addEventListener('click', () => {
+      if (document.referrer && document.referrer.includes(location.host)) history.back();
+      else location.href = 'index.html';
+    });
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

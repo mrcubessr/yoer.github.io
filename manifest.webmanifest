@@ -1,0 +1,32 @@
+{
+  "name": "优尔数学思维启蒙商城",
+  "short_name": "优尔启蒙",
+  "description": "优尔 2-5 岁数学思维启蒙套盒：L1 零基础启蒙、L2 进阶提升、L3 高阶拓展，桌游教具 + 配套视频课。",
+  "lang": "zh-CN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#ea580c",
+  "background_color": "#fff7ed",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
