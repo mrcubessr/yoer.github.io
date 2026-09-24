@@ -1350,7 +1350,7 @@ const SYLLABUS = {
     "level": "L3",
     "name": "L3 高阶拓展盒",
     "productId": "C03",
-    "age": "4–5 岁",
+    "age": "7–8 岁",
     "goal": "从运算到推理",
     "theme": "red",
     "home": {
