@@ -149,9 +149,10 @@ const PRODUCTS = {
     ],
     audience: '已完成L1或3-4岁已会数1-10的孩子；园所小班下/中班组数学区；幼小衔接思维铺垫。',
     theme: 'green',
-    mainImg: 'images/C02/C02-main.jpg',
-    cardImg: 'images/C02/C02-products.jpg',
+    mainImg: 'images/C02/L2-main.jpg',
+    cardImg: 'images/C02/L2-main.jpg',
     gallery: [
+      'images/C02/L2-main.jpg',
       'images/C02/C02-products.jpg',
       'images/C02/C02-course.jpg',
       'images/C02/C02-1.jpg', 'images/C02/C02-2.jpg', 'images/C02/C02-3.jpg',
