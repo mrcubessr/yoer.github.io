@@ -185,32 +185,25 @@
     padding: 28px 32px 40px;
   }
   #detailRoot > .gallery {
-    grid-area: gallery;
     position: sticky;
     top: 84px;
-    align-self: start;
-    max-width: none;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    overflow: hidden;
-  }
-  #detailRoot .gallery .slides img {
-    aspect-ratio: 4 / 3;
-    object-fit: contain;
-    background: #fff;
   }
   #detailRoot > .d-head {
     grid-area: head;
     padding: 0 0 18px;
   }
   #detailRoot > .d-head .wrap { max-width: none; padding: 0; }
+  /* 内容区：双栏横向铺开，取代竖排长条 */
   #detailRoot > .wrap {
     grid-area: content;
     max-width: none;
     padding: 0;
-    column-count: 1;
+    column-count: 2;
+    column-gap: 20px;
   }
+  #detailRoot > .wrap > .d-sec { break-inside: avoid; margin-bottom: 14px; }
+  #detailRoot > .wrap > .full-span,
+  #detailRoot > .wrap > .long-img { column-span: all; }
 
   .buybar-inner { max-width: 1480px; }
 }
