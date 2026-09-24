@@ -13,6 +13,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="优尔启蒙">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="desktop.css">
 </head>
 <body>
   <header class="topbar">
@@ -22,6 +23,14 @@
         <b>优尔思维启蒙商城</b>
         <span>2–5 岁 · 数学思维分级套盒</span>
       </div>
+      <nav class="nav-menu">
+        <a href="#products">产品总览</a>
+        <a href="#games">经典桌游</a>
+        <a href="#path">学习路径</a>
+        <a href="#tools">教具图鉴</a>
+        <a href="#why">品牌背书</a>
+        <a href="#buy" class="nav-cta">咨询选购</a>
+      </nav>
     </div>
     <div class="offline-tip" id="offlineTip">当前离线，正在浏览缓存内容</div>
   </header>
@@ -29,21 +38,57 @@
   <!-- Hero -->
   <section class="hero">
     <div class="wrap">
-      <span class="kicker">玩，是最好的学 · 桌游教具 + 配套视频课</span>
-      <h1>不跳级的数学思维<br><em>L1 → L2 → L3</em> 分级启蒙</h1>
-      <p>认识数字 → 理解运算 → 数学推理，一套玩三年</p>
-      <div class="path-pills">
-        <span class="pill">L1 · 2-3岁</span>
-        <span class="arrow">→</span>
-        <span class="pill">L2 · 3-4岁</span>
-        <span class="arrow">→</span>
-        <span class="pill">L3 · 4-5岁</span>
+      <div class="hero-text">
+        <span class="kicker">玩，是最好的学 · 桌游教具 + 配套视频课</span>
+        <h1>不跳级的数学思维<br><em>L1 → L2 → L3</em> 分级启蒙</h1>
+        <p>认识数字 → 理解运算 → 数学推理，一套玩三年</p>
+        <div class="path-pills">
+          <span class="pill">L1 · 2-3岁</span>
+          <span class="arrow">→</span>
+          <span class="pill">L2 · 3-4岁</span>
+          <span class="arrow">→</span>
+          <span class="pill">L3 · 4-5岁</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="images/C01/L1-photo-01.jpg" alt="优尔 L1 零基础启蒙盒">
+        <div class="hero-visual-badge">L1 · L2 · L3 分级套盒</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 教具图鉴 & 课程材料明细（醒目入口，置顶） -->
+  <section class="tools-entry" id="tools">
+    <div class="wrap">
+      <div class="tools-entry-head">
+        <h2>教具图鉴 &amp; 课程材料明细</h2>
+        <p>每一件教具、每一个游戏对应的材料一目了然 · 家长 / 老师即拿即用</p>
+      </div>
+      <div class="tools-entry-grid">
+        <a class="te-card te-l1" href="tools.html">
+          <span class="te-level">L1</span>
+          <b>零基础启蒙盒</b>
+          <span class="te-sub">17 件教具图鉴 · 32 课程主题明细</span>
+          <em class="te-go">查看教具图鉴 →</em>
+        </a>
+        <a class="te-card te-l2" href="tools-l2.html">
+          <span class="te-level">L2</span>
+          <b>进阶提升盒</b>
+          <span class="te-sub">教具图鉴 · 课程材料明细</span>
+          <em class="te-go">查看教具图鉴 →</em>
+        </a>
+        <a class="te-card te-l3" href="tools-l3.html">
+          <span class="te-level">L3</span>
+          <b>高阶拓展盒</b>
+          <span class="te-sub">教具图鉴 · 课程材料明细</span>
+          <em class="te-go">查看教具图鉴 →</em>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- 产品卡 -->
-  <section class="section">
+  <section class="section" id="products">
     <div class="wrap">
       <div class="section-head">
         <h2><i>OUR PRODUCTS</i>三大核心产品</h2>
@@ -54,7 +99,7 @@
   </section>
 
   <!-- 经典桌游 -->
-  <section class="section" style="background:#f9fafb;">
+  <section class="section" id="games" style="background:#f9fafb;">
     <div class="wrap">
       <div class="section-head">
         <h2><i>CLASSIC GAMES</i>三大经典桌游</h2>
@@ -65,7 +110,7 @@
   </section>
 
   <!-- 学习路径 -->
-  <section class="section">
+  <section class="section" id="path">
     <div class="wrap">
       <div class="section-head">
         <h2><i>LEARNING PATH</i>为什么建议按 L1→L2→L3 学习</h2>
@@ -117,7 +162,7 @@
   </section>
 
   <!-- 品牌背书 -->
-  <section class="section">
+  <section class="section" id="why">
     <div class="wrap">
       <div class="section-head">
         <h2><i>WHY YOER</i>为什么家长和园所选择优尔</h2>
@@ -138,7 +183,7 @@
   </section>
 
   <!-- 选购 CTA -->
-  <section class="wrap">
+  <section class="wrap" id="buy">
     <div class="cta-banner">
       <b>不知道选 L1 / L2 / L3？</b>
       <p>把孩子年龄 + 基础告诉我们，帮孩子选对级别，跟对体系</p>

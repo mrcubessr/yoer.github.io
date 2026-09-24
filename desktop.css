@@ -1,0 +1,207 @@
+/* =========================================================
+   优尔官网 · 宽屏横版浏览版（≥1200px 桌面 / 1920 横屏）
+   仅作用于桌面；移动端沿用 styles.css，不受影响。
+   ========================================================= */
+
+/* 桌面导航菜单默认在移动端隐藏（desktop.css 全局加载，故先置 none） */
+.topbar .nav-menu { display: none; }
+
+@media (min-width: 1200px) {
+
+  /* 容器拓宽 */
+  .wrap { max-width: 1480px; padding: 0 32px; }
+
+  /* ===================== 顶栏：横向导航 ===================== */
+  .topbar-inner {
+    max-width: 1480px;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .topbar .logo { width: 44px; height: 44px; font-size: 21px; border-radius: 12px; }
+  .topbar .titles b { font-size: 19px; letter-spacing: .5px; }
+  .topbar .titles span { font-size: 12px; }
+
+  .topbar .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-left: auto;
+  }
+  .topbar .nav-menu a {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: .88;
+    white-space: nowrap;
+    transition: opacity .2s;
+  }
+  .topbar .nav-menu a:hover { opacity: 1; }
+  .topbar .nav-menu .nav-cta {
+    background: #fff;
+    color: var(--brand);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: 700;
+    opacity: 1;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+  }
+
+  /* ===================== Hero：左右两栏横版 ===================== */
+  .hero { padding: 56px 0 64px; text-align: left; }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 56px;
+    align-items: center;
+    max-width: 1480px;
+  }
+  .hero .kicker { margin-bottom: 18px; }
+  .hero h1 { font-size: 48px; line-height: 1.25; }
+  .hero p { font-size: 19px; margin-top: 16px; }
+  .path-pills { justify-content: flex-start; margin-top: 26px; }
+  .path-pills .pill { font-size: 15px; padding: 9px 20px; }
+  .hero-visual { position: relative; }
+  .hero-visual img {
+    width: 100%;
+    border-radius: 22px;
+    box-shadow: 0 24px 60px rgba(234, 88, 12, .22);
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+  .hero-visual-badge {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    background: rgba(255, 255, 255, .92);
+    color: var(--brand);
+    font-weight: 800;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .15);
+  }
+
+  /* ===================== 区块标题 ===================== */
+  .section { padding: 40px 0 12px; }
+  .section-head { margin-bottom: 26px; }
+  .section-head h2 { font-size: 28px; }
+  .section-head p { font-size: 15px; }
+
+  /* ===================== 产品卡：三列横排 ===================== */
+  .product-list { grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .p-card .cover img { aspect-ratio: 4 / 3; }
+  .p-card h3 { font-size: 20px; }
+  .p-card .body { padding: 18px 20px 20px; }
+
+  /* 经典桌游三列 */
+  #gameList { grid-template-columns: repeat(3, 1fr); gap: 26px; }
+
+  /* ===================== 教具图鉴 · 醒目入口 ===================== */
+  .tools-entry { background: linear-gradient(135deg, #fff7ed, #ffffff); }
+  .tools-entry-head { text-align: center; margin: 34px 0 24px; }
+  .tools-entry-head h2 { font-size: 28px; }
+  .tools-entry-head p { color: var(--ink-2); font-size: 15px; margin-top: 6px; }
+  .tools-entry-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 14px;
+  }
+  .te-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 26px 24px;
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 30px rgba(234, 88, 12, .10);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .te-card:hover { transform: translateY(-4px); box-shadow: 0 18px 42px rgba(234, 88, 12, .18); }
+  .te-card .te-level {
+    align-self: flex-start;
+    font-weight: 800;
+    font-size: 14px;
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .te-card b { font-size: 22px; }
+  .te-card .te-sub { font-size: 13px; color: var(--ink-2); }
+  .te-card .te-go { margin-top: 14px; font-weight: 700; font-size: 15px; }
+  .te-l1 .te-level { background: linear-gradient(135deg, var(--brand-light), var(--brand)); }
+  .te-l1 .te-go { color: var(--brand); }
+  .te-l2 .te-level { background: linear-gradient(135deg, #4ade80, #16a34a); }
+  .te-l2 .te-go { color: #16a34a; }
+  .te-l3 .te-level { background: linear-gradient(135deg, #f87171, #dc2626); }
+  .te-l3 .te-go { color: #dc2626; }
+
+  /* ===================== 学习路径横排 ===================== */
+  .path-row { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .path-item { padding: 20px 22px; }
+
+  /* ===================== 玩法四步 ===================== */
+  .steps-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .step-card { padding: 20px; }
+
+  /* ===================== 套装 / 选购 横幅：左右布局 ===================== */
+  .bundle-banner,
+  .cta-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 26px 32px;
+    margin: 34px 0 12px;
+  }
+  .bundle-banner > div,
+  .cta-banner > div { flex: 1; }
+  .cta-banner .cta-list { margin: 14px 0 0; max-width: 760px; }
+  .bundle-banner .go,
+  .cta-banner .go { flex: none; font-size: 15px; padding: 12px 28px; }
+
+  /* ===================== 品牌背书：双列 ===================== */
+  .brand-list { grid-template-columns: repeat(2, 1fr); gap: 10px 32px; }
+
+  /* ===================== 页脚 ===================== */
+  .footer { font-size: 13px; padding: 30px 16px 34px; }
+
+  /* ===================== 详情页：宽屏横版产品介绍页 ===================== */
+  #detailRoot {
+    display: grid;
+    grid-template-columns: 600px 1fr;
+    grid-template-areas:
+      "gallery head"
+      "gallery content";
+    grid-template-rows: auto 1fr;
+    gap: 44px;
+    align-items: start;
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+  }
+  #detailRoot > .gallery {
+    grid-area: gallery;
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    max-width: none;
+  }
+  #detailRoot > .d-head {
+    grid-area: head;
+    padding: 0 0 18px;
+  }
+  #detailRoot > .d-head .wrap { max-width: none; padding: 0; }
+  #detailRoot > .wrap {
+    grid-area: content;
+    max-width: none;
+    padding: 0;
+    column-count: 1;
+  }
+
+  .buybar-inner { max-width: 1480px; }
+}
