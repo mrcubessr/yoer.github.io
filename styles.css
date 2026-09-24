@@ -101,6 +101,8 @@ button { font-family: inherit; border: none; cursor: pointer; }
 /* 主页「三大核心产品」主图：竖版封面图（L1/L2/L3 封面），2:3 框近乎完整展示。
    限定 #productList，不影响桌游卡（#gameList）的横向封面。 */
 #productList .p-card .cover img { aspect-ratio: 2 / 3; object-position: center; }
+/* 封面图自带标题栏，隐藏产品卡左上级别徽章避免重叠（保留右上年龄标签） */
+#productList .p-card .lv-badge { display: none; }
 .p-card .lv-badge {
   position: absolute; left: 12px; top: 12px;
   background: linear-gradient(135deg, var(--brand-light), var(--brand));
