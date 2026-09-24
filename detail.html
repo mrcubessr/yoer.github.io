@@ -27,6 +27,7 @@
         <a href="index.html#products">产品总览</a>
         <a href="syllabus.html">课程大纲</a>
         <a href="index.html#tools">教具图鉴</a>
+        <a href="index.html#tracks">两大体系</a>
         <a href="index.html#buy" class="nav-cta">咨询选购</a>
       </nav>
     </div>
@@ -35,18 +36,6 @@
   <main id="detailRoot">
     <!-- JS 渲染 -->
   </main>
-
-  <div class="buybar-spacer"></div>
-  <div class="buybar">
-    <div class="buybar-inner">
-      <div class="p-info">
-        <div class="price" id="buybarPrice"></div>
-        <em id="buybarNote">正品保障 · 含配套视频课</em>
-      </div>
-      <button class="cta" id="buyBtn">立即购买</button>
-    </div>
-  </div>
-  <div class="toast" id="toast"></div>
 
   <script src="products.js"></script>
   <script>
@@ -58,13 +47,33 @@
     document.getElementById('dTitle').textContent = p.name;
     document.body.className = 'dpage d-' + p.id.toLowerCase();
 
-    /* 轮播图：仅使用图集，不再挂载「图文详情」长图 */
+    /* 轮播图：仅使用图集 */
     const slides = p.gallery.slice();
     const toolsHref = p.id === 'C01' ? 'tools.html' : 'tools-' + p.level.toLowerCase() + '.html';
+    const hasTracks = !!(p.homeTrack || p.kindergartenTrack);
+
+    /* ===== 两条主线卡片 ===== */
+    function trackCol(track, type) {
+      if (!track) return '';
+      const isHome = type === 'home';
+      const stats = isHome
+        ? `<div class="track-stats"><span><b>${track.videoLessons}</b><em>节视频课</em></span></div>`
+        : `<div class="track-stats"><span><b>${track.lessonPlans}</b><em>份标准教案</em></span><span><b>${track.courseware}</b><em>份配套课件</em></span></div>`;
+      return `
+        <div class="track ${isHome ? 'home' : 'kinder'}">
+          <div class="track-tag">${isHome ? '家庭亲子体系' : '幼儿园课程体系'}</div>
+          <b>${track.title}</b>
+          <em>${track.audience}</em>
+          <p>${track.desc}</p>
+          ${stats}
+          <ul>${track.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+        </div>`;
+    }
 
     /* ===== 五个界面的内容 ===== */
     const PANES = {};
 
+    /* 总览：共享的基础介绍（教具/材料/图鉴之外的通用说明） */
     PANES.overview = `
       <div class="d-sec">
         <h2>产品说明</h2>
@@ -95,40 +104,82 @@
       </div>
     `;
 
-    PANES.curriculum = `
-      ${p.modules ? `
-      <div class="d-sec">
-        <h2>${p.modulesTitle || '8 大能力模块（层层递进）'}</h2>
-        ${p.modules.map((m, i) => `
-          <div class="module">
-            <div class="m-no">${(p.modulesTitle || '模块').includes('板块') ? '板块' : '模块'}${i + 1}</div>
-            <div>
-              <b>${m.name}${m.lessons ? `<em>${m.themes} 主题 · ${m.lessons} 课时</em>` : ''}</b>
-              <span>${m.items}</span>
-            </div>
-          </div>`).join('')}
-      </div>` : ''}
-
-      <div class="d-sec">
-        <h2>完整课程大纲</h2>
-        <a class="syl-link" href="syllabus.html?lv=${p.level}">
-          <b>查看 ${p.level} 逐课明细表 →</b>
-          <span>按月份列出每一节课的核心内容、主要游戏与所需材料</span>
-        </a>
-      </div>
-
-      ${p.sevenSteps ? `
-      <div class="d-sec">
-        <h2>7 步启蒙路径</h2>
-        <div class="d-steps">
-          ${p.sevenSteps.map((s, i) => `
-            <div class="d-step">
-              <div class="no">${i + 1}</div>
-              <div><b>${s.t}</b><span>${s.d}</span></div>
-            </div>`).join('')}
+    /* 课程体系：共享教具 + 两条主线（家庭 / 园所）各自介绍 */
+    if (hasTracks) {
+      PANES.curriculum = `
+        <div class="d-sec full-span">
+          <h2>一套教具 · 两套课程体系</h2>
+          <p>盒内的教具、材料与图鉴是<b>共享</b>的；但在「家庭亲子」与「幼儿园集体教学」两种场景下，课程内容、课程大纲与配套形式各不相同。请按你的使用场景，选择对应的体系查看。</p>
         </div>
-      </div>` : ''}
-    `;
+        <div class="d-sec full-span">
+          <div class="track-grid">
+            ${trackCol(p.homeTrack, 'home')}
+            ${trackCol(p.kindergartenTrack, 'kinder')}
+          </div>
+        </div>
+        ${p.modules ? `
+        <div class="d-sec full-span">
+          <h2>${p.modulesTitle || '8 大能力模块（层层递进）'}</h2>
+          <p style="margin-bottom:10px;">无论家庭还是园所，孩子都将沿以下能力模块循序渐进地成长：</p>
+          ${p.modules.map((m, i) => `
+            <div class="module">
+              <div class="m-no">${(p.modulesTitle || '模块').includes('板块') ? '板块' : '模块'}${i + 1}</div>
+              <div>
+                <b>${m.name}${m.lessons ? `<em>${m.themes} 主题 · ${m.lessons} 课时</em>` : ''}</b>
+                <span>${m.items}</span>
+              </div>
+            </div>`).join('')}
+        </div>` : ''}
+        <div class="d-sec full-span">
+          <h2>完整课程大纲</h2>
+          <a class="syl-link" href="syllabus.html?lv=${p.level}">
+            <b>查看 ${p.level} 逐课明细表 →</b>
+            <span>按月份列出每一节课的核心内容、主要游戏与所需材料</span>
+          </a>
+        </div>
+        ${p.sevenSteps ? `
+        <div class="d-sec full-span">
+          <h2>7 步启蒙路径</h2>
+          <div class="d-steps">
+            ${p.sevenSteps.map((s, i) => `
+              <div class="d-step">
+                <div class="no">${i + 1}</div>
+                <div><b>${s.t}</b><span>${s.d}</span></div>
+              </div>`).join('')}
+          </div>
+        </div>` : ''}
+      `;
+    } else {
+      PANES.curriculum = `
+        ${p.modules ? `
+        <div class="d-sec">
+          <h2>${p.modulesTitle || '核心玩法板块'}</h2>
+          ${p.modules.map((m, i) => `
+            <div class="module">
+              <div class="m-no">${i + 1}</div>
+              <div><b>${m.name}</b><span>${m.items}</span></div>
+            </div>`).join('')}
+        </div>` : ''}
+        <div class="d-sec">
+          <h2>完整课程大纲</h2>
+          <a class="syl-link" href="syllabus.html?lv=${p.level}">
+            <b>查看 ${p.level} 逐课明细表 →</b>
+            <span>按月份列出每一节课的核心内容、主要游戏与所需材料</span>
+          </a>
+        </div>
+        ${p.sevenSteps ? `
+        <div class="d-sec">
+          <h2>7 步启蒙路径</h2>
+          <div class="d-steps">
+            ${p.sevenSteps.map((s, i) => `
+              <div class="d-step">
+                <div class="no">${i + 1}</div>
+                <div><b>${s.t}</b><span>${s.d}</span></div>
+              </div>`).join('')}
+          </div>
+        </div>` : ''}
+      `;
+    }
 
     PANES.play = `
       <div class="d-sec">
@@ -194,32 +245,25 @@
             </tr>`).join('')}
           </tbody>
         </table>
-      </div>` : (p.homeTrack || p.kindergartenTrack) ? `
+      </div>` : ''}
+
+      ${hasTracks ? `
       <div class="d-sec full-span">
-        <h2>两条产品线 · 针对不同场景</h2>
+        <h2>两种场景 · 分别采购</h2>
         <div class="track-grid">
           ${p.homeTrack ? `
           <div class="track home">
-            <div class="track-tag">家庭场景</div>
+            <div class="track-tag">家庭亲子体系</div>
             <b>${p.homeTrack.title}</b>
             <em>${p.homeTrack.audience}</em>
-            <p>${p.homeTrack.desc}</p>
-            <div class="track-stats">
-              <span><b>${p.homeTrack.videoLessons}</b><em>节视频课</em></span>
-            </div>
-            <ul>${p.homeTrack.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+            <p>家长自购，1 盒起；含 ${p.homeTrack.videoLessons} 节真人视频课，持续更新。</p>
           </div>` : ''}
           ${p.kindergartenTrack ? `
           <div class="track kinder">
-            <div class="track-tag">园所场景</div>
+            <div class="track-tag">幼儿园课程体系</div>
             <b>${p.kindergartenTrack.title}</b>
             <em>${p.kindergartenTrack.audience}</em>
-            <p>${p.kindergartenTrack.desc}</p>
-            <div class="track-stats">
-              <span><b>${p.kindergartenTrack.lessonPlans}</b><em>份标准教案</em></span>
-              <span><b>${p.kindergartenTrack.courseware}</b><em>份配套课件</em></span>
-            </div>
-            <ul>${p.kindergartenTrack.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+            <p>园所采购，按班级起订；含 ${p.kindergartenTrack.lessonPlans} 份标准教案 + ${p.kindergartenTrack.courseware} 份配套课件，免费教师指导。</p>
           </div>` : ''}
         </div>
       </div>` : ''}
@@ -261,28 +305,46 @@
       { k: 'purchase', t: '场景采购' }
     ];
 
-    document.getElementById('detailRoot').innerHTML = `
-      <!-- 轮播图 -->
-      <div class="gallery">
-        <div class="slides" id="slides">
-          ${slides.map(s => `<img src="${s}" alt="${p.name} 展示图" loading="lazy">`).join('')}
+    /* ===== 顶层：左图集 + 右简介（等高），右侧含两条主线选择入口 ===== */
+    const trackSelect = hasTracks ? `
+      <div class="track-select">
+        <div class="ts-title">同一套教具 · 两套课程体系，请选择你的场景</div>
+        <div class="ts-cards">
+          ${p.homeTrack ? `
+          <button class="ts-card home" data-tab="curriculum" type="button">
+            <span class="ts-tag">家庭亲子体系</span>
+            <b>${p.homeTrack.title}</b>
+            <em>${p.homeTrack.audience}</em>
+          </button>` : ''}
+          ${p.kindergartenTrack ? `
+          <button class="ts-card kinder" data-tab="curriculum" type="button">
+            <span class="ts-tag">幼儿园课程体系</span>
+            <b>${p.kindergartenTrack.title}</b>
+            <em>${p.kindergartenTrack.audience}</em>
+          </button>` : ''}
         </div>
-        <span class="counter" id="slideCounter">1/${slides.length}</span>
-      </div>
+      </div>` : '';
 
-      <!-- 标题价格 -->
-      <div class="d-head">
-        <div class="wrap">
+    document.getElementById('detailRoot').innerHTML = `
+      <div class="d-top">
+        <!-- 左：图片展示区域 -->
+        <div class="d-gallery">
+          <div class="slides" id="slides">
+            ${slides.map(s => `<img src="${s}" alt="${p.name} 展示图" loading="lazy">`).join('')}
+          </div>
+          <span class="counter" id="slideCounter">1/${slides.length}</span>
+        </div>
+
+        <!-- 右：基础介绍 + 总览（不超出左侧高度） -->
+        <div class="d-intro">
           <h1>${p.name}</h1>
           <p class="tagline">${p.tagline}</p>
           <div class="meta">
             ${[p.age, p.players, p.duration, '100+ 玩/教具', '培养领域 · ' + p.domain]
               .map(m => `<span>${m}</span>`).join('')}
           </div>
-          <div class="d-price-row">
-            <div class="price"><span class="cur">¥</span><span class="num">${p.price}</span><span class="unit"> /盒</span></div>
-            <span class="sold">${p.level} 级 · 编号 ${p.id}</span>
-          </div>
+          <p class="intro-desc">${p.desc}</p>
+          ${trackSelect}
         </div>
       </div>
 
@@ -291,7 +353,7 @@
         ${TABS.map(t => `<a href="?id=${p.id}&tab=${t.k}" data-k="${t.k}" class="${t.k === 'overview' ? 'on' : ''}">${t.t}</a>`).join('')}
       </nav>
 
-      <!-- 界面内容 -->
+      <!-- 界面内容（整体下方，横版铺开） -->
       <div class="d-panes" id="dPanes">
         ${TABS.map(t => `<div class="d-pane${t.k === 'overview' ? ' on' : ''}" data-k="${t.k}"><div class="wrap">${PANES[t.k]}</div></div>`).join('')}
       </div>
@@ -313,10 +375,6 @@
         const u = new URL(location.href);
         u.searchParams.set('tab', k);
         history.pushState({ tab: k }, '', u);
-
-        const anchor = document.getElementById('dTabs');
-        const top = anchor.getBoundingClientRect().top + window.scrollY - 64;
-        if (window.scrollY > top) window.scrollTo({ top: top, behavior: 'smooth' });
       }
     }
 
@@ -324,8 +382,23 @@
       const a = e.target.closest('a[data-k]');
       if (!a) return;
       e.preventDefault();
-      if (a.dataset.k === tabFromUrl()) return;
+      if (a.dataset.k === tabFromUrl()) {
+        // 已在该标签，仍滚动到内容区顶部
+        const top = document.getElementById('dPanes').getBoundingClientRect().top + window.scrollY - 64;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+        return;
+      }
       showTab(a.dataset.k, true);
+    });
+
+    /* 顶层两条主线选择卡 → 直达课程体系 */
+    document.querySelectorAll('.ts-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const k = btn.dataset.tab || 'curriculum';
+        showTab(k, true);
+        const top = document.getElementById('dPanes').getBoundingClientRect().top + window.scrollY - 64;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
     });
 
     window.addEventListener('popstate', e => {
@@ -341,19 +414,6 @@
       const i = Math.round(slidesEl.scrollLeft / slidesEl.clientWidth) + 1;
       counter.textContent = `${Math.min(i, slides.length)}/${slides.length}`;
     }, { passive: true });
-
-    /* ===== 购买栏 ===== */
-    document.getElementById('buybarPrice').innerHTML =
-      `<span class="cur">¥</span><span class="num">${p.price}</span><span class="unit">/盒</span>`;
-
-    const toast = document.getElementById('toast');
-    let toastTimer;
-    document.getElementById('buyBtn').addEventListener('click', () => {
-      toast.textContent = '已加入意向清单，客服将尽快与您联系';
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
-    });
 
     document.getElementById('backBtn').addEventListener('click', () => {
       if (document.referrer && document.referrer.includes(location.host)) history.back();

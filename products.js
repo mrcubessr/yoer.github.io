@@ -21,7 +21,7 @@ const PRODUCTS = {
     audience: '家庭亲子数学启蒙与园所小班/托班数学区首选；零基础入门款，家长无需懂数学，跟着视频课即可引导。',
     theme: 'orange',
     mainImg: 'images/C01/L1-main.jpg',
-    cardImg: 'images/C01/L1-main.jpg',
+    cardImg: 'images/C01/L1-cover.jpg',
     gallery: [
       'images/C01/L1-main.jpg',
       'images/C01/L1-photo-01.jpg',
@@ -150,7 +150,7 @@ const PRODUCTS = {
     audience: '已完成L1或3-4岁已会数1-10的孩子；园所小班下/中班组数学区；幼小衔接思维铺垫。',
     theme: 'green',
     mainImg: 'images/C02/L2-main.jpg',
-    cardImg: 'images/C02/L2-main.jpg',
+    cardImg: 'images/C02/L2-cover.jpg',
     gallery: [
       'images/C02/L2-main.jpg',
       'images/C02/C02-products.jpg',
@@ -224,7 +224,7 @@ const PRODUCTS = {
     audience: '已完成L2或4-5岁已会基础加减的孩子；园所中/大班数学区、幼小衔接专项；系统性思维培养。',
     theme: 'red',
     mainImg: 'images/C03/C03-main.jpg',
-    cardImg: 'images/C03/C03-products.jpg',
+    cardImg: 'images/C03/L3-cover.jpg',
     gallery: [
       'images/C03/C03-products.jpg',
       'images/C03/C03-course.jpg',

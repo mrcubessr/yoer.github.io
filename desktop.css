@@ -170,26 +170,21 @@
   /* ===================== 页脚 ===================== */
   .footer { font-size: 13px; padding: 30px 16px 34px; }
 
-  /* ===================== 详情页：左图集吸顶 + 右侧界面切换横版 ===================== */
-  #detailRoot {
-    grid-template-columns: 520px 1fr;
-    gap: 0 44px;
-    max-width: 1480px;
-    padding: 28px 32px 0;
-  }
-  #detailRoot > .gallery { top: 84px; }
-  #detailRoot > .d-panes { padding-bottom: 36px; }
-  #detailRoot .d-tabs { top: 64px; padding: 0 0 18px; }
-  #detailRoot .d-tabs a { padding: 10px 20px; font-size: 14px; }
-  /* 界面内容：宽屏下双列铺开，跨栏板块独占整行 */
-  #detailRoot .d-pane .wrap {
+  /* ===================== 详情页：顶层两栏 + 下方横版铺开 ===================== */
+  .d-top { max-width: 1480px; padding: 24px 32px 0; gap: 0 44px; }
+  .d-gallery { border-radius: 22px; }
+  .d-intro { padding: 30px; border-radius: 22px; }
+  .d-intro h1 { font-size: 30px; }
+  .d-tabs { max-width: 1480px; padding: 20px 32px 0; }
+  .d-tabs a { padding: 10px 20px; font-size: 14px; }
+  .d-panes { max-width: 1480px; padding: 22px 32px 40px; }
+  .d-pane .wrap {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 18px;
+    max-width: none;
   }
-  #detailRoot .d-pane .wrap > .full-span { grid-column: 1 / -1; }
-  #detailRoot .d-pane .wrap > .d-sec h2 { font-size: 18px; }
-
-  .buybar-inner { max-width: 1480px; }
+  .d-pane .wrap > .d-sec { margin-top: 0; }
+  .d-pane .wrap > .full-span { grid-column: 1 / -1; }
+  .d-pane .wrap > .d-sec h2 { font-size: 18px; }
 }

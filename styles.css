@@ -98,6 +98,9 @@ button { font-family: inherit; border: none; cursor: pointer; }
 }
 .p-card .cover { position: relative; }
 .p-card .cover img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+/* 主页「三大核心产品」主图：竖版封面图（L1/L2/L3 封面），2:3 框近乎完整展示。
+   限定 #productList，不影响桌游卡（#gameList）的横向封面。 */
+#productList .p-card .cover img { aspect-ratio: 2 / 3; object-position: center; }
 .p-card .lv-badge {
   position: absolute; left: 12px; top: 12px;
   background: linear-gradient(135deg, var(--brand-light), var(--brand));
@@ -196,24 +199,63 @@ button { font-family: inherit; border: none; cursor: pointer; }
 }
 .footer b { color: #fff; font-size: 14px; display: block; margin-bottom: 4px; }
 
-/* ===== 详情页 ===== */
-.gallery { position: relative; background: #111; max-width: 560px; margin: 0 auto; }
-.gallery .slides { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
-.gallery .slides img { width: 100%; aspect-ratio: 3 / 2; object-fit: contain; background: #fff; flex: none; scroll-snap-align: center; display: block; }
-.gallery .counter {
+/* ===== 详情页：顶层 左图集 + 右简介（等高） ===== */
+.d-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--card);
+}
+.d-gallery { position: relative; background: #111; }
+.d-gallery .slides { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
+.d-gallery .slides img { width: 100%; aspect-ratio: 3 / 2; object-fit: contain; background: #fff; flex: none; scroll-snap-align: center; display: block; }
+.d-gallery .counter {
   position: absolute; right: 12px; bottom: 12px;
   background: rgba(0,0,0,.55); color: #fff;
   font-size: 12px; padding: 3px 11px; border-radius: 999px;
 }
-.d-head { background: var(--card); padding: 16px 0 18px; }
-.d-head h1 { font-size: 21px; }
-.d-head .tagline { color: var(--brand); font-size: 14px; margin-top: 6px; font-weight: 600; }
-.d-head .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
-.d-price-row {
-  display: flex; align-items: baseline; gap: 8px; margin-top: 13px;
+.d-intro { padding: 16px; }
+.d-intro h1 { font-size: 21px; }
+.d-intro .tagline { color: var(--brand); font-size: 14px; margin-top: 6px; font-weight: 600; }
+.d-intro .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
+.intro-desc { font-size: 14px; color: #4b5563; text-align: justify; margin-top: 12px; }
+
+/* 顶层两条主线选择卡 */
+.track-select { margin-top: 16px; }
+.track-select .ts-title { font-size: 13px; color: var(--ink-2); font-weight: 600; margin-bottom: 9px; }
+.ts-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ts-card {
+  text-align: left; background: #fff; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px; box-shadow: var(--shadow);
+  transition: transform .15s, box-shadow .15s;
 }
-.d-price-row .price .num { font-size: 30px; }
-.d-price-row .sold { font-size: 12px; color: var(--ink-2); }
+.ts-card:active { transform: scale(.98); }
+.ts-card .ts-tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; margin-bottom: 6px; }
+.ts-card.home .ts-tag { background: #fff7ed; color: var(--brand); }
+.ts-card.kinder .ts-tag { background: #eff6ff; color: #2563eb; }
+.ts-card b { display: block; font-size: 14px; color: var(--ink); }
+.ts-card em { display: block; font-style: normal; font-size: 11px; color: var(--ink-2); margin-top: 3px; }
+
+/* ===== 首页：两大课程体系板块 ===== */
+.track-intro-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 4px; }
+.ti-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 22px 20px; box-shadow: var(--shadow);
+}
+.ti-card .ti-tag {
+  display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; margin-bottom: 12px;
+}
+.ti-card.home .ti-tag { background: #fff7ed; color: var(--brand); }
+.ti-card.kinder .ti-tag { background: #eff6ff; color: #2563eb; }
+.ti-card b { display: block; font-size: 18px; }
+.ti-card p { font-size: 13px; color: var(--ink-2); margin-top: 8px; line-height: 1.6; }
+.ti-card .ti-go { display: inline-block; margin-top: 14px; font-weight: 700; font-size: 14px; }
+.ti-card.home .ti-go { color: var(--brand); }
+.ti-card.kinder .ti-go { color: #2563eb; }
+@media (min-width: 760px) { .track-intro-grid { grid-template-columns: 1fr 1fr; } }
 
 /* 详情页：按级别切换主题色 */
 body.d-c02 { --brand: #16a34a; --brand-light: #4ade80; --brand-bg: #f0fdf4; }
@@ -380,27 +422,9 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
 }
 .switch-row a.cur { background: #fff1e2; border-color: #fdba74; color: #9a3412; font-weight: 700; }
 
-/* ===== 底部购买栏 ===== */
-.buybar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
-  background: rgba(255,255,255,.96); backdrop-filter: blur(10px);
-  border-top: 1px solid var(--line);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-.buybar-inner {
-  max-width: 520px; margin: 0 auto; padding: 10px 16px;
-  display: flex; align-items: center; gap: 12px;
-}
-.buybar .p-info { flex: 1; min-width: 0; }
-.buybar .p-info .price .num { font-size: 22px; }
-.buybar .p-info em { font-style: normal; font-size: 11px; color: var(--ink-2); display: block; }
-.buybar .cta {
-  flex: none; background: linear-gradient(135deg, var(--brand-light), var(--brand));
-  color: #fff; font-weight: 800; font-size: 15px;
-  padding: 12px 30px; border-radius: 999px;
-  box-shadow: 0 5px 16px rgba(234,88,12,.35);
-}
-.buybar-spacer { height: 74px; }
+/* ===== 详情页：Tab 与内容容器基础宽度 ===== */
+.d-tabs { max-width: 560px; margin: 0 auto; }
+.d-panes { max-width: 560px; margin: 0 auto; padding-bottom: 28px; }
 
 /* toast */
 .toast {
@@ -488,41 +512,50 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
   .hero h1 { font-size: 32px; }
 }
 
-/* 详情页：手机端默认 560px 竖栏，桌面端切换横版铺满 */
-#detailRoot .wrap { max-width: 560px; }
-.buybar-inner { max-width: 560px; }
-
-/* ===== 桌面横版布局（≥900px）：左图集吸顶 + 右「标题 / 界面导航 / 界面内容」 ===== */
+/* ===== 桌面横版布局（≥900px）：顶层两栏等高 + 下方内容横版铺开 ===== */
 @media (min-width: 900px) {
-  #detailRoot {
-    display: grid;
-    grid-template-columns: 420px 1fr;
-    grid-template-areas: "gallery head" "gallery tabs" "gallery panes";
+  .d-top {
+    grid-template-columns: 1fr 1fr;
     gap: 0 28px;
-    align-items: start;
+    align-items: stretch;
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 18px 24px 0;
+    margin: 18px auto 0;
+    padding: 0 24px;
+    background: transparent;
   }
-  #detailRoot > .gallery {
-    grid-area: gallery;
-    position: sticky;
-    top: 76px;
-    align-self: start;
+  .d-gallery {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 18px; overflow: hidden; align-self: stretch;
+  }
+  .d-intro {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 18px; padding: 24px; align-self: stretch; overflow: auto;
+  }
+  .d-intro h1 { font-size: 26px; }
+  .d-intro .tagline { font-size: 16px; }
+  .ts-card { padding: 16px; }
+  .ts-card b { font-size: 16px; }
+  .d-tabs { max-width: 1200px; padding: 16px 24px 0; }
+  .d-panes { max-width: 1200px; padding: 18px 24px 36px; }
+  .d-pane .wrap {
     max-width: none;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
   }
-  #detailRoot > .d-head {
-    grid-area: head;
-    padding: 0 0 16px;
-  }
-  #detailRoot > .d-head .wrap { max-width: none; padding: 0; }
-  #detailRoot > .d-tabs { grid-area: tabs; padding: 0 0 16px; }
-  #detailRoot > .d-panes { grid-area: panes; padding-bottom: 28px; }
-  #detailRoot .d-pane .wrap { max-width: none; padding: 0; }
-  #detailRoot .d-pane .wrap > .d-sec { margin-top: 0; }
-  .buybar-inner { max-width: 1200px; }
+  .d-pane .wrap > .d-sec { margin-top: 0; }
+  .d-pane .wrap > .full-span { grid-column: 1 / -1; }
+  .d-pane .wrap > .d-sec h2 { font-size: 18px; }
+}
+
+/* ===== 宽屏（≥1200px） ===== */
+@media (min-width: 1200px) {
+  .d-top { max-width: 1480px; padding: 24px 32px 0; gap: 0 44px; }
+  .d-gallery { border-radius: 22px; }
+  .d-intro { padding: 30px; border-radius: 22px; }
+  .d-intro h1 { font-size: 30px; }
+  .d-tabs { max-width: 1480px; padding: 20px 32px 0; }
+  .d-tabs a { padding: 10px 20px; font-size: 14px; }
+  .d-panes { max-width: 1480px; padding: 22px 32px 40px; }
+  .d-pane .wrap { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; }
 }
