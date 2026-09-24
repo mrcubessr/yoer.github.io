@@ -187,4 +187,19 @@
   .d-pane .wrap > .d-sec { margin-top: 0; }
   .d-pane .wrap > .full-span { grid-column: 1 / -1; }
   .d-pane .wrap > .d-sec h2 { font-size: 18px; }
+
+  /* 桌面通用：滚动条与选中色 */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #f0c9ad; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: #e8a97f; }
+  ::-webkit-scrollbar-track { background: transparent; }
+}
+
+/* 超宽屏（≥1600px）：适度放大留白 */
+@media (min-width: 1600px) {
+  .wrap, .topbar-inner { max-width: 1560px; padding: 0 40px; }
+  .hero { padding: 72px 0 84px; }
+  .hero h1 { font-size: 54px; }
+  .product-list, #gameList { gap: 30px; }
+  .section { padding: 52px 0 16px; }
 }

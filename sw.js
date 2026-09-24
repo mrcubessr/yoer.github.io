@@ -1,16 +1,21 @@
-/* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览 */
-const VERSION = 'yoer-shop-v17';
+/* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
+   版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
+const VERSION = 'yoer-shop-v18';
 const PRECACHE = [
-  './',
   'index.html',
   'detail.html',
   'game.html',
+  'syllabus.html',
   'tools.html',
   'tools-l2.html',
   'tools-l3.html',
+  'offline.html',
   'products.js',
   'games.js',
+  'syllabus-data.js',
+  'app.js',
   'styles.css',
+  'desktop.css',
   'manifest.webmanifest',
   'icons/icon-192.png',
   'icons/icon-512.png',
@@ -81,7 +86,9 @@ const PRECACHE = [
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(VERSION).then((cache) => cache.addAll(PRECACHE)).then(() => self.skipWaiting())
+    caches.open(VERSION)
+      .then((cache) => cache.addAll(PRECACHE))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -89,38 +96,60 @@ self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim())
+      .then(() => {
+        if (self.registration.navigationPreload) {
+          self.registration.navigationPreload.disable().catch(() => {});
+        }
+        return self.clients.claim();
+      })
   );
+});
+
+self.addEventListener('message', (e) => {
+  if (e.data === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
-  // 页面导航：缓存优先，离线回退首页
+  const url = new URL(req.url);
+  // 跨域请求一律放行，不拦截不缓存
+  if (url.origin !== location.origin) return;
+
+  // 页面导航：network-first，失败回缓存，最后回 offline.html
   if (req.mode === 'navigate') {
     e.respondWith(
       fetch(req)
         .then((res) => {
-          const copy = res.clone();
-          caches.open(VERSION).then((c) => c.put(req, copy));
-          return res;
-        })
-        .catch(() => caches.match(req).then((hit) => hit || caches.match('index.html')))
-    );
-    return;
-  }
-  // 静态资源：缓存优先，回源后写入缓存
-  e.respondWith(
-    caches.match(req).then(
-      (hit) =>
-        hit ||
-        fetch(req).then((res) => {
-          if (res.ok && new URL(req.url).origin === location.origin) {
+          if (res && res.ok) {
             const copy = res.clone();
             caches.open(VERSION).then((c) => c.put(req, copy));
           }
           return res;
         })
-    )
+        .catch(() =>
+          caches.match(req, { ignoreSearch: true })
+            .then((hit) => hit || caches.match('index.html'))
+            .then((hit) => hit || caches.match('offline.html'))
+            .then((hit) => hit || new Response('离线', { headers: { 'Content-Type': 'text/html; charset=utf-8' } }))
+        )
+    );
+    return;
+  }
+
+  // 静态资源：cache-first + 后台更新（stale-while-revalidate）
+  e.respondWith(
+    caches.match(req).then((hit) => {
+      const network = fetch(req)
+        .then((res) => {
+          if (res && res.ok && res.type === 'basic') {
+            const copy = res.clone();
+            caches.open(VERSION).then((c) => c.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() => hit);
+      return hit || network;
+    })
   );
 });

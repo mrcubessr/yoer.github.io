@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>离线模式 · 优尔启蒙</title>
+  <meta name="description" content="当前无网络，可查看已缓存的优尔启蒙内容。">
+  <meta name="theme-color" content="#ea580c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="优尔启蒙">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+  <style>
+    .off-page {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #fff7ed 0%, #ffedd5 60%, #ffe4c7 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+    }
+    .off-card {
+      width: 100%; max-width: 420px;
+      background: #fff; border: 1px solid #fed7aa;
+      border-radius: 22px; padding: 34px 26px 28px;
+      box-shadow: 0 18px 48px rgba(234, 88, 12, .16);
+      text-align: center;
+    }
+    .off-ico {
+      width: 76px; height: 76px; margin: 0 auto 18px;
+      border-radius: 50%; display: grid; place-items: center;
+      background: #fff7ed; border: 1px solid #fed7aa;
+    }
+    .off-card h1 { font-size: 21px; color: #1f2937; }
+    .off-card p { margin-top: 10px; font-size: 13.5px; line-height: 1.8; color: #6b7280; }
+    .off-actions { margin-top: 22px; display: grid; gap: 10px; }
+    .off-btn {
+      display: block; padding: 13px 18px; border-radius: 999px;
+      background: linear-gradient(135deg, #fb923c, #ea580c);
+      color: #fff; font-size: 15px; font-weight: 700;
+      box-shadow: 0 8px 20px rgba(234, 88, 12, .28);
+    }
+    .off-btn.ghost {
+      background: #fff; color: #ea580c; border: 1.5px solid #fdba74; box-shadow: none;
+    }
+    .off-list { margin-top: 20px; display: grid; gap: 8px; }
+    .off-list a {
+      display: block; font-size: 13px; color: #9a3412; background: #fff7ed;
+      border: 1px solid #fed7aa; border-radius: 12px; padding: 11px 14px;
+    }
+    .off-state { margin-top: 16px; font-size: 12px; color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <div class="off-page">
+    <div class="off-card">
+      <div class="off-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round">
+          <path d="M2 8.8a15 15 0 0 1 20 0"/>
+          <path d="M5.5 12.3a10.5 10.5 0 0 1 13 0"/>
+          <path d="M9 15.8a6 6 0 0 1 6 0"/>
+          <path d="M12 19.5h.01"/>
+          <path d="M3 3l18 18" stroke="#f59e0b"/>
+        </svg>
+      </div>
+      <h1>当前处于离线状态</h1>
+      <p>网络似乎断开了。<br>已缓存的页面仍可正常浏览，恢复网络后会自动同步最新内容。</p>
+      <div class="off-actions">
+        <button class="off-btn" type="button" id="retryBtn">重新连接</button>
+        <a class="off-btn ghost" href="index.html">前往首页（离线可用）</a>
+      </div>
+      <div class="off-list">
+        <a href="syllabus.html">课程大纲 · L1→L2→L3</a>
+        <a href="tools.html">L1 教具图鉴</a>
+        <a href="detail.html?id=C01">L1 启蒙盒详情</a>
+      </div>
+      <p class="off-state" id="state">正在检测网络…</p>
+    </div>
+  </div>
+  <script>
+    var state = document.getElementById('state');
+    function sync() {
+      state.textContent = navigator.onLine ? '网络已恢复，请刷新页面' : '仍未检测到网络连接';
+    }
+    window.addEventListener('online', sync);
+    window.addEventListener('offline', sync);
+    sync();
+    document.getElementById('retryBtn').addEventListener('click', function () {
+      if (navigator.onLine) location.reload();
+      else { state.textContent = '仍未检测到网络连接'; }
+    });
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+  </script>
+</body>
+</html>
