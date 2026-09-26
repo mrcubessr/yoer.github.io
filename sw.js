@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v19';
+const VERSION = 'yoer-shop-v20';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -64,7 +64,7 @@ const PRECACHE = [
   'images/C03/tools/神机妙算.jpg', 'images/C03/tools/九九争霸.jpg', 'images/C03/tools/三国谋算.jpg',
   'images/C03/tools/手拍铃.jpg', 'images/C03/tools/贤士棋.jpg',
   'images/C03/tools/百里驰援.jpg', 'images/C03/tools/官渡算战.jpg', 'images/C03/tools/小黑人.jpg',
-  // 经典桌游：格米数学派对（11 张）
+  // 经典桌游：格米的数学派对（11 张）
   'images/games/party/party-01.jpg', 'images/games/party/party-02.jpg', 'images/games/party/party-03.jpg',
   'images/games/party/party-04.jpg', 'images/games/party/party-05.jpg', 'images/games/party/party-06.jpg',
   'images/games/party/party-07.jpg', 'images/games/party/party-08.jpg', 'images/games/party/party-09.jpg',
