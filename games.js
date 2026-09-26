@@ -14,7 +14,7 @@ const GAMES = {
     tagline: '既是好玩的桌游，又是专业的数学课',
     themeColor: '#15803d',
     themeColorSoft: '#f0fdf4',
-    cardImg: 'images/games/party/party-03.jpg',
+    cardImg: 'images/games/party/party-main-01.jpg',
     meta: ['3–5 岁', '2–4 人', '15 分钟/局', '5 大游戏机制', '8 节视频课'],
     priceLabel: '399',
     priceSuffix: '/套',
@@ -153,17 +153,12 @@ const GAMES = {
       '园所/机构引进（版权 + 师训 + 配套课程）请联系客服单独报价'
     ],
     gallery: [
-      'images/games/party/party-03.jpg',
-      'images/games/party/party-10.jpg',
-      'images/games/party/party-09.jpg',
-      'images/games/party/party-04.jpg',
-      'images/games/party/party-05.jpg',
-      'images/games/party/party-01.jpg',
-      'images/games/party/party-02.jpg',
-      'images/games/party/party-06.jpg',
-      'images/games/party/party-07.jpg',
-      'images/games/party/party-08.jpg',
-      'images/games/party/party-11.jpg'
+      'images/games/party/party-main-01.jpg',
+      'images/games/party/party-main-02.jpg',
+      'images/games/party/party-main-03.jpg',
+      'images/games/party/party-main-04.jpg',
+      'images/games/party/party-main-05.jpg',
+      'images/games/party/party-detail.jpg'
     ]
   },
 
