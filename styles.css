@@ -528,6 +528,40 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
 .hl b { font-size: 14px; display: block; }
 .hl span { font-size: 13px; color: var(--ink-2); }
 
+/* ===== 游戏页：分组卖点 ===== */
+.sell-group { margin-bottom: 13px; }
+.sell-group:last-of-type { margin-bottom: 0; }
+.sell-group > b { font-size: 13.5px; color: var(--brand); display: block; margin-bottom: 6px; }
+.sell-group .dot-list { gap: 6px; }
+.sell-conclusion {
+  margin-top: 12px; font-size: 13px; line-height: 1.65; color: #374151;
+  background: var(--brand-bg); border: 1px dashed color-mix(in srgb, var(--brand) 35%, transparent);
+  border-radius: 12px; padding: 11px 13px; text-align: justify;
+}
+
+/* ===== 游戏页：教育价值三维论证 ===== */
+.sec-note { font-size: 13px; color: var(--ink-2); margin-bottom: 11px; text-align: justify; }
+.rs-item { padding-bottom: 11px; margin-bottom: 11px; border-bottom: 1px dashed var(--line); }
+.rs-item:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.rs-item > b { font-size: 13.5px; color: var(--brand); display: block; margin-bottom: 6px; }
+.rs-item .dot-list { gap: 6px; }
+.cmp-block {
+  margin-top: 12px; background: #f9fafb; border: 1px solid var(--line);
+  border-radius: 12px; padding: 11px 13px;
+}
+.cmp-block > b { font-size: 13.5px; color: var(--brand); display: block; margin-bottom: 5px; }
+.cmp-row { display: flex; gap: 10px; align-items: flex-start; padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: 12.5px; }
+.cmp-row:last-child { border-bottom: none; padding-bottom: 0; }
+.cmp-t { flex: none; width: 92px; font-weight: 600; color: #4b5563; }
+.cmp-d { color: var(--ink-2); line-height: 1.6; }
+.cmp-row.cur .cmp-t { color: var(--brand); }
+.cmp-row.cur .cmp-d { color: #374151; font-weight: 600; }
+.slogan {
+  margin-top: 13px; text-align: center; font-size: 13.5px; font-weight: 700;
+  color: var(--brand); background: var(--brand-bg);
+  border-radius: 999px; padding: 11px 14px; line-height: 1.6;
+}
+
 .dot-list { list-style: none; display: grid; gap: 8px; }
 .dot-list li { font-size: 13px; color: #4b5563; padding-left: 15px; position: relative; }
 .dot-list li::before { content: "•"; position: absolute; left: 2px; color: var(--brand); font-weight: 800; }

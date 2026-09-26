@@ -130,6 +130,18 @@
           </div>` : ''}
         </div>
 
+        <!-- 五大维度 · 15 条核心卖点 -->
+        ${g.sellGroups ? `
+        <div class="d-sec">
+          <h2>${g.sellGroupsTitle || '核心卖点详解'}</h2>
+          ${g.sellGroups.map(sg => `
+            <div class="sell-group">
+              <b>${sg.g}</b>
+              <ul class="dot-list">${sg.items.map(s => `<li>${s}</li>`).join('')}</ul>
+            </div>`).join('')}
+          ${g.sellConclusion ? `<p class="sell-conclusion">${g.sellConclusion}</p>` : ''}
+        </div>` : ''}
+
         <!-- 游戏模块 -->
         ${g.modules ? `
         <div class="d-sec">
@@ -186,6 +198,28 @@
           <h2>${g.highlightsTitle || g.highlights.length + ' 大产品亮点'}</h2>
           ${g.highlights.map(h => `
             <div class="hl"><b>${h.t}</b><span>${h.d}</span></div>`).join('')}
+        </div>` : ''}
+
+        <!-- 教育价值三维论证 -->
+        ${g.research ? `
+        <div class="d-sec">
+          <h2>${g.researchTitle || '教育价值论证'}</h2>
+          ${g.researchNote ? `<p class="sec-note">${g.researchNote}</p>` : ''}
+          ${g.research.map(r => `
+            <div class="rs-item">
+              <b>${r.dim}</b>
+              <ul class="dot-list">${r.points.map(p => `<li>${p}</li>`).join('')}</ul>
+            </div>`).join('')}
+          ${g.positioning ? `
+            <div class="cmp-block">
+              <b>${g.positioningTitle || '产品定位对比'}</b>
+              ${g.positioning.map(p => `
+                <div class="cmp-row${p.cur ? ' cur' : ''}">
+                  <span class="cmp-t">${p.t}</span>
+                  <span class="cmp-d">${p.d}</span>
+                </div>`).join('')}
+            </div>` : ''}
+          ${g.slogan ? `<p class="slogan">${g.slogan}</p>` : ''}
         </div>` : ''}
 
         <!-- 使用场景 -->
