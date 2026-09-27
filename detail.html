@@ -220,6 +220,15 @@
               </div>`).join('')}
           </div>
         </div>` : ''}
+
+        ${p.detailImgs ? `
+        <div class="d-sec full-span">
+          <h2>产品图文详情</h2>
+          <p class="longimg-note">点击任意图片可查看高清大图</p>
+          <div class="longimg-grid">
+            ${p.detailImgs.map((s, i) => `<a class="longimg" href="${s}" target="_blank" rel="noopener"><img src="${s}" alt="${p.name} 图文详情 ${i + 1}" loading="lazy"></a>`).join('')}
+          </div>
+        </div>` : ''}
       `;
     } else {
       PANES.curriculum = `

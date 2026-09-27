@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v21';
+const VERSION = 'yoer-shop-v22';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -37,8 +37,11 @@ const PRECACHE = [
   'images/C01/tools/抢答铃.jpg',
   // L2
   'images/C02/C02-main.jpg', 'images/C02/C02-products.jpg', 'images/C02/C02-course.jpg',
-  'images/C02/C02-1.jpg', 'images/C02/C02-2.jpg', 'images/C02/C02-3.jpg', 'images/C02/C02-4.jpg',
-  'images/C02/C02-5.jpg', 'images/C02/C02-detail-1.jpg',
+  'images/C02/C02-1.jpg', 'images/C02/C02-2.jpg', 'images/C02/C02-3.jpg',
+  // L2 图文详情长图切片（6 段）
+  'images/C02/detail/C02-detail-01.jpg', 'images/C02/detail/C02-detail-02.jpg',
+  'images/C02/detail/C02-detail-03.jpg', 'images/C02/detail/C02-detail-04.jpg',
+  'images/C02/detail/C02-detail-05.jpg', 'images/C02/detail/C02-detail-06.jpg',
   // L2 课程参考图（25 张）
   'images/C02/tools/一眼识数.jpg', 'images/C02/tools/一眼识数-2.jpg',
   'images/C02/tools/PK游戏.jpg', 'images/C02/tools/多角度分类.jpg',

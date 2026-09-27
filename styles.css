@@ -233,6 +233,17 @@ button { font-family: inherit; border: none; cursor: pointer; }
   background: rgba(0,0,0,.55); color: #fff;
   font-size: 12px; padding: 3px 11px; border-radius: 999px;
 }
+
+/* 图文详情（长图切片网格） */
+.longimg-note { font-size: 12.5px; color: var(--ink-2); margin-bottom: 10px; }
+.longimg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.longimg {
+  display: block; overflow: hidden; background: #fff;
+  border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: var(--shadow); transition: transform .15s, box-shadow .15s;
+}
+.longimg:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,23,42,.10); }
+.longimg img { width: 100%; display: block; }
 .d-intro { padding: 16px; }
 .d-intro h1 { font-size: 21px; }
 .d-intro .tagline { color: var(--brand); font-size: 14px; margin-top: 6px; font-weight: 600; }

@@ -35,7 +35,7 @@ const PRODUCTS = {
       'images/C01/L1-card-04.jpg',
       'images/C01/L1-card-05.jpg'
     ],
-    detailImg: null,
+    detailImgs: null,
     contents: ['图形认知 ×4', '大棋盘 ×3', '白板 + 白板笔 ×1', '十格阵 ×1', '小鱼总动员 ×1', '格米扑克 ×1', '搭配玩教具 ×1', '数字磁力贴 ×27', '磁力贴 ×40', '拼接积木 ×20', '圆形木板 ×9', '手拍铃 ×1', '疯狂大请客 ×1', '格米贴纸 ×1'],
     courseNote: 'L1 阶段含 74 节真人老师视频课（直播/录屏可回看），Kevin 老师领衔出镜，覆盖手口一致点数、认数字、倒数、堆高楼、一眼识数、数字建形、数的分解、加减启蒙等。',
     /* ===== 以下内容整合自《L1产品介绍网页主页文案》===== */
@@ -162,10 +162,17 @@ const PRODUCTS = {
       'images/C02/L2-main.jpg',
       'images/C02/C02-products.jpg',
       'images/C02/C02-course.jpg',
-      'images/C02/C02-1.jpg', 'images/C02/C02-2.jpg', 'images/C02/C02-3.jpg',
-      'images/C02/C02-4.jpg', 'images/C02/C02-5.jpg'
+      'images/C02/C02-1.jpg', 'images/C02/C02-2.jpg', 'images/C02/C02-3.jpg'
     ],
-    detailImg: 'images/C02/C02-detail-1.jpg',
+    /* 图文详情长图（按内容板块切为 6 段，720×2105 竖图） */
+    detailImgs: [
+      'images/C02/detail/C02-detail-01.jpg',
+      'images/C02/detail/C02-detail-02.jpg',
+      'images/C02/detail/C02-detail-03.jpg',
+      'images/C02/detail/C02-detail-04.jpg',
+      'images/C02/detail/C02-detail-05.jpg',
+      'images/C02/detail/C02-detail-06.jpg'
+    ],
     contents: ['拼接棋盘 ×2', '游戏棋盘 ×3', '数字游戏 ×1', '逻辑九宫格 ×1', '水果卡 ×1套', '矿石卡 ×1套', '格米扑克 ×1套', '动物美食卡 ×20', '数字卡 ×45', '拼接积木 ×20', '图形木板 ×9', '手拍铃 ×1', '小羊牌 ×1套', '格米贴纸 ×1'],
     courseNote: '配套同步视频课，Kevin 老师出镜示范引导方式，家长跟着视频即可陪玩。',
     /* ===== 同构板块（基于产品总表与教具图集事实整理）===== */
@@ -279,7 +286,7 @@ const PRODUCTS = {
       'images/C03/C03-4.jpg', 'images/C03/C03-5.jpg', 'images/C03/C03-6.jpg',
       'images/C03/C03-7.jpg', 'images/C03/C03-8.jpg'
     ],
-    detailImg: null, // C03 无独立长图，图文详情复用图集
+    detailImgs: null, // C03 无独立长图，图文详情复用图集
     contents: ['24算比赛专用垫 ×1', '主题算战棋盘 ×4（九九争霸 / 官渡算战 / 三国谋算 等）', '24算卡牌 ×1套', '计时沙漏 ×1', '手拍铃 ×1', '黑色棋子 ×1套', '白黄棋子 ×1套', '多面骰子 ×1套', '元宝道具 ×1套', '游戏卡牌 ×1套'],
     courseNote: '配套同步视频课，讲解四则混合运算游戏的引导要点，为小学数学做准备。',
     /* ===== 同构板块（基于产品总表与教具图集事实整理）===== */
