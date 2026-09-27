@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v22';
+const VERSION = 'yoer-shop-v23';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -78,12 +78,15 @@ const PRECACHE = [
   'images/games/grid/grid-10.jpg', 'images/games/grid/grid-11.jpg', 'images/games/grid/grid-12.jpg',
   'images/games/grid/grid-13.jpg', 'images/games/grid/grid-14.jpg', 'images/games/grid/grid-15.jpg',
   // 经典桌游：疯狂大请客（16 张）
-  'images/games/feast/feast-l1-03.jpg', 'images/games/feast/feast-l1-04.jpg', 'images/games/feast/feast-l1-05.jpg',
-  'images/games/feast/feast-l1-06.jpg', 'images/games/feast/feast-l1-07.jpg', 'images/games/feast/feast-l1-08.jpg',
-  'images/games/feast/feast-l1-09.jpg', 'images/games/feast/feast-l1-11.jpg', 'images/games/feast/feast-l1-12.jpg',
-  'images/games/feast/feast-l1-13.jpg', 'images/games/feast/feast-l1-19.jpg', 'images/games/feast/feast-l1-20.jpg',
-  'images/games/feast/feast-l1-21.jpg', 'images/games/feast/feast-l4-01.jpg',
-  'images/games/feast/feast-l5-01.jpg', 'images/games/feast/feast-l5-02.jpg'
+  // feast：新展示图 + 详情长图切片 + 保留的功能牌/玩法示意
+  'images/games/feast/feast-01.jpg', 'images/games/feast/feast-02.jpg', 'images/games/feast/feast-03.jpg',
+  'images/games/feast/feast-04.jpg', 'images/games/feast/feast-05.jpg', 'images/games/feast/feast-06.jpg',
+  'images/games/feast/feast-07.jpg', 'images/games/feast/feast-detail-01.jpg', 'images/games/feast/feast-detail-02.jpg',
+  'images/games/feast/feast-detail-03.jpg', 'images/games/feast/feast-detail-04.jpg', 'images/games/feast/feast-detail-05.jpg',
+  'images/games/feast/feast-detail-06.jpg', 'images/games/feast/feast-detail-07.jpg', 'images/games/feast/feast-detail-08.jpg',
+  'images/games/feast/feast-detail-09.jpg',
+  'images/games/feast/feast-l1-12.jpg', 'images/games/feast/feast-l1-19.jpg',
+  'images/games/feast/feast-l1-20.jpg', 'images/games/feast/feast-l1-21.jpg'
 ];
 
 self.addEventListener('install', (e) => {

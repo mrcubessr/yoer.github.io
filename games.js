@@ -170,7 +170,7 @@ const GAMES = {
     tagline: '拍铃抢答，5 以内加减法越玩越快',
     themeColor: '#e11d48',
     themeColorSoft: '#fff1f2',
-    cardImg: 'images/C01/tools/疯狂大请客卡牌.jpg',
+    cardImg: 'images/games/feast/feast-01.jpg',
     meta: ['5–6 岁 · 大班', '3–5 人（4 人最佳）', '5 课阶梯进阶', 'L1 课程配套游戏', '单局约 15 分钟'],
     priceLabel: null,
     priceSuffix: '',
@@ -228,7 +228,7 @@ const GAMES = {
       '幼儿园大班：集体课分组游戏（3–5 人一组），配 5 节标准教案课件',
       '朋友聚会：规则易懂、气氛热烈，是孩子聚会的破冰游戏'
     ],
-    courseImg: 'images/C01/tools/疯狂大请客卡牌.jpg',
+    courseImg: 'images/games/feast/feast-01.jpg',
     courseNote: '配套 5 节完整教案与 PPT 课件（L1 课程第 25 单元「5 以内的加减法」），每课结构固定：游戏回顾 → 新增规则 → 分组实战（学具取-发-收-还分工）→ 课程小结，园所老师拿到就能上课。',
     contentsTitle: '游戏配置清单',
     contents: [
@@ -245,23 +245,28 @@ const GAMES = {
       '卡牌具体张数以包装内实物为准'
     ],
     gallery: [
-      'images/C01/tools/疯狂大请客卡牌.jpg',
+      'images/games/feast/feast-01.jpg',
+      'images/games/feast/feast-02.jpg',
+      'images/games/feast/feast-03.jpg',
+      'images/games/feast/feast-04.jpg',
+      'images/games/feast/feast-05.jpg',
+      'images/games/feast/feast-06.jpg',
+      'images/games/feast/feast-07.jpg',
       'images/games/feast/feast-l1-12.jpg',
-      'images/games/feast/feast-l1-03.jpg',
-      'images/games/feast/feast-l1-04.jpg',
-      'images/games/feast/feast-l1-05.jpg',
-      'images/games/feast/feast-l1-06.jpg',
-      'images/games/feast/feast-l1-07.jpg',
-      'images/games/feast/feast-l1-08.jpg',
-      'images/games/feast/feast-l1-09.jpg',
-      'images/games/feast/feast-l1-11.jpg',
-      'images/games/feast/feast-l1-13.jpg',
-      'images/games/feast/feast-l1-20.jpg',
-      'images/games/feast/feast-l1-21.jpg',
       'images/games/feast/feast-l1-19.jpg',
-      'images/games/feast/feast-l4-01.jpg',
-      'images/games/feast/feast-l5-01.jpg',
-      'images/games/feast/feast-l5-02.jpg'
+      'images/games/feast/feast-l1-20.jpg',
+      'images/games/feast/feast-l1-21.jpg'
+    ],
+    detailImgs: [
+      'images/games/feast/feast-detail-01.jpg',
+      'images/games/feast/feast-detail-02.jpg',
+      'images/games/feast/feast-detail-03.jpg',
+      'images/games/feast/feast-detail-04.jpg',
+      'images/games/feast/feast-detail-05.jpg',
+      'images/games/feast/feast-detail-06.jpg',
+      'images/games/feast/feast-detail-07.jpg',
+      'images/games/feast/feast-detail-08.jpg',
+      'images/games/feast/feast-detail-09.jpg'
     ]
   },
 
