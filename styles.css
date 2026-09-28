@@ -106,8 +106,10 @@ button { font-family: inherit; border: none; cursor: pointer; }
 .hv-slide { flex: 0 0 100%; position: relative; }
 .hv-slide img {
   width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  object-position: center top; /* 竖版封面顶部对齐，L1/L2/L3 标题栏完整显示 */
   background: #fff7ed;
 }
+.hv-slide img.hv-img-c { object-position: center; } /* 横版主图保持居中 */
 .hv-slide .hv-cap {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: 22px 14px 12px;
