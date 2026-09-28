@@ -100,7 +100,7 @@
     /* 总览：阶段定位 + 分段产品说明 + 三阶连贯路径 */
     const overviewBody = p.overviewParas && p.overviewParas.length ? p.overviewParas : null;
     PANES.overview = `
-      <div class="d-sec stage-sec">
+      <div class="d-sec full-span stage-sec">
         <div class="stage-hero ${p.theme}">
           <span class="stage-label">阶段定位 · ${p.stage.label}</span>
           <p class="stage-slogan">${p.stage.slogan}</p>
@@ -111,15 +111,17 @@
       </div>
 
       ${overviewBody ? `
-      <div class="d-sec">
+      <div class="d-sec full-span ov-sec">
         <h2>产品说明</h2>
+        <div class="ov-grid">
         ${overviewBody.map(o => `
           <div class="ov-para">
             <b>${o.h}</b>
             <p>${o.p}</p>
           </div>`).join('')}
+        </div>
       </div>` : `
-      <div class="d-sec">
+      <div class="d-sec full-span">
         <h2>产品说明</h2>
         <p>${p.desc}</p>
       </div>`}

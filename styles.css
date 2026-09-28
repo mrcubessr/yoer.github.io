@@ -873,7 +873,7 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
   .d-pane .wrap {
     max-width: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
   .d-pane .wrap > .d-sec { margin-top: 0; }
@@ -882,6 +882,28 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
   /* 总览首屏：阶段定位卡与产品说明等高填充 */
   .d-pane .wrap > .stage-sec { display: flex; flex-direction: column; }
   .d-pane .wrap > .stage-sec > .stage-hero { flex: 1; }
+  /* 产品说明：横版段落卡（全行铺开，与上下区块对齐） */
+  .d-pane .wrap > .ov-sec { grid-column: 1 / -1; }
+  .ov-sec .ov-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 12px 16px; margin-top: 12px;
+  }
+  .ov-sec .ov-para {
+    border: 1px solid var(--line); border-radius: 14px;
+    background: #fff; padding: 14px 16px 15px; margin: 0;
+  }
+  .ov-sec .ov-para:last-child { border-bottom: 1px solid var(--line); padding-bottom: 15px; }
+  /* 奇数段时最后一张卡跨满整行，避免右下留白 */
+  .ov-sec .ov-para:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .ov-sec .ov-para p { line-height: 1.8; }
+  /* 阶段定位卡：桌面横向内部布局（左标语 / 右目标与衔接） */
+  .stage-hero {
+    display: grid; grid-template-columns: 1.05fr 1fr;
+    gap: 8px 26px; align-items: start;
+  }
+  .stage-hero .stage-label { grid-column: 1; justify-self: start; }
+  .stage-hero .stage-slogan, .stage-hero .stage-focus { grid-column: 1; }
+  .stage-hero .stage-goal, .stage-hero .stage-bridge { grid-column: 2; margin-top: 0; }
   .d-pane .contents-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
@@ -894,7 +916,7 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
   .d-tabs { max-width: 1480px; padding: 20px 32px 0; }
   .d-tabs a { padding: 10px 20px; font-size: 14px; }
   .d-panes { max-width: 1480px; padding: 22px 32px 40px; }
-  .d-pane .wrap { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; }
+  .d-pane .wrap { grid-template-columns: repeat(2, 1fr); gap: 18px; }
   .d-pane .contents-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
