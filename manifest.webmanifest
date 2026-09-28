@@ -1,7 +1,7 @@
 {
   "name": "优尔数学思维启蒙商城",
   "short_name": "优尔启蒙",
-  "description": "优尔 2-8 岁数学思维启蒙套盒：L1 零基础启蒙（2-4岁）、L2 进阶提升（3-4岁）、L3 高阶拓展（7-8岁），桌游教具 + 配套视频课，离线也能看。",
+  "description": "优尔 2-8 岁数学思维启蒙套盒：L1 零基础启蒙（2-4岁）、L2 进阶提升（5-6岁）、L3 高阶拓展（7-8岁），桌游教具 + 配套视频课，离线也能看。",
   "lang": "zh-CN",
   "start_url": "./index.html",
   "scope": "./",
@@ -38,7 +38,7 @@
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "L2 进阶盒（3-4岁）",
+      "name": "L2 进阶盒（5-6岁）",
       "url": "./detail.html?id=C02",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     },

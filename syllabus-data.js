@@ -537,7 +537,7 @@ const SYLLABUS = {
     "level": "L2",
     "name": "L2 进阶提升盒",
     "productId": "C02",
-    "age": "3–4 岁",
+    "age": "5-6 岁",
     "goal": "从数数到运算",
     "theme": "green",
     "home": {
