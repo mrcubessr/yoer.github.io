@@ -100,11 +100,13 @@
     /* 总览：阶段定位 + 分段产品说明 + 三阶连贯路径 */
     const overviewBody = p.overviewParas && p.overviewParas.length ? p.overviewParas : null;
     PANES.overview = `
-      <div class="d-sec">
+      <div class="d-sec stage-sec">
         <div class="stage-hero ${p.theme}">
           <span class="stage-label">阶段定位 · ${p.stage.label}</span>
           <p class="stage-slogan">${p.stage.slogan}</p>
           <p class="stage-focus">${p.stage.focus}</p>
+          ${p.stage.goal ? `<div class="stage-goal"><b>这一阶段的目标</b><p>${p.stage.goal}</p></div>` : ''}
+          ${p.stage.bridge ? `<div class="stage-bridge"><b>在整体路径中的位置</b><p>${p.stage.bridge}</p></div>` : ''}
         </div>
       </div>
 
@@ -294,11 +296,11 @@
 
     const TRACK_LABELS = { all: '两条体系都看', home: '家庭亲子套装', kinder: '园所教学套装' };
     PANES.curriculum = `
-      <div class="track-switch" id="trackSwitch">
+      <div class="track-switch full-span" id="trackSwitch">
         ${['all', 'home', 'kinder'].filter(k => k === 'all' || (k === 'home' ? p.homeTrack : p.kindergartenTrack))
           .map(k => `<button type="button" data-track="${k}" class="${k === 'all' ? 'on' : ''}">${TRACK_LABELS[k]}</button>`).join('')}
       </div>
-      <div id="curriculumBody"></div>
+      <div id="curriculumBody" class="full-span"></div>
       ${sharedSections()}
     `;
 
@@ -326,14 +328,26 @@
     }
 
     PANES.play = `
-      <div class="d-sec">
-        <h2>玩法四步</h2>
-        <div class="d-steps">
-          ${p.steps.map((s, i) => `
-            <div class="d-step">
-              <div class="no">${i + 1}</div>
-              <div><b>${s.t}</b><span>${s.d}</span></div>
-            </div>`).join('')}
+      <div class="d-pair full-span">
+        <div class="d-sec">
+          <h2>玩法四步</h2>
+          <div class="d-steps">
+            ${p.steps.map((s, i) => `
+              <div class="d-step">
+                <div class="no">${i + 1}</div>
+                <div><b>${s.t}</b><span>${s.d}</span></div>
+              </div>`).join('')}
+          </div>
+        </div>
+
+        <div class="d-sec">
+          <h2>培养能力点</h2>
+          ${p.abilityGroups ? p.abilityGroups.map(g => `
+            <div class="ab-group">
+              <b>${g.g}</b>
+              <div class="chips">${g.items.map(a => `<span>${a}</span>`).join('')}</div>
+            </div>`).join('') : `
+            <div class="chips">${p.abilities.map(a => `<span>${a}</span>`).join('')}</div>`}
         </div>
       </div>
 
@@ -347,20 +361,6 @@
             <div><b>${l.n}</b><span>${l.d}</span></div>
           </div>`).join('')}
       </div>` : ''}
-
-      ${p.abilityGroups ? `
-      <div class="d-sec">
-        <h2>培养能力点</h2>
-        ${p.abilityGroups.map(g => `
-          <div class="ab-group">
-            <b>${g.g}</b>
-            <div class="chips">${g.items.map(a => `<span>${a}</span>`).join('')}</div>
-          </div>`).join('')}
-      </div>` : `
-      <div class="d-sec">
-        <h2>培养能力点</h2>
-        <div class="chips">${p.abilities.map(a => `<span>${a}</span>`).join('')}</div>
-      </div>`}
 
       ${p.outcomes ? `
       <div class="d-sec full-span">

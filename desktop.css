@@ -197,6 +197,10 @@
   .d-pane .wrap > .d-sec { margin-top: 0; }
   .d-pane .wrap > .full-span { grid-column: 1 / -1; }
   .d-pane .wrap > .d-sec h2 { font-size: 18px; }
+  .d-pane .wrap > .stage-sec { display: flex; flex-direction: column; }
+  .d-pane .wrap > .stage-sec > .stage-hero { flex: 1; }
+  .d-pane .contents-grid { grid-template-columns: repeat(4, 1fr); }
+  .d-pane .wrap > .d-pair { grid-template-columns: 1fr 1fr; gap: 18px; }
 
   /* 桌面通用：滚动条与选中色 */
   ::-webkit-scrollbar { width: 10px; height: 10px; }
