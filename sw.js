@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v23';
+const VERSION = 'yoer-shop-v25';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -11,6 +11,7 @@ const PRECACHE = [
   'tools-l3.html',
   'offline.html',
   'products.js',
+  'tools-data.js',
   'games.js',
   'syllabus-data.js',
   'app.js',
@@ -20,11 +21,10 @@ const PRECACHE = [
   'icons/icon-192.png',
   'icons/icon-512.png',
   'icons/apple-touch-icon.png',
-  // L1（10 张新图）
-  'images/C01/L1-photo-01.jpg', 'images/C01/L1-photo-02.jpg', 'images/C01/L1-photo-03.jpg',
-  'images/C01/L1-photo-04.jpg', 'images/C01/L1-photo-05.jpg',
-  'images/C01/L1-card-01.jpg', 'images/C01/L1-card-02.jpg', 'images/C01/L1-card-03.jpg',
-  'images/C01/L1-card-04.jpg', 'images/C01/L1-card-05.jpg',
+  // L1（7 张新主图：封面 + 主图1-5 + 白底）
+  'images/C01/L1-main-01.jpg', 'images/C01/L1-main-02.jpg', 'images/C01/L1-main-03.jpg',
+  'images/C01/L1-main-04.jpg', 'images/C01/L1-main-05.jpg', 'images/C01/L1-main-06.jpg',
+  'images/C01/L1-main-07.jpg',
   // L1 教具图鉴
   'images/C01/tools/糖果铺子游戏板.jpg', 'images/C01/tools/像素积木块.jpg',
   'images/C01/tools/磁力红蓝棋子.jpg', 'images/C01/tools/磁力实物棋子.jpg',

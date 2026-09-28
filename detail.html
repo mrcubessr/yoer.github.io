@@ -27,7 +27,6 @@
       <nav class="nav-menu">
         <a href="index.html#products">产品总览</a>
         <a href="syllabus.html">课程大纲</a>
-        <a href="index.html#tools">教具图鉴</a>
         <a href="index.html#buy" class="nav-cta">咨询选购</a>
       </nav>
     </div>
@@ -38,10 +37,15 @@
   </main>
 
   <script src="products.js"></script>
+  <script src="tools-data.js"></script>
   <script>
     const id = new URLSearchParams(location.search).get('id');
     const p = PRODUCTS[id];
     if (!p) { location.replace('index.html'); throw new Error('bad id'); }
+    const TOOLS_MAP = typeof TOOLS !== 'undefined' ? TOOLS : {};
+    const THEMES_MAP = typeof THEMES !== 'undefined' ? THEMES : {};
+    const toolsOf = TOOLS_MAP[p.id] || [];
+    const themesOf = THEMES_MAP[p.id] || [];
 
     document.title = p.name + ' · 优尔数学思维启蒙盒';
     document.getElementById('dTitle').textContent = p.name;
@@ -73,14 +77,61 @@
         </div>`;
     }
 
+    /* ===== 三阶连贯路径（展示三个级别的能力递进） ===== */
+    const LADDER = PRODUCT_ORDER.map(k => {
+      const q = PRODUCTS[k];
+      return {
+        lv: q.level,
+        age: q.age,
+        slogan: q.stage.slogan,
+        ladder: q.stage.ladder,
+        theme: q.theme
+      };
+    });
+    const THEME_GRAD = {
+      orange: 'linear-gradient(135deg,#fb923c,#ea580c)',
+      green: 'linear-gradient(135deg,#4ade80,#16a34a)',
+      red: 'linear-gradient(135deg,#f87171,#dc2626)'
+    };
+
     /* ===== 五个界面的内容 ===== */
     const PANES = {};
 
-    /* 总览：共享的基础介绍（教具/材料/图鉴之外的通用说明） */
+    /* 总览：阶段定位 + 分段产品说明 + 三阶连贯路径 */
+    const overviewBody = p.overviewParas && p.overviewParas.length ? p.overviewParas : null;
     PANES.overview = `
+      <div class="d-sec">
+        <div class="stage-hero ${p.theme}">
+          <span class="stage-label">阶段定位 · ${p.stage.label}</span>
+          <p class="stage-slogan">${p.stage.slogan}</p>
+          <p class="stage-focus">${p.stage.focus}</p>
+        </div>
+      </div>
+
+      ${overviewBody ? `
+      <div class="d-sec">
+        <h2>产品说明</h2>
+        ${overviewBody.map(o => `
+          <div class="ov-para">
+            <b>${o.h}</b>
+            <p>${o.p}</p>
+          </div>`).join('')}
+      </div>` : `
       <div class="d-sec">
         <h2>产品说明</h2>
         <p>${p.desc}</p>
+      </div>`}
+
+      <div class="d-sec full-span">
+        <h2>L1 → L2 → L3 · 一条路径</h2>
+        <div class="ladder">
+          ${LADDER.map(s => `
+            <div class="ladder-item ${s.theme}">
+              <div class="lv">${s.lv}</div>
+              <div><b>${s.slogan}</b><span>${s.ladder}</span><em>${s.age}</em></div>
+            </div>`).join('')}
+        </div>
+        <p class="ladder-note">三阶共用一条教具线：格米扑克 / 十格阵 → 数字卡 / 逻辑九宫格 → 24 算牌 / 主题算战棋盘。换的是玩法，不变的是数学思维的成长节奏——按 L1→L2→L3 顺序学，不跳级、不重复。</p>
       </div>
 
       ${p.sellTags ? `
@@ -107,43 +158,60 @@
       </div>
     `;
 
-    /* 课程体系：共享教具 + 两条主线（家庭 / 园所）各自介绍 */
-    if (hasTracks) {
-      const bothTracks = !!(p.homeTrack && p.kindergartenTrack);
-      const homeSyl = p.homeTrack && p.homeTrack.syllabus ? p.homeTrack.syllabus : null;
-      const sylTotal = homeSyl ? homeSyl.filter(s => s.lessons != null).reduce((a, b) => a + b.lessons, 0) : 0;
-      const kinderSyl = p.kindergartenTrack && p.kindergartenTrack.syllabus ? p.kindergartenTrack.syllabus : null;
-      const kinderTotal = kinderSyl ? kinderSyl.reduce((a, b) => a + (b.lessons || 0), 0) : 0;
-      PANES.curriculum = `
-        ${bothTracks ? `
-        <div class="d-sec full-span">
-          <h2>一套教具 · 两套课程体系</h2>
-          <p>盒内的教具、材料与图鉴是<b>共享</b>的；但在「家庭亲子」与「幼儿园集体教学」两种场景下，课程内容、课程大纲与配套形式各不相同。请按你的使用场景，选择对应的体系查看。</p>
-        </div>
-        <div class="d-sec full-span">
-          <div class="track-grid">
-            ${trackCol(p.homeTrack, 'home')}
-            ${trackCol(p.kindergartenTrack, 'kinder')}
-          </div>
-        </div>` : p.homeTrack ? `
-        <div class="d-sec full-span">
-          <h2>家庭亲子版 · 视频在线课程</h2>
-          <p>本套盒提供完整的家庭亲子视频课程体系，家长跟着真人视频课即可在家启蒙；<b>不提供课件与教案</b>，通过在线视频课程逐节学习。</p>
-        </div>
-        <div class="d-sec full-span">
-          <div class="track-grid">
-            ${trackCol(p.homeTrack, 'home')}
-          </div>
-        </div>` : `
-        <div class="d-sec full-span">
-          <div class="track-grid">
-            ${trackCol(p.kindergartenTrack, 'kinder')}
-          </div>
-        </div>`}
+    /* 课程体系：家庭亲子 / 园所教学两条体系分开呈现，支持顶部切换直达 */
+    const homeSyl = p.homeTrack && p.homeTrack.syllabus ? p.homeTrack.syllabus : null;
+    const sylTotal = homeSyl ? homeSyl.filter(s => s.lessons != null).reduce((a, b) => a + b.lessons, 0) : 0;
+    const kinderSyl = p.kindergartenTrack && p.kindergartenTrack.syllabus ? p.kindergartenTrack.syllabus : null;
+    const kinderTotal = kinderSyl ? kinderSyl.reduce((a, b) => a + (b.lessons || 0), 0) : 0;
 
-        ${homeSyl ? `
-        <div class="d-sec full-span">
-          <h2>家庭版课程大纲（视频在线课）</h2>
+    /* 课程主题与材料对应表（幼儿园课程体系专用，放在园所体系板块内） */
+    const themeColGames = themesOf.some(g => g.items.some(it => it.games));
+    const themeColMonth = themesOf.some(g => g.items.some(it => it.month));
+    const themeTotal = themesOf.reduce((a, g) => a + g.items.length, 0);
+    function materialsFold() {
+      if (!themesOf.length) return '';
+      return `
+        <details class="mat-fold">
+          <summary>展开：课程主题与材料对应表（${themeTotal} 个主题）</summary>
+          <div class="mat-body">
+            ${themesOf.map(g => `
+              <div class="mat-group">
+                <h4>${g.title}</h4>
+                <div class="mat-scroll">
+                  <table class="mat-table">
+                    <thead><tr>
+                      <th class="seq">#</th><th>课程主题</th>
+                      ${themeColMonth ? '<th>月份</th>' : ''}
+                      ${themeColGames ? '<th>主要玩法</th>' : ''}
+                      <th>核心内容</th><th>所需材料</th>
+                    </tr></thead>
+                    <tbody>
+                      ${g.items.map(it => `<tr>
+                        <td class="seq">${it.seq}</td>
+                        <td class="course">${it.course}</td>
+                        ${themeColMonth ? `<td class="mon">${it.month}</td>` : ''}
+                        ${themeColGames ? `<td class="games">${it.games}</td>` : ''}
+                        <td>${it.content}</td>
+                        <td class="materials">${it.materials}</td>
+                      </tr>`).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              </div>`).join('')}
+          </div>
+        </details>`;
+    }
+
+    /* 单个体系板块 */
+    function trackBlock(type) {
+      if (type === 'home') {
+        if (!p.homeTrack) return '';
+        return `
+        <div class="d-sec full-span track-block home">
+          <h2>家庭亲子体系 · ${p.homeTrack.title}</h2>
+          <p class="tb-note">家长自购 · 1 盒起 · 跟着真人视频课在家玩，每天 10–20 分钟；纯视频在线学习，无课件无教案。</p>
+          ${trackCol(p.homeTrack, 'home')}
+          ${homeSyl ? `
           <div class="syl-callout">纯视频在线学习 · 无课件 · 无教案</div>
           <div class="syl-board">
             ${homeSyl.map(s => `
@@ -157,12 +225,17 @@
             <b>查看 ${p.level} 家庭版完整大纲 →</b>
             <span>版块结构与节数明细 · 纯视频在线学习，无课件无教案</span>
           </a>
-          <p class="syl-disclaimer">注：家庭版课程为视频在线学习形式，不含幼儿园版的标准教案与配套课件；该大纲内容由 AI 生成，仅供参考，实际课程以官方发布为准。</p>
-        </div>` : ''}
+          <p class="syl-disclaimer">注：家庭版课程为视频在线学习形式，不含幼儿园版的标准教案与配套课件；该大纲内容由 AI 生成，仅供参考，实际课程以官方发布为准。</p>` : ''}
+        </div>`;
+      }
 
-        ${kinderSyl ? `
-        <div class="d-sec full-span">
-          <h2>幼儿园版课程大纲（含教案课件）</h2>
+      if (!p.kindergartenTrack) return '';
+      return `
+        <div class="d-sec full-span track-block kinder">
+          <h2>园所教学体系 · ${p.kindergartenTrack.title}</h2>
+          <p class="tb-note">园所按班级起订 · ${p.kindergartenTrack.lessonPlans} 份标准教案 + ${p.kindergartenTrack.courseware} 份配套课件 · 集体 / 小组 / 区域 / 户外活动全场景覆盖。</p>
+          ${trackCol(p.kindergartenTrack, 'kinder')}
+          ${kinderSyl ? `
           <div class="syl-callout kinder">按季度排课 · ${p.kindergartenTrack.lessonPlans} 份标准教案 + ${p.kindergartenTrack.courseware} 份配套课件</div>
           <div class="syl-board">
             ${kinderSyl.map(s => `
@@ -172,94 +245,84 @@
                 <em>${s.note || ''}</em>
               </div>`).join('')}
           </div>
-          <div class="syl-total">共 <b>${kinderTotal}</b> 个教学主题，两学期完整排课 · 盒内教具、材料与家庭版完全共用</div>
+          <div class="syl-total">共 <b>${kinderTotal}</b> 个教学主题，两学期完整排课 · 盒内教具、材料与家庭版完全共用</div>` : ''}
+          ${materialsFold()}
           <a class="syl-link kinder-link" href="syllabus.html?lv=${p.level}">
-            <b>查看 ${p.level} 幼儿园版逐课明细表（含标准教案与配套课件）→</b>
-            <span>按${p.level === 'L3' ? '学期 / 季度' : '月份'}列出每一节课的核心内容、主要游戏与所需材料</span>
+            <b>查看 ${p.level} 逐课明细表（含标准教案与配套课件）→</b>
+            <span>${p.level === 'L3' ? '按学期 / 季度' : '按月份'}列出每一节课的核心内容、主要游戏与所需材料</span>
           </a>
-        </div>` : ''}
+        </div>`;
+    }
 
-        ${p.modules ? `
-        <div class="d-sec full-span">
-          <h2>${p.modulesTitle || '8 大能力模块（层层递进）'}</h2>
-          <p style="margin-bottom:10px;">无论家庭还是园所，孩子都将沿以下能力模块循序渐进地成长：</p>
-          ${p.modules.map((m, i) => `
-            <div class="module">
-              <div class="m-no">${(p.modulesTitle || '模块').includes('板块') ? '板块' : '模块'}${i + 1}</div>
-              <div>
-                <b>${m.name}${m.lessons ? `<em>${m.themes} 主题 · ${m.lessons} 课时</em>` : ''}</b>
-                <span>${m.items}</span>
-              </div>
+    /* 两条体系共用：能力模块 + 启蒙路径 + 图文详情 */
+    const sharedSections = () => `
+      ${p.modules ? `
+      <div class="d-sec full-span">
+        <h2>${p.modulesTitle || '8 大能力模块（层层递进）'}</h2>
+        <p style="margin-bottom:10px;">无论家庭还是园所，孩子都将沿以下能力模块循序渐进地成长：</p>
+        ${p.modules.map((m, i) => `
+          <div class="module">
+            <div class="m-no">${(p.modulesTitle || '模块').includes('板块') ? '板块' : '模块'}${i + 1}</div>
+            <div>
+              <b>${m.name}${m.lessons ? `<em>${m.themes} 主题 · ${m.lessons} 课时</em>` : ''}</b>
+              <span>${m.items}</span>
+            </div>
+          </div>`).join('')}
+      </div>` : ''}
+
+      ${p.sevenSteps ? `
+      <div class="d-sec full-span">
+        <h2>7 步启蒙路径</h2>
+        <div class="d-steps">
+          ${p.sevenSteps.map((s, i) => `
+            <div class="d-step">
+              <div class="no">${i + 1}</div>
+              <div><b>${s.t}</b><span>${s.d}</span></div>
             </div>`).join('')}
-        </div>` : ''}
-
-        ${p.kindergartenTrack ? `
-        <div class="d-sec full-span">
-          <h2>幼儿园版完整大纲（含教案课件）</h2>
-          <a class="syl-link kinder-link" href="syllabus.html?lv=${p.level}">
-            <b>查看 ${p.level} 幼儿园逐课明细表（含标准教案与配套课件）→</b>
-            <span>${p.kindergartenTrack.lessonPlans} 份标准教案 + ${p.kindergartenTrack.courseware} 份配套课件，供园所集体教学使用</span>
-          </a>
-        </div>` : `
-        <div class="d-sec full-span">
-          <h2>完整课程大纲</h2>
-          <a class="syl-link" href="syllabus.html?lv=${p.level}">
-            <b>查看 ${p.level} 逐课明细表 →</b>
-            <span>按月份列出每一节课的核心内容、主要游戏与所需材料</span>
-          </a>
-        </div>`}
-
-        ${p.sevenSteps ? `
-        <div class="d-sec full-span">
-          <h2>7 步启蒙路径</h2>
-          <div class="d-steps">
-            ${p.sevenSteps.map((s, i) => `
-              <div class="d-step">
-                <div class="no">${i + 1}</div>
-                <div><b>${s.t}</b><span>${s.d}</span></div>
-              </div>`).join('')}
-          </div>
-        </div>` : ''}
-
-        ${p.detailImgs ? `
-        <div class="d-sec full-span">
-          <h2>产品图文详情</h2>
-          <p class="longimg-note">点击任意图片可查看高清大图</p>
-          <div class="longimg-grid">
-            ${p.detailImgs.map((s, i) => `<a class="longimg" href="${s}" target="_blank" rel="noopener"><img src="${s}" alt="${p.name} 图文详情 ${i + 1}" loading="lazy"></a>`).join('')}
-          </div>
-        </div>` : ''}
-      `;
-    } else {
-      PANES.curriculum = `
-        ${p.modules ? `
-        <div class="d-sec">
-          <h2>${p.modulesTitle || '核心玩法板块'}</h2>
-          ${p.modules.map((m, i) => `
-            <div class="module">
-              <div class="m-no">${i + 1}</div>
-              <div><b>${m.name}</b><span>${m.items}</span></div>
-            </div>`).join('')}
-        </div>` : ''}
-        <div class="d-sec">
-          <h2>完整课程大纲</h2>
-          <a class="syl-link" href="syllabus.html?lv=${p.level}">
-            <b>查看 ${p.level} 逐课明细表 →</b>
-            <span>按月份列出每一节课的核心内容、主要游戏与所需材料</span>
-          </a>
         </div>
-        ${p.sevenSteps ? `
-        <div class="d-sec">
-          <h2>7 步启蒙路径</h2>
-          <div class="d-steps">
-            ${p.sevenSteps.map((s, i) => `
-              <div class="d-step">
-                <div class="no">${i + 1}</div>
-                <div><b>${s.t}</b><span>${s.d}</span></div>
-              </div>`).join('')}
-          </div>
-        </div>` : ''}
-      `;
+      </div>` : ''}
+
+      ${p.detailImgs ? `
+      <div class="d-sec full-span">
+        <h2>产品图文详情</h2>
+        <p class="longimg-note">点击任意图片可查看高清大图</p>
+        <div class="longimg-grid">
+          ${p.detailImgs.map((s, i) => `<a class="longimg" href="${s}" target="_blank" rel="noopener"><img src="${s}" alt="${p.name} 图文详情 ${i + 1}" loading="lazy"></a>`).join('')}
+        </div>
+      </div>` : ''}
+    `;
+
+    const TRACK_LABELS = { all: '两条体系都看', home: '家庭亲子套装', kinder: '园所教学套装' };
+    PANES.curriculum = `
+      <div class="track-switch" id="trackSwitch">
+        ${['all', 'home', 'kinder'].filter(k => k === 'all' || (k === 'home' ? p.homeTrack : p.kindergartenTrack))
+          .map(k => `<button type="button" data-track="${k}" class="${k === 'all' ? 'on' : ''}">${TRACK_LABELS[k]}</button>`).join('')}
+      </div>
+      <div id="curriculumBody"></div>
+      ${sharedSections()}
+    `;
+
+    /* 按当前选中的体系渲染课程体系内容 */
+    let curTrack = 'all';
+    function renderCurriculum() {
+      const box = document.getElementById('curriculumBody');
+      if (!box) return;
+      let html = '';
+      if (p.homeTrack && (curTrack === 'all' || curTrack === 'home')) html += trackBlock('home');
+      if (p.kindergartenTrack && (curTrack === 'all' || curTrack === 'kinder')) html += trackBlock('kinder');
+      if (!html) {
+        html = `<div class="d-sec full-span">
+          <h2>完整课程大纲</h2>
+          <a class="syl-link" href="syllabus.html?lv=${p.level}">
+            <b>查看 ${p.level} 逐课明细表 →</b>
+            <span>按月份列出每一节课的核心内容、主要游戏与所需材料</span>
+          </a>
+        </div>`;
+      }
+      box.innerHTML = html;
+      document.querySelectorAll('#trackSwitch button').forEach(btn => {
+        btn.classList.toggle('on', (btn.dataset.track || 'all') === curTrack);
+      });
     }
 
     PANES.play = `
@@ -274,10 +337,30 @@
         </div>
       </div>
 
+      ${p.playLines ? `
+      <div class="d-sec full-span">
+        <h2>本阶段玩法主线（${p.age}）</h2>
+        <p class="sec-note" style="margin-bottom:12px;">按 ${p.stage.label}孩子的年龄特点与认知水平精选，每一条都对应盒内的具体教具或游戏。</p>
+        ${p.playLines.map((l, i) => `
+          <div class="play-line">
+            <div class="pl-no">${i + 1}</div>
+            <div><b>${l.n}</b><span>${l.d}</span></div>
+          </div>`).join('')}
+      </div>` : ''}
+
+      ${p.abilityGroups ? `
+      <div class="d-sec">
+        <h2>培养能力点</h2>
+        ${p.abilityGroups.map(g => `
+          <div class="ab-group">
+            <b>${g.g}</b>
+            <div class="chips">${g.items.map(a => `<span>${a}</span>`).join('')}</div>
+          </div>`).join('')}
+      </div>` : `
       <div class="d-sec">
         <h2>培养能力点</h2>
         <div class="chips">${p.abilities.map(a => `<span>${a}</span>`).join('')}</div>
-      </div>
+      </div>`}
 
       ${p.outcomes ? `
       <div class="d-sec full-span">
@@ -300,8 +383,35 @@
     PANES.contents = `
       <div class="d-sec full-span">
         <h2>盒内教具清单（100+ 玩/教具）</h2>
+        <p class="sec-note" style="margin-bottom:12px;">打开盒子就能玩的完整配置，无需另外准备学具；下表按类别列出，括号为数量。</p>
         <div class="contents-grid">${p.contents.map(c => `<span>${c}</span>`).join('')}</div>
-        <a class="tools-link" href="${toolsHref}">查看教具图鉴 &amp; 课程材料明细表 →</a>
+      </div>
+
+      ${toolsOf.length ? `
+      <div class="d-sec full-span">
+        <h2>教具图鉴（${toolsOf.length} 件核心教具）</h2>
+        <p class="sec-note" style="margin-bottom:12px;">每一件教具对应哪些游戏、出现在多少节课里，一目了然。</p>
+        <div class="tool-grid d-tool-grid">
+          ${toolsOf.map(t => `
+            <div class="tool-card">
+              <div class="tool-img">${t.img
+                ? `<img src="${t.img}" alt="${t.name}" loading="lazy">`
+                : `<div class="tool-ph">教具</div>`}</div>
+              <div class="tool-info">
+                <b>${t.name}</b>
+                ${t.use ? `<div class="aka">用于：${t.use}</div>` : ''}
+                ${t.freq ? `<span class="freq">课程出现 ${t.freq}</span>` : ''}
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <div class="d-sec full-span">
+        <h2>材料怎么准备</h2>
+        <ul class="dot-list">
+          <li>盒内已配齐全部 reusable 教具与操作材料，家庭场景开盒即玩。</li>
+          <li>园所集体教学需补的部分材料（色卡、自制图卡、PPT 等）已逐课列明，见「课程体系 → 园所教学体系 → 课程主题与材料对应表」。</li>
+        </ul>
       </div>
     `;
 
@@ -326,27 +436,6 @@
             </tr>`).join('')}
           </tbody>
         </table>
-      </div>` : ''}
-
-      ${hasTracks ? `
-      <div class="d-sec full-span">
-        <h2>两种场景 · 分别采购</h2>
-        <div class="track-grid">
-          ${p.homeTrack ? `
-          <div class="track home">
-            <div class="track-tag">家庭亲子体系</div>
-            <b>${p.homeTrack.title}</b>
-            <em>${p.homeTrack.audience}</em>
-            <p>家长自购，1 盒起；含 ${p.homeTrack.videoLessons} 节真人视频课，持续更新。</p>
-          </div>` : ''}
-          ${p.kindergartenTrack ? `
-          <div class="track kinder">
-            <div class="track-tag">幼儿园课程体系</div>
-            <b>${p.kindergartenTrack.title}</b>
-            <em>${p.kindergartenTrack.audience}</em>
-            <p>园所采购，按班级起订；含 ${p.kindergartenTrack.lessonPlans} 份标准教案 + ${p.kindergartenTrack.courseware} 份配套课件，免费教师指导。</p>
-          </div>` : ''}
-        </div>
       </div>` : ''}
 
       ${p.scenarios ? `
@@ -386,22 +475,24 @@
       { k: 'purchase', t: '场景采购' }
     ];
 
-    /* ===== 顶层：左图集 + 右简介（等高），右侧含两条主线选择入口 ===== */
+    /* ===== 顶层：左图集 + 右简介，右侧两条产品线卡点击即直达对应体系 ===== */
     const trackSelect = hasTracks ? `
       <div class="track-select">
-        <div class="ts-title">同一套教具 · 两套课程体系，请选择你的场景</div>
+        <div class="ts-title">同一套教具 · 两套课程体系，点击卡片直接看对应内容</div>
         <div class="ts-cards">
           ${p.homeTrack ? `
-          <button class="ts-card home" data-tab="curriculum" type="button">
+          <button class="ts-card home" data-track="home" type="button">
             <span class="ts-tag">家庭亲子体系</span>
             <b>${p.homeTrack.title}</b>
             <em>${p.homeTrack.audience}</em>
+            <em class="ts-cta">${p.homeTrack.videoLessons ? p.homeTrack.videoLessons + ' 节真人视频课' : '纯视频在线学习'} · 1 盒起 →</em>
           </button>` : ''}
           ${p.kindergartenTrack ? `
-          <button class="ts-card kinder" data-tab="curriculum" type="button">
-            <span class="ts-tag">幼儿园课程体系</span>
+          <button class="ts-card kinder" data-track="kinder" type="button">
+            <span class="ts-tag">园所教学体系</span>
             <b>${p.kindergartenTrack.title}</b>
             <em>${p.kindergartenTrack.audience}</em>
+            <em class="ts-cta">${p.kindergartenTrack.lessonPlans} 份教案 + ${p.kindergartenTrack.courseware} 份课件 · 按班起订 →</em>
           </button>` : ''}
         </div>
       </div>` : '';
@@ -445,19 +536,49 @@
       const t = new URLSearchParams(location.search).get('tab');
       return TABS.some(x => x.k === t) ? t : 'overview';
     }
+    function trackFromUrl() {
+      const t = new URLSearchParams(location.search).get('track');
+      return ['home', 'kinder'].indexOf(t) >= 0 ? t : 'all';
+    }
+    function syncUrl(tab, track) {
+      const u = new URL(location.href);
+      u.searchParams.set('tab', tab);
+      if (track && track !== 'all') u.searchParams.set('track', track);
+      else u.searchParams.delete('track');
+      history.pushState({ tab: tab, track: track || 'all' }, '', u);
+    }
 
-    function showTab(k, push) {
+    function showTab(k, push, track) {
       const panes = document.querySelectorAll('.d-pane');
       const tabs = document.querySelectorAll('.d-tabs a');
       panes.forEach(el => el.classList.toggle('on', el.dataset.k === k));
       tabs.forEach(el => el.classList.toggle('on', el.dataset.k === k));
 
-      if (push) {
-        const u = new URL(location.href);
-        u.searchParams.set('tab', k);
-        history.pushState({ tab: k }, '', u);
+      if (push) syncUrl(k, track !== undefined ? track : curTrack);
+    }
+
+    /* 体系切换：只重渲课程体系分区，不影响其他分区 */
+    function setTrack(k, push, scroll) {
+      curTrack = ['home', 'kinder', 'all'].indexOf(k) >= 0 ? k : 'all';
+      renderCurriculum();
+      const u = new URL(location.href);
+      u.searchParams.set('tab', 'curriculum');
+      u.searchParams.set('track', curTrack);
+      document.querySelectorAll('.ts-card').forEach(btn => {
+        btn.classList.toggle('on', btn.dataset.track === curTrack);
+      });
+      if (push) history.pushState({ tab: 'curriculum', track: curTrack }, '', u);
+      if (scroll) {
+        const top = document.getElementById('dPanes').getBoundingClientRect().top + window.scrollY - 64;
+        window.scrollTo({ top: top, behavior: 'smooth' });
       }
     }
+
+    document.getElementById('dPanes').addEventListener('click', e => {
+      const btn = e.target.closest('button[data-track]');
+      if (!btn) return;
+      setTrack(btn.dataset.track, true, true);
+    });
 
     document.getElementById('dTabs').addEventListener('click', e => {
       const a = e.target.closest('a[data-k]');
@@ -472,21 +593,30 @@
       showTab(a.dataset.k, true);
     });
 
-    /* 顶层两条主线选择卡 → 直达课程体系 */
+    /* 顶层两条产品线卡 → 直接筛选对应体系内容并进入课程体系 */
     document.querySelectorAll('.ts-card').forEach(btn => {
       btn.addEventListener('click', () => {
-        const k = btn.dataset.tab || 'curriculum';
-        showTab(k, true);
+        const t = btn.dataset.track;
+        if (t) setTrack(t, true, false);
+        showTab('curriculum', false, t);
+        document.querySelectorAll('.d-tabs a').forEach(a => {
+          a.classList.toggle('on', a.dataset.k === 'curriculum');
+        });
         const top = document.getElementById('dPanes').getBoundingClientRect().top + window.scrollY - 64;
         window.scrollTo({ top: top, behavior: 'smooth' });
       });
     });
 
     window.addEventListener('popstate', e => {
-      showTab((e.state && e.state.tab) || tabFromUrl(), false);
+      const st = e.state || {};
+      if (st.track && st.track !== curTrack) { curTrack = st.track; renderCurriculum(); }
+      showTab(st.tab || tabFromUrl(), false, st.track || trackFromUrl());
     });
 
-    showTab(tabFromUrl(), false);
+    /* 初始化：从 URL 读取 tab / track */
+    curTrack = trackFromUrl();
+    showTab(tabFromUrl(), false, curTrack);
+    renderCurriculum();
 
     /* ===== 轮播计数 ===== */
     const slidesEl = document.getElementById('slides');

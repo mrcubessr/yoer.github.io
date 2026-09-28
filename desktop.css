@@ -62,14 +62,14 @@
   .hero p { font-size: 19px; margin-top: 16px; }
   .path-pills { justify-content: flex-start; margin-top: 26px; }
   .path-pills .pill { font-size: 15px; padding: 9px 20px; }
-  .hero-visual { position: relative; }
-  .hero-visual img {
-    width: 100%;
-    border-radius: 22px;
-    box-shadow: 0 24px 60px rgba(234, 88, 12, .22);
-    object-fit: cover;
-    aspect-ratio: 4 / 3;
-  }
+  /* Hero 右侧改为横向自动轮播（L1/L2/L3 主图） */
+  .hv-window { border-radius: 22px; }
+  .hv-slide img { aspect-ratio: 16 / 11; }
+  .hv-slide .hv-cap { padding: 34px 22px 18px; }
+  .hv-slide .hv-cap b { font-size: 19px; }
+  .hv-slide .hv-cap em { font-size: 13.5px; }
+  .hero-meta { grid-template-columns: repeat(4, 1fr); margin-top: 22px; }
+  .hero-meta span { font-size: 12.5px; padding: 7px 14px; }
   .hero-visual-badge {
     position: absolute;
     left: 18px;
@@ -175,6 +175,16 @@
   .d-gallery { border-radius: 22px; }
   .d-intro { padding: 30px; border-radius: 22px; }
   .d-intro h1 { font-size: 30px; }
+  .ts-card { padding: 18px; }
+  .ts-card b { font-size: 17px; }
+  .ts-card em { font-size: 12px; }
+  .ts-card .ts-cta { margin-top: 12px; font-size: 12.5px; }
+  .track-switch button { font-size: 14px; padding: 10px 22px; }
+  .ladder { grid-template-columns: repeat(3, 1fr); }
+  .d-tool-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  .stage-hero { padding: 20px; }
+  .stage-hero .stage-slogan { font-size: 22px; }
+  .ov-para p { font-size: 14px; }
   .d-tabs { max-width: 1480px; padding: 20px 32px 0; }
   .d-tabs a { padding: 10px 20px; font-size: 14px; }
   .d-panes { max-width: 1480px; padding: 22px 32px 40px; }

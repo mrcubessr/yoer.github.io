@@ -26,10 +26,9 @@
       </div>
       <nav class="nav-menu">
         <a href="#products">产品总览</a>
+        <a href="#products">产品详情</a>
         <a href="#games">经典桌游</a>
         <a href="#path">学习路径</a>
-        <a href="syllabus.html">课程大纲</a>
-        <a href="#tools">教具图鉴</a>
         <a href="#why">品牌背书</a>
         <a href="#buy" class="nav-cta">咨询选购</a>
       </nav>
@@ -45,46 +44,50 @@
         <h1>不跳级的数学思维<br><em>L1 → L2 → L3</em> 分级启蒙</h1>
         <p>认识数字 → 理解运算 → 数学推理，一套玩三年</p>
         <div class="path-pills">
-          <span class="pill">L1 · 2-3岁</span>
+          <a class="pill" href="detail.html?id=C01">L1 · 2-3岁</a>
           <span class="arrow">→</span>
-          <span class="pill">L2 · 3-4岁</span>
+          <a class="pill" href="detail.html?id=C02">L2 · 3-4岁</a>
           <span class="arrow">→</span>
-          <span class="pill">L3 · 7-8岁</span>
+          <a class="pill" href="detail.html?id=C03">L3 · 7-8岁</a>
+        </div>
+        <div class="hero-meta">
+          <span><b>2–8 岁</b>适龄覆盖</span>
+          <span><b>300+</b>游戏课时</span>
+          <span><b>74</b>节真人视频课</span>
+          <span><b>100+</b>玩/教具</span>
         </div>
       </div>
       <div class="hero-visual">
-        <img src="images/C01/L1-photo-01.jpg" alt="优尔 L1 零基础启蒙盒">
-        <div class="hero-visual-badge">L1 · L2 · L3 分级套盒</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 教具图鉴 & 课程材料明细（醒目入口，置顶） -->
-  <section class="tools-entry" id="tools">
-    <div class="wrap">
-      <div class="tools-entry-head">
-        <h2>教具图鉴 &amp; 课程材料明细</h2>
-        <p>每一件教具、每一个游戏对应的材料一目了然 · 家长 / 老师即拿即用</p>
-      </div>
-      <div class="tools-entry-grid">
-        <a class="te-card te-l1" href="tools.html">
-          <span class="te-level">L1</span>
-          <b>零基础启蒙盒</b>
-          <span class="te-sub">17 件教具图鉴 · 32 课程主题明细</span>
-          <em class="te-go">查看教具图鉴 →</em>
-        </a>
-        <a class="te-card te-l2" href="tools-l2.html">
-          <span class="te-level">L2</span>
-          <b>进阶提升盒</b>
-          <span class="te-sub">教具图鉴 · 课程材料明细</span>
-          <em class="te-go">查看教具图鉴 →</em>
-        </a>
-        <a class="te-card te-l3" href="tools-l3.html">
-          <span class="te-level">L3</span>
-          <b>高阶拓展盒</b>
-          <span class="te-sub">教具图鉴 · 课程材料明细</span>
-          <em class="te-go">查看教具图鉴 →</em>
-        </a>
+        <div class="hv-window">
+          <div class="hv-track" id="hvTrack">
+            <div class="hv-slide">
+              <img src="images/C01/L1-main.jpg" alt="L1 零基础启蒙盒">
+              <span class="hv-cap"><b>L1 零基础启蒙盒</b><em>2–3 岁起 · 数感启蒙</em></span>
+            </div>
+            <div class="hv-slide">
+              <img src="images/C01/L1-cover.jpg" alt="L1 家庭亲子套装">
+              <span class="hv-cap"><b>L1 家庭亲子套装</b><em>74 节视频课 · 每天 15 分钟</em></span>
+            </div>
+            <div class="hv-slide">
+              <img src="images/C02/C02-main.jpg" alt="L2 进阶提升盒">
+              <span class="hv-cap"><b>L2 进阶提升盒</b><em>3–4 岁 · 数与逻辑关系</em></span>
+            </div>
+            <div class="hv-slide">
+              <img src="images/C02/L2-cover.jpg" alt="L2 园所教学套装">
+              <span class="hv-cap"><b>L2 园所教学套装</b><em>89 份教案 + 88 份课件</em></span>
+            </div>
+            <div class="hv-slide">
+              <img src="images/C03/C03-main.jpg" alt="L3 高阶拓展盒">
+              <span class="hv-cap"><b>L3 高阶拓展盒</b><em>7–8 岁 · 24 算与主题算战</em></span>
+            </div>
+            <div class="hv-slide">
+              <img src="images/C03/L3-cover.jpg" alt="L3 家庭亲子套装">
+              <span class="hv-cap"><b>L3 家庭亲子套装</b><em>四则运算 · 一题多解</em></span>
+            </div>
+          </div>
+          <div class="hv-dots" id="hvDots" aria-label="产品图轮播"></div>
+        </div>
+        <div class="hero-visual-badge">L1 → L2 → L3 分级套盒</div>
       </div>
     </div>
   </section>
@@ -255,6 +258,50 @@
         </div>
       </a>`;
     }).join('');
+
+    // Hero 轮播：横向自动播放（鼠标悬停 / 触摸时暂停）
+    (function () {
+      const track = document.getElementById('hvTrack');
+      const dotsBox = document.getElementById('hvDots');
+      if (!track) return;
+      const slides = track.querySelectorAll('.hv-slide');
+      const total = slides.length;
+      if (!total) return;
+      let idx = 0;
+      let timer = null;
+
+      dotsBox.innerHTML = Array.from({ length: total }, (_, i) =>
+        `<button type="button" class="hv-dot${i === 0 ? ' on' : ''}" data-i="${i}" aria-label="第 ${i + 1} 张"></button>`
+      ).join('');
+
+      const dots = dotsBox.querySelectorAll('.hv-dot');
+      function paint() {
+        track.style.transition = 'transform .7s cubic-bezier(.4,.15,.2,1)';
+        track.style.transform = `translateX(${-idx * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('on', i === idx));
+      }
+      function next() { idx = (idx + 1) % total; paint(); }
+      function play() { stop(); timer = setInterval(next, 3200); }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+      dotsBox.addEventListener('click', e => {
+        const b = e.target.closest('.hv-dot');
+        if (!b) return;
+        idx = Number(b.dataset.i);
+        paint();
+        play();
+      });
+
+      const win = track.parentElement;
+      win.addEventListener('mouseenter', stop);
+      win.addEventListener('mouseleave', play);
+      win.addEventListener('touchstart', stop, { passive: true });
+      win.addEventListener('touchend', () => { play(); }, { passive: true });
+      document.addEventListener('visibilitychange', () => document.hidden ? stop() : play());
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) play();
+      paint();
+    })();
 
     // PWA
     if ('serviceWorker' in navigator) {
