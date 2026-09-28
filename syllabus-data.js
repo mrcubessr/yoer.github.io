@@ -7,7 +7,7 @@ const SYLLABUS = {
     "level": "L1",
     "name": "L1 零基础启蒙盒",
     "productId": "C01",
-    "age": "2–3 岁起",
+    "age": "2-4 岁",
     "goal": "认识数字 · 建立数感",
     "theme": "orange",
     "home": {

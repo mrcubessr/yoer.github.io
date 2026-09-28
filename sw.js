@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v28';
+const VERSION = 'yoer-shop-v29';
 const PRECACHE = [
   'index.html',
   'detail.html',
