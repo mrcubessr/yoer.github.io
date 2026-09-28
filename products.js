@@ -208,10 +208,10 @@ const PRODUCTS = {
     mainImg: 'images/C02/L2-main.jpg',
     cardImg: 'images/C02/L2-cover.jpg',
     gallery: [
-      'images/C02/L2-main.jpg',
+      'images/C02/L2-main-01.jpg',
       'images/C02/C02-products.jpg',
       'images/C02/C02-course.jpg',
-      'images/C02/C02-1.jpg', 'images/C02/C02-2.jpg', 'images/C02/C02-3.jpg'
+      'images/C02/C02-2.jpg', 'images/C02/C02-3.jpg'
     ],
     /* 图文详情长图（按内容板块切为 6 段，720×2105 竖图） */
     detailImgs: [
