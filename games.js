@@ -379,7 +379,243 @@ const GAMES = {
       'images/games/grid/grid-14.jpg',
       'images/games/grid/grid-15.jpg'
     ]
+  },
+
+  /* ============================================================
+     新品桌游（框架页）：内容待填充，字段结构对齐上方标准条目
+     ============================================================ */
+
+  /* ---------- 超级巴士 ---------- */
+  bus: {
+    id: 'bus',
+    name: '超级巴士',
+    enName: 'SUPER BUS',
+    tagline: '规则意识 · 数量认知 · 数物对应',
+    themeColor: '#0369a1',
+    themeColorSoft: '#f0f9ff',
+    cardImg: 'images/games/bus/bus-01.jpg',
+    meta: ['3 岁以上', '2–4 人', '约 15 分钟/局', '内容待填充'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '数感启蒙桌游',
+    desc: '（内容待填充）超级巴士——优尔教育数感启蒙桌游：上车、到站、数物对应，在巴士行驶的游戏情境中完成数量认知与规则意识启蒙。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面亮点：规则意识 / 数量认知 / 数物对应'
+    ],
+    abilities: ['规则意识', '数量认知', '数物对应'],
+    audience: '适龄 3 岁以上、2–4 人同玩（详细介绍待补充）。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/bus/bus-01.jpg',
+      'images/games/bus/bus-02.jpg'
+    ]
+  },
+
+  /* ---------- 疯狂的长颈鹿 ---------- */
+  giraffe: {
+    id: 'giraffe',
+    name: '疯狂的长颈鹿',
+    enName: 'CRAZY GIRAFFE',
+    tagline: '儿童加减法趣味入门桌面游戏',
+    themeColor: '#8b5cf6',
+    themeColorSoft: '#f5f3ff',
+    cardImg: 'images/games/giraffe/giraffe-01.jpg',
+    meta: ['3 岁以上', '2–4 人', '内容待填充', '内容待填充'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '加减法入门桌游',
+    desc: '（内容待填充）疯狂的长颈鹿——儿童加减法趣味入门桌面游戏：长颈鹿伸长脖子够高楼，在趣味对局中迈出加减法第一步。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面信息：游戏人数 2–4 人 · 游戏年龄 3 岁以上'
+    ],
+    abilities: ['加减法入门', '数感建立', '观察匹配'],
+    audience: '适龄 3 岁以上、2–4 人同玩（详细介绍待补充）。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/giraffe/giraffe-01.jpg',
+      'images/games/giraffe/giraffe-02.jpg'
+    ]
+  },
+
+  /* ---------- 格米的草莓派对 ---------- */
+  strawberry: {
+    id: 'strawberry',
+    name: '格米的草莓派对',
+    enName: 'GEMI STRAWBERRY PARTY',
+    tagline: '数感对应 · 数量对应 · 数字分合',
+    themeColor: '#dc2626',
+    themeColorSoft: '#fef2f2',
+    cardImg: 'images/games/strawberry/strawberry-01.jpg',
+    meta: ['内容待填充', '内容待填充', '内容待填充', '内容待填充'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '数字分合桌游',
+    desc: '（内容待填充）格米的草莓派对——和格米一起摘草莓、办派对，在分一分、合一合的游戏中掌握数感对应、数量对应与数字分合。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面亮点：数感对应 / 数量对应 / 数字分合'
+    ],
+    abilities: ['数感对应', '数量对应', '数字分合'],
+    audience: '适龄与玩法详细介绍待补充。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/strawberry/strawberry-01.jpg',
+      'images/games/strawberry/strawberry-02.jpg'
+    ]
+  },
+
+  /* ---------- 格米的逻辑派对 ---------- */
+  logic: {
+    id: 'logic',
+    name: '格米的逻辑派对',
+    enName: 'GERMI LOGIC PARTY',
+    tagline: '5 款游戏 1 盒搞定，逻辑思维入门到进阶',
+    themeColor: '#be185d',
+    themeColorSoft: '#fdf2f8',
+    cardImg: 'images/games/logic/logic-01.jpg',
+    meta: ['4–5 岁', '1–4 人', '10–20 分钟/局', '5 款游戏 1 盒'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '5合1逻辑桌游',
+    desc: '（内容待填充）格米的逻辑派对——5 款游戏 1 盒搞定：糖果铺子、赫尔方格、逻辑九宫格、数字游戏、形色魔盒，和格米一起玩出逻辑力！',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面信息：适合年龄 4–5 岁 · 游戏人数 1–4 人 · 单局时长 10–20 分钟',
+      '盒面亮点：空间推理 / 专注力 / 逻辑推理'
+    ],
+    abilities: ['空间推理', '专注力', '逻辑推理'],
+    audience: '适龄 4–5 岁、1–4 人同玩（详细介绍待补充）。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/logic/logic-01.jpg',
+      'images/games/logic/logic-02.jpg'
+    ]
+  },
+
+  /* ---------- 格米赛车手 ---------- */
+  racer: {
+    id: 'racer',
+    name: '格米赛车手',
+    enName: 'GERMI THE RACER',
+    tagline: '感知数量 · 情境实景 · 互动性强',
+    themeColor: '#c026d3',
+    themeColorSoft: '#fdf4ff',
+    cardImg: 'images/games/racer/racer-01.jpg',
+    meta: ['内容待填充', '内容待填充', '内容待填充', '内容待填充'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '互动赛车桌游',
+    desc: '（内容待填充）格米赛车手——格米开上卡丁车，在真实的赛车情境里感知数量，比一比谁先冲过终点线！',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面亮点：感知数量 / 情境实景 / 互动性强'
+    ],
+    abilities: ['感知数量', '情境互动', '反应力'],
+    audience: '适龄与玩法详细介绍待补充。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/racer/racer-01.jpg',
+      'images/games/racer/racer-02.jpg',
+      'images/games/racer/racer-03.jpg'
+    ]
+  },
+
+  /* ---------- 航天小先锋 ---------- */
+  space: {
+    id: 'space',
+    name: '航天小先锋',
+    enName: 'SPACE PIONEER',
+    tagline: '亲子互动 · 形状认知 · 观察能力 · 动手能力',
+    themeColor: '#4f46e5',
+    themeColorSoft: '#eef2ff',
+    cardImg: 'images/games/space/space-01.jpg',
+    meta: ['内容待填充', '内容待填充', '内容待填充', '内容待填充'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '全脑思维桌游',
+    desc: '（内容待填充）航天小先锋——乘上火箭探索太空！在亲子互动中完成形状认知，锻炼观察能力与动手能力，大脑睿智全开发。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面亮点：亲子互动 / 形状认知 / 观察能力 / 动手能力 / 大脑睿智全开发'
+    ],
+    abilities: ['亲子互动', '形状认知', '观察能力', '动手能力'],
+    audience: '适龄与玩法详细介绍待补充。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/space/space-01.jpg',
+      'images/games/space/space-02.jpg'
+    ]
+  },
+
+  /* ---------- 小鱼总动员 ---------- */
+  nemo: {
+    id: 'nemo',
+    name: '小鱼总动员',
+    enName: 'FINDING NEMO',
+    tagline: '小鱼游游游，数感反应一起练',
+    themeColor: '#0891b2',
+    themeColorSoft: '#ecfeff',
+    cardImg: 'images/games/nemo/nemo-01.jpg',
+    meta: ['2–5 岁', '1–7 人', '5–10 分钟/局', '内容待填充'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '数感反应桌游',
+    desc: '（内容待填充）小鱼总动员——五彩小鱼游啊游，在轻松欢乐的对局中练数感、练反应，单局只要 5–10 分钟。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面信息：游戏年龄 2–5 岁 · 游戏人数 1–7 人 · 游戏时间 5–10 分钟'
+    ],
+    abilities: ['数感启蒙', '观察反应'],
+    audience: '适龄 2–5 岁、1–7 人同玩（详细介绍待补充）。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/nemo/nemo-01.jpg'
+    ]
   }
 };
 
-const GAME_ORDER = ['party', 'feast', 'grid'];
+const GAME_ORDER = ['party', 'feast', 'grid', 'bus', 'giraffe', 'strawberry', 'logic', 'racer', 'space', 'nemo'];

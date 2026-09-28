@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v31';
+const VERSION = 'yoer-shop-v32';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -86,7 +86,15 @@ const PRECACHE = [
   'images/games/feast/feast-detail-06.jpg', 'images/games/feast/feast-detail-07.jpg', 'images/games/feast/feast-detail-08.jpg',
   'images/games/feast/feast-detail-09.jpg',
   'images/games/feast/feast-l1-12.jpg', 'images/games/feast/feast-l1-19.jpg',
-  'images/games/feast/feast-l1-20.jpg', 'images/games/feast/feast-l1-21.jpg'
+  'images/games/feast/feast-l1-20.jpg', 'images/games/feast/feast-l1-21.jpg',
+  // 经典桌游：新品框架页（超级巴士 / 疯狂的长颈鹿 / 格米的草莓派对 / 格米的逻辑派对 / 格米赛车手 / 航天小先锋 / 小鱼总动员）
+  'images/games/bus/bus-01.jpg', 'images/games/bus/bus-02.jpg',
+  'images/games/giraffe/giraffe-01.jpg', 'images/games/giraffe/giraffe-02.jpg',
+  'images/games/strawberry/strawberry-01.jpg', 'images/games/strawberry/strawberry-02.jpg',
+  'images/games/logic/logic-01.jpg', 'images/games/logic/logic-02.jpg',
+  'images/games/racer/racer-01.jpg', 'images/games/racer/racer-02.jpg', 'images/games/racer/racer-03.jpg',
+  'images/games/space/space-01.jpg', 'images/games/space/space-02.jpg',
+  'images/games/nemo/nemo-01.jpg'
 ];
 
 self.addEventListener('install', (e) => {
