@@ -33,8 +33,24 @@
     .game-switch a.cur { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand); }
     .game-switch a span { display: block; margin-top: 5px; }
     .contents-note { margin-top: 10px; font-size: 12px; color: var(--ink-2); }
+
+    /* 桌面横版：正文双列网格（与 L1–L3 详情页统一，顶部 d-top 复用详情页样式） */
     @media (min-width: 900px) {
-      .game-page { max-width: 1152px; margin: 0 auto; }
+      .game-page { max-width: 1180px; }
+      .game-page .g-body { max-width: 1180px; }
+      .game-page .g-body {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+      .game-page .g-body > .d-sec { margin-top: 0; }
+      .game-page .g-body > .full-span { grid-column: 1 / -1; }
+      .game-page .course-box img { width: 150px; }
+    }
+    @media (min-width: 1200px) {
+      .game-page, .game-page .g-body { max-width: 1480px; }
+      .game-page .g-body { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 0 32px; }
     }
   </style>
   <script src="app.js" defer></script>
@@ -86,17 +102,16 @@
     const slides = g.gallery;
 
     document.getElementById('detailRoot').innerHTML = `
-      <!-- 轮播图 -->
-      <div class="gallery">
-        <div class="slides" id="slides">
-          ${slides.map(s => `<img src="${s}" alt="${g.name} 展示图" loading="lazy">`).join('')}
+      <!-- 顶层：左图集 + 右标题价格（与 L1–L3 详情页统一横版） -->
+      <div class="d-top">
+        <div class="d-gallery">
+          <div class="slides" id="slides">
+            ${slides.map(s => `<img src="${s}" alt="${g.name} 展示图" loading="lazy">`).join('')}
+          </div>
+          <span class="counter" id="slideCounter">1/${slides.length}</span>
         </div>
-        <span class="counter" id="slideCounter">1/${slides.length}</span>
-      </div>
 
-      <!-- 标题价格 -->
-      <div class="d-head">
-        <div class="wrap">
+        <div class="d-intro">
           <div class="en-name">${g.enName}</div>
           <h1>${g.name}</h1>
           <p class="tagline">${g.tagline}</p>
@@ -109,11 +124,10 @@
               : `<div class="price-text">${g.priceText || '详询客服'}</div>`}
             <span class="sold">${g.levelTag}</span>
           </div>
-          <span class="level-tag">${g.tagline}</span>
         </div>
       </div>
 
-      <div class="wrap">
+      <div class="wrap g-body">
         <!-- 产品说明 -->
         <div class="d-sec">
           <h2>游戏介绍</h2>

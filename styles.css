@@ -898,14 +898,13 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
   /* 奇数段时最后一张卡跨满整行，避免右下留白 */
   .ov-sec .ov-para:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .ov-sec .ov-para p { line-height: 1.8; }
-  /* 阶段定位卡：桌面横向内部布局（左标语 / 右目标与衔接） */
+  /* 阶段定位卡：桌面横向内部布局（左标语 / 右目标与衔接，上下居中对齐） */
   .stage-hero {
     display: grid; grid-template-columns: 1.05fr 1fr;
-    gap: 8px 26px; align-items: start;
+    gap: 14px 28px; align-items: stretch;
   }
-  .stage-hero .stage-label { grid-column: 1; justify-self: start; }
-  .stage-hero .stage-slogan, .stage-hero .stage-focus { grid-column: 1; }
-  .stage-hero .stage-goal, .stage-hero .stage-bridge { grid-column: 2; margin-top: 0; }
+  .stage-main { display: flex; flex-direction: column; justify-content: center; }
+  .stage-side { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
   .d-pane .contents-grid { grid-template-columns: repeat(3, 1fr); }
 }
 

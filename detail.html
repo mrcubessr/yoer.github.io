@@ -102,11 +102,15 @@
     PANES.overview = `
       <div class="d-sec full-span stage-sec">
         <div class="stage-hero ${p.theme}">
-          <span class="stage-label">阶段定位 · ${p.stage.label}</span>
-          <p class="stage-slogan">${p.stage.slogan}</p>
-          <p class="stage-focus">${p.stage.focus}</p>
-          ${p.stage.goal ? `<div class="stage-goal"><b>这一阶段的目标</b><p>${p.stage.goal}</p></div>` : ''}
-          ${p.stage.bridge ? `<div class="stage-bridge"><b>在整体路径中的位置</b><p>${p.stage.bridge}</p></div>` : ''}
+          <div class="stage-main">
+            <span class="stage-label">阶段定位 · ${p.stage.label}</span>
+            <p class="stage-slogan">${p.stage.slogan}</p>
+            <p class="stage-focus">${p.stage.focus}</p>
+          </div>
+          <div class="stage-side">
+            ${p.stage.goal ? `<div class="stage-goal"><b>这一阶段的目标</b><p>${p.stage.goal}</p></div>` : ''}
+            ${p.stage.bridge ? `<div class="stage-bridge"><b>在整体路径中的位置</b><p>${p.stage.bridge}</p></div>` : ''}
+          </div>
         </div>
       </div>
 
@@ -139,27 +143,35 @@
       </div>
 
       ${p.sellTags ? `
-      <div class="d-sec">
-        <h2>${p.stats ? '课程体系速览' : '核心卖点'}</h2>
-        <ul class="sell-list">${p.sellTags.map(s => `<li>${s}</li>`).join('')}</ul>
-        ${p.stats ? `
-        <div class="stats-grid">
-          <div class="stat"><b>${p.stats.modules}</b><span>大能力模块</span></div>
-          <div class="stat"><b>${p.stats.themes}</b><span>大课程主题</span></div>
-          <div class="stat"><b>${p.stats.lessons}</b><span>个游戏课时</span></div>
-          <div class="stat"><b>${p.stats.plans}</b><span>份标准教案</span></div>
-          <div class="stat"><b>${p.stats.courseware}</b><span>份配套课件</span></div>
-          <div class="stat"><b>${p.stats.videoLessons}</b><span>节真人视频课</span></div>
-        </div>` : ''}
-      </div>` : ''}
-
-      <div class="d-sec">
+      <div class="d-pair full-span">
+        <div class="d-sec">
+          <h2>${p.stats ? '课程体系速览' : '核心卖点'}</h2>
+          <ul class="sell-list">${p.sellTags.map(s => `<li>${s}</li>`).join('')}</ul>
+          ${p.stats ? `
+          <div class="stats-grid">
+            <div class="stat"><b>${p.stats.modules}</b><span>大能力模块</span></div>
+            <div class="stat"><b>${p.stats.themes}</b><span>大课程主题</span></div>
+            <div class="stat"><b>${p.stats.lessons}</b><span>个游戏课时</span></div>
+            <div class="stat"><b>${p.stats.plans}</b><span>份标准教案</span></div>
+            <div class="stat"><b>${p.stats.courseware}</b><span>份配套课件</span></div>
+            <div class="stat"><b>${p.stats.videoLessons}</b><span>节真人视频课</span></div>
+          </div>` : ''}
+        </div>
+        <div class="d-sec">
+          <h2>配套视频课</h2>
+          <div class="course-box">
+            <img src="${p.gallery[1] || p.mainImg}" alt="配套视频课" loading="lazy">
+            <p>${p.courseNote}</p>
+          </div>
+        </div>
+      </div>` : `
+      <div class="d-sec full-span">
         <h2>配套视频课</h2>
         <div class="course-box">
           <img src="${p.gallery[1] || p.mainImg}" alt="配套视频课" loading="lazy">
           <p>${p.courseNote}</p>
         </div>
-      </div>
+      </div>`}
     `;
 
     /* 课程体系：家庭亲子 / 园所教学两条体系分开呈现，支持顶部切换直达 */
