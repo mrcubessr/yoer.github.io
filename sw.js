@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v34';
+const VERSION = 'yoer-shop-v35';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -97,7 +97,9 @@ const PRECACHE = [
   'images/games/nemo/nemo-01.jpg',
   'images/games/party/party-card.jpg', 'images/games/party/party-scene.jpg',
   'images/games/feast/feast-card.jpg', 'images/games/grid/grid-card.jpg',
-  'images/games/m24/m24-card.jpg', 'images/games/m24/m24-01.jpg', 'images/games/m24/m24-02.jpg'
+  'images/games/m24/m24-card.jpg', 'images/games/m24/m24-01.jpg', 'images/games/m24/m24-02.jpg',
+  'images/games/market/market-01.png', 'images/games/ocean/ocean-01.png',
+  'images/games/farm/farm-01.jpg', 'images/games/kingdom/kingdom-01.jpg'
 ];
 
 self.addEventListener('install', (e) => {

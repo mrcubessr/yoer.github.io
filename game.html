@@ -92,7 +92,7 @@
     if (!g) { location.replace('index.html'); throw new Error('bad game id'); }
 
     // 主题色注入
-    const LIGHT = { party: '#4ade80', feast: '#fb7185', grid: '#fbbf24', m24: '#fde047', bus: '#7dd3fc', giraffe: '#c4b5fd', strawberry: '#fca5a5', logic: '#f9a8d4', racer: '#e879f9', space: '#a5b4fc', nemo: '#67e8f9' };
+    const LIGHT = { party: '#4ade80', feast: '#fb7185', grid: '#fbbf24', m24: '#fde047', bus: '#7dd3fc', giraffe: '#c4b5fd', strawberry: '#fca5a5', logic: '#f9a8d4', racer: '#e879f9', space: '#a5b4fc', nemo: '#67e8f9', market: '#fbbf24', ocean: '#38bdf8', farm: '#a3e635', kingdom: '#60a5fa' };
     const root = document.documentElement.style;
     root.setProperty('--brand', g.themeColor);
     root.setProperty('--brand-light', LIGHT[id]);

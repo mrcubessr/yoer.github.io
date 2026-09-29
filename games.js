@@ -649,7 +649,135 @@ const GAMES = {
       'images/games/m24/m24-01.jpg',
       'images/games/m24/m24-02.jpg'
     ]
+  },
+
+  /* ---------- 超市购物（框架页） ---------- */
+  market: {
+    id: 'market',
+    name: '超市购物',
+    enName: 'GROW UP WITH GEMI',
+    tagline: '和格米一起逛超市 · 生活认知启蒙桌游',
+    themeColor: '#d97706',
+    themeColorSoft: '#fffbeb',
+    cardImg: 'images/games/market/market-01.png',
+    meta: ['2–3 岁', '亲子共玩', '生活认知', '数物对应'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '生活认知启蒙桌游',
+    desc: '（内容待填充）和格米一起超市购物——跟着格米推起小购物车，在模拟超市购物的生活场景中认识蔬果物品、练习数物对应，玩中启蒙生活认知。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面亮点：生活认知 / 数物对应 / 亲子互动'
+    ],
+    abilities: ['生活认知', '数物对应', '表达力', '亲子互动'],
+    audience: '适龄 2–3 岁、亲子共玩（详细介绍待补充）。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/market/market-01.png'
+    ]
+  },
+
+  /* ---------- 揭秘海洋馆（框架页） ---------- */
+  ocean: {
+    id: 'ocean',
+    name: '揭秘海洋馆',
+    enName: 'GROW UP WITH GEMI',
+    tagline: '和格米一起潜入海底 · 海洋认知启蒙桌游',
+    themeColor: '#0284c7',
+    themeColorSoft: '#f0f9ff',
+    cardImg: 'images/games/ocean/ocean-01.png',
+    meta: ['2–3 岁', '亲子共玩', '自然认知', '观察记忆'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '自然认知启蒙桌游',
+    desc: '（内容待填充）和格米一起揭秘海洋馆——戴上潜水镜跟格米畅游海底世界，认识海洋生物、锻炼观察与记忆，在探索中启蒙自然认知。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面亮点：自然认知 / 观察记忆 / 亲子互动'
+    ],
+    abilities: ['自然认知', '观察力', '记忆力', '亲子互动'],
+    audience: '适龄 2–3 岁、亲子共玩（详细介绍待补充）。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/ocean/ocean-01.png'
+    ]
+  },
+
+  /* ---------- 丰收果园（框架页） ---------- */
+  farm: {
+    id: 'farm',
+    name: '丰收果园',
+    enName: 'GROW UP WITH GEMI',
+    tagline: '和格米一起去丰收果园 · 果园采摘启蒙桌游',
+    themeColor: '#65a30d',
+    themeColorSoft: '#f7fee7',
+    cardImg: 'images/games/farm/farm-01.jpg',
+    meta: ['2–3 岁', '亲子共玩', '自然认知', '分类配对'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '自然认知启蒙桌游',
+    desc: '（内容待填充）和格米一起去丰收果园——跟格米摘水果、装果盘，认识果蔬颜色形状、练习分类配对，在丰收乐趣中启蒙自然认知。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面亮点：自然认知 / 分类配对 / 亲子互动'
+    ],
+    abilities: ['自然认知', '分类配对', '颜色形状', '亲子互动'],
+    audience: '适龄 2–3 岁、亲子共玩（详细介绍待补充）。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/farm/farm-01.jpg'
+    ]
+  },
+
+  /* ---------- 智趣逻辑王国（框架页） ---------- */
+  kingdom: {
+    id: 'kingdom',
+    name: '智趣逻辑王国',
+    enName: 'Smart Yaoer',
+    tagline: '益智卢梭 · 我说量维「数」「形」二合一',
+    themeColor: '#2563eb',
+    themeColorSoft: '#eff6ff',
+    cardImg: 'images/games/kingdom/kingdom-01.jpg',
+    meta: ['4 岁+', '2–4 人', '约 15 分钟', '逻辑思维'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '逻辑思维桌游',
+    desc: '（内容待填充）智趣逻辑王国——「数」与「形」二合一逻辑挑战：图形拼搭、规律推理，15 分钟一局，在竞争中锻炼逻辑思维与专注力。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面亮点：图形认知 / 规律推理 / 逻辑思维'
+    ],
+    abilities: ['逻辑推理', '图形认知', '规律发现', '专注力'],
+    audience: '适龄 4 岁+、2–4 人同玩（详细介绍待补充）。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/kingdom/kingdom-01.jpg'
+    ]
   }
 };
 
-const GAME_ORDER = ['party', 'feast', 'grid', 'm24', 'bus', 'giraffe', 'strawberry', 'logic', 'racer', 'space', 'nemo'];
+const GAME_ORDER = ['party', 'feast', 'grid', 'm24', 'market', 'ocean', 'farm', 'kingdom', 'bus', 'giraffe', 'strawberry', 'logic', 'racer', 'space', 'nemo'];
