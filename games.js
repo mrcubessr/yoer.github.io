@@ -14,7 +14,7 @@ const GAMES = {
     tagline: '既是好玩的桌游，又是专业的数学课',
     themeColor: '#15803d',
     themeColorSoft: '#f0fdf4',
-    cardImg: 'images/games/party/party-main-01.jpg',
+    cardImg: 'images/games/party/party-card.jpg',
     meta: ['3–5 岁', '2–4 人', '15 分钟/局', '5 大游戏机制', '8 节视频课'],
     priceLabel: '399',
     priceSuffix: '/套',
@@ -153,6 +153,7 @@ const GAMES = {
       '园所/机构引进（版权 + 师训 + 配套课程）请联系客服单独报价'
     ],
     gallery: [
+      'images/games/party/party-scene.jpg',
       'images/games/party/party-main-01.jpg',
       'images/games/party/party-main-02.jpg',
       'images/games/party/party-main-03.jpg',
@@ -170,7 +171,7 @@ const GAMES = {
     tagline: '拍铃抢答，5 以内加减法越玩越快',
     themeColor: '#e11d48',
     themeColorSoft: '#fff1f2',
-    cardImg: 'images/games/feast/feast-01.jpg',
+    cardImg: 'images/games/feast/feast-card.jpg',
     meta: ['5–6 岁 · 大班', '3–5 人（4 人最佳）', '5 课阶梯进阶', 'L1 课程配套游戏', '单局约 15 分钟'],
     priceLabel: null,
     priceSuffix: '',
@@ -278,7 +279,7 @@ const GAMES = {
     tagline: '不是课程，胜似课程。孩子觉得在玩，家长知道在学',
     themeColor: '#d97706',
     themeColorSoft: '#fffbeb',
-    cardImg: 'images/games/grid/grid-01.jpg',
+    cardImg: 'images/games/grid/grid-card.jpg',
     meta: ['2–7 岁', '2–3 人', '15–30 分钟/次', '60 种玩法', '90 节视频课'],
     priceLabel: null,
     priceSuffix: '',
@@ -615,7 +616,40 @@ const GAMES = {
     gallery: [
       'images/games/nemo/nemo-01.jpg'
     ]
+  },
+
+  /* ---------- 24算游戏（框架页） ---------- */
+  m24: {
+    id: 'm24',
+    name: '24算游戏',
+    enName: 'THE 24 GAME',
+    tagline: '数学思维训练 · 24点游戏锻炼反应力',
+    themeColor: '#ca8a04',
+    themeColorSoft: '#fefce8',
+    cardImg: 'images/games/m24/m24-card.jpg',
+    meta: ['4–6 岁', '2 人对战', '提升运算速度', '亲子互动桌游'],
+    priceLabel: null,
+    priceSuffix: '',
+    priceText: '内容待填充',
+    priceNote: '价格与购买信息待补充',
+    levelTag: '数学反应力桌游',
+    desc: '（内容待填充）24算游戏——经典 24 点玩法：四张牌、加减乘除，最先算出 24 的按下抢答铃！在紧张刺激的对战中提升运算速度，磨炼数学思维与反应力。',
+    sellTags: [
+      '核心卖点待填充',
+      '盒面亮点：提升运算速度 / 亲子互动桌游'
+    ],
+    abilities: ['四则运算', '运算速度', '反应力', '亲子互动'],
+    audience: '适龄 4–6 岁、2 人对战（详细介绍待补充）。',
+    courseNote: '配套课程信息待补充。',
+    contentsTitle: '盒内配置清单',
+    contents: ['盒内配置待补充'],
+    contentsNote: '配置以产品包装实物为准。',
+    purchase: ['价格与购买信息待补充。'],
+    gallery: [
+      'images/games/m24/m24-01.jpg',
+      'images/games/m24/m24-02.jpg'
+    ]
   }
 };
 
-const GAME_ORDER = ['party', 'feast', 'grid', 'bus', 'giraffe', 'strawberry', 'logic', 'racer', 'space', 'nemo'];
+const GAME_ORDER = ['party', 'feast', 'grid', 'm24', 'bus', 'giraffe', 'strawberry', 'logic', 'racer', 'space', 'nemo'];

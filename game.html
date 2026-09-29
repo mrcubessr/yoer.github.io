@@ -24,7 +24,7 @@
     .price-text { color: var(--brand); font-weight: 800; font-size: 26px; line-height: 1; }
     .game-switch img { width: 100%; border-radius: 8px; aspect-ratio: 16/10; object-fit: cover; background: #f9fafb; }
     .game-switch {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;
     }
     .game-switch a {
       border: 1px solid var(--line); border-radius: 12px; padding: 8px; text-align: center;
@@ -36,7 +36,7 @@
 
     /* 桌面横版：正文双列网格（与 L1–L3 详情页统一，顶部 d-top 复用详情页样式） */
     @media (min-width: 900px) {
-      .game-page { max-width: 1180px; }
+      .game-page { max-width: 1180px; margin: 0 auto; }
       .game-page .g-body { max-width: 1180px; }
       .game-page .g-body {
         display: grid;
@@ -47,10 +47,13 @@
       .game-page .g-body > .d-sec { margin-top: 0; }
       .game-page .g-body > .full-span { grid-column: 1 / -1; }
       .game-page .course-box img { width: 150px; }
+      /* 满宽大区块内部双列，避免半栏挤长文、半栏留大空白 */
+      .game-page .g-body .cols2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 32px; align-items: start; }
     }
     @media (min-width: 1200px) {
       .game-page, .game-page .g-body { max-width: 1480px; }
       .game-page .g-body { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 0 32px; }
+      .game-page .g-body .cols2 { gap: 10px 40px; }
     }
   </style>
   <script src="app.js" defer></script>
@@ -89,7 +92,7 @@
     if (!g) { location.replace('index.html'); throw new Error('bad game id'); }
 
     // 主题色注入
-    const LIGHT = { party: '#4ade80', feast: '#fb7185', grid: '#fbbf24', bus: '#7dd3fc', giraffe: '#c4b5fd', strawberry: '#fca5a5', logic: '#f9a8d4', racer: '#e879f9', space: '#a5b4fc', nemo: '#67e8f9' };
+    const LIGHT = { party: '#4ade80', feast: '#fb7185', grid: '#fbbf24', m24: '#fde047', bus: '#7dd3fc', giraffe: '#c4b5fd', strawberry: '#fca5a5', logic: '#f9a8d4', racer: '#e879f9', space: '#a5b4fc', nemo: '#67e8f9' };
     const root = document.documentElement.style;
     root.setProperty('--brand', g.themeColor);
     root.setProperty('--brand-light', LIGHT[id]);
@@ -128,13 +131,133 @@
       </div>
 
       <div class="wrap g-body">
-        <!-- 产品说明 -->
+        ${g.sellGroups ? `
+        <!-- 有卖点详解的产品：删重复核心卖点，长文区块满宽铺开 -->
         <div class="d-sec">
           <h2>游戏介绍</h2>
           <p>${g.desc}</p>
         </div>
 
-        <!-- 核心卖点 -->
+        <div class="d-sec">
+          <h2>培养能力点</h2>
+          <div class="chips">${g.abilities.map(a => `<span>${a}</span>`).join('')}</div>
+        </div>
+
+        <div class="d-sec">
+          <h2>产品数据</h2>
+          <div class="stats-grid">
+            ${g.stats.map(s => `<div class="stat"><b>${s.n}</b><span>${s.label}</span></div>`).join('')}
+          </div>
+        </div>
+
+        <div class="d-sec">
+          <h2>适合谁</h2>
+          <div class="audience-box">${g.audience}</div>
+        </div>
+
+        <div class="d-sec full-span">
+          <h2>${g.sellGroupsTitle || '核心卖点详解'}</h2>
+          <div class="cols2">
+            ${g.sellGroups.map(sg => `
+              <div class="sell-group">
+                <b>${sg.g}</b>
+                <ul class="dot-list">${sg.items.map(s => `<li>${s}</li>`).join('')}</ul>
+              </div>`).join('')}
+          </div>
+          ${g.sellConclusion ? `<p class="sell-conclusion">${g.sellConclusion}</p>` : ''}
+        </div>
+
+        <div class="d-sec full-span">
+          <h2>${g.modulesTitle}</h2>
+          <div class="cols2">
+            ${g.modules.map((m, i) => `
+              <div class="module">
+                <div class="m-no">${i + 1}</div>
+                <div>
+                  <b>${m.name}${m.em ? `<em>${m.em}</em>` : ''}</b>
+                  <span>${m.items}</span>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>
+
+        ${g.research ? `
+        <div class="d-sec full-span">
+          <h2>${g.researchTitle || '教育价值论证'}</h2>
+          ${g.researchNote ? `<p class="sec-note">${g.researchNote}</p>` : ''}
+          <div class="cols2">
+            ${g.research.map(r => `
+              <div class="rs-item">
+                <b>${r.dim}</b>
+                <ul class="dot-list">${r.points.map(p => `<li>${p}</li>`).join('')}</ul>
+              </div>`).join('')}
+          </div>
+          ${g.positioning ? `
+            <div class="cmp-block">
+              <b>${g.positioningTitle || '产品定位对比'}</b>
+              ${g.positioning.map(p => `
+                <div class="cmp-row${p.cur ? ' cur' : ''}">
+                  <span class="cmp-t">${p.t}</span>
+                  <span class="cmp-d">${p.d}</span>
+                </div>`).join('')}
+            </div>` : ''}
+          ${g.slogan ? `<p class="slogan">${g.slogan}</p>` : ''}
+        </div>` : ''}
+
+        <div class="d-sec">
+          <h2>${g.stepsTitle || '玩法步骤'}</h2>
+          <div class="d-steps">
+            ${g.steps.map((s, i) => `
+              <div class="d-step">
+                <div class="no">${i + 1}</div>
+                <div><b>${s.t}</b><span>${s.d}</span></div>
+              </div>`).join('')}
+          </div>
+        </div>
+
+        <div class="d-sec">
+          <h2>配套视频课 / 教案</h2>
+          <div class="course-box">
+            <img src="${g.courseImg || g.gallery[0]}" alt="配套课程" loading="lazy">
+            <p>${g.courseNote}</p>
+          </div>
+        </div>
+
+        ${g.outcomes ? `
+        <div class="d-sec">
+          <h2>玩过之后，孩子将获得</h2>
+          ${g.outcomes.map(o => `
+            <div class="outcome-group">
+              <b>${o.g}</b>
+              <p>${o.items}</p>
+            </div>`).join('')}
+        </div>` : ''}
+
+        ${g.highlights ? `
+        <div class="d-sec">
+          <h2>${g.highlightsTitle || g.highlights.length + ' 大产品亮点'}</h2>
+          ${g.highlights.map(h => `
+            <div class="hl"><b>${h.t}</b><span>${h.d}</span></div>`).join('')}
+        </div>` : ''}
+
+        ${g.scenarios ? `
+        <div class="d-sec">
+          <h2>使用场景</h2>
+          <ul class="dot-list">${g.scenarios.map(s => `<li>${s}</li>`).join('')}</ul>
+        </div>` : ''}
+
+        ${g.purchase ? `
+        <div class="d-sec">
+          <h2>购买与服务</h2>
+          <ul class="dot-list">${g.purchase.map(s => `<li>${s}</li>`).join('')}</ul>
+        </div>` : ''}
+        ` : `
+        <!-- 无卖点详解的产品：保持原顺序 -->
+        <div class="d-sec">
+          <h2>游戏介绍</h2>
+          <p>${g.desc}</p>
+        </div>
+
         <div class="d-sec">
           <h2>核心卖点</h2>
           <ul class="sell-list">${g.sellTags.map(s => `<li>${s}</li>`).join('')}</ul>
@@ -144,19 +267,6 @@
           </div>` : ''}
         </div>
 
-        <!-- 五大维度 · 15 条核心卖点 -->
-        ${g.sellGroups ? `
-        <div class="d-sec">
-          <h2>${g.sellGroupsTitle || '核心卖点详解'}</h2>
-          ${g.sellGroups.map(sg => `
-            <div class="sell-group">
-              <b>${sg.g}</b>
-              <ul class="dot-list">${sg.items.map(s => `<li>${s}</li>`).join('')}</ul>
-            </div>`).join('')}
-          ${g.sellConclusion ? `<p class="sell-conclusion">${g.sellConclusion}</p>` : ''}
-        </div>` : ''}
-
-        <!-- 游戏模块 -->
         ${g.modules ? `
         <div class="d-sec">
           <h2>${g.modulesTitle}</h2>
@@ -170,13 +280,11 @@
             </div>`).join('')}
         </div>` : ''}
 
-        <!-- 培养能力 -->
         <div class="d-sec">
           <h2>培养能力点</h2>
           <div class="chips">${g.abilities.map(a => `<span>${a}</span>`).join('')}</div>
         </div>
 
-        <!-- 玩法路径 -->
         ${g.steps ? `
         <div class="d-sec">
           <h2>${g.stepsTitle || '玩法步骤'}</h2>
@@ -189,13 +297,11 @@
           </div>
         </div>` : ''}
 
-        <!-- 适合谁 -->
         <div class="d-sec">
           <h2>适合谁</h2>
           <div class="audience-box">${g.audience}</div>
         </div>
 
-        <!-- 玩完收获 -->
         ${g.outcomes ? `
         <div class="d-sec">
           <h2>玩过之后，孩子将获得</h2>
@@ -206,7 +312,6 @@
             </div>`).join('')}
         </div>` : ''}
 
-        <!-- 产品亮点 -->
         ${g.highlights ? `
         <div class="d-sec">
           <h2>${g.highlightsTitle || g.highlights.length + ' 大产品亮点'}</h2>
@@ -214,36 +319,12 @@
             <div class="hl"><b>${h.t}</b><span>${h.d}</span></div>`).join('')}
         </div>` : ''}
 
-        <!-- 教育价值三维论证 -->
-        ${g.research ? `
-        <div class="d-sec">
-          <h2>${g.researchTitle || '教育价值论证'}</h2>
-          ${g.researchNote ? `<p class="sec-note">${g.researchNote}</p>` : ''}
-          ${g.research.map(r => `
-            <div class="rs-item">
-              <b>${r.dim}</b>
-              <ul class="dot-list">${r.points.map(p => `<li>${p}</li>`).join('')}</ul>
-            </div>`).join('')}
-          ${g.positioning ? `
-            <div class="cmp-block">
-              <b>${g.positioningTitle || '产品定位对比'}</b>
-              ${g.positioning.map(p => `
-                <div class="cmp-row${p.cur ? ' cur' : ''}">
-                  <span class="cmp-t">${p.t}</span>
-                  <span class="cmp-d">${p.d}</span>
-                </div>`).join('')}
-            </div>` : ''}
-          ${g.slogan ? `<p class="slogan">${g.slogan}</p>` : ''}
-        </div>` : ''}
-
-        <!-- 使用场景 -->
         ${g.scenarios ? `
         <div class="d-sec">
           <h2>使用场景</h2>
           <ul class="dot-list">${g.scenarios.map(s => `<li>${s}</li>`).join('')}</ul>
         </div>` : ''}
 
-        <!-- 配套视频课 -->
         <div class="d-sec">
           <h2>配套视频课 / 教案</h2>
           <div class="course-box">
@@ -251,6 +332,13 @@
             <p>${g.courseNote}</p>
           </div>
         </div>
+
+        ${g.purchase ? `
+        <div class="d-sec full-span">
+          <h2>购买与服务</h2>
+          <ul class="dot-list">${g.purchase.map(s => `<li>${s}</li>`).join('')}</ul>
+        </div>` : ''}
+        `}
 
         <!-- 产品图文详情 -->
         ${g.detailImgs ? `
@@ -268,13 +356,6 @@
           <div class="contents-grid">${g.contents.map(c => `<span>${c}</span>`).join('')}</div>
           ${g.contentsNote ? `<p class="contents-note">${g.contentsNote}</p>` : ''}
         </div>
-
-        <!-- 购买与服务 -->
-        ${g.purchase ? `
-        <div class="d-sec full-span">
-          <h2>购买与服务</h2>
-          <ul class="dot-list">${g.purchase.map(s => `<li>${s}</li>`).join('')}</ul>
-        </div>` : ''}
 
         <!-- 其他游戏 -->
         <div class="d-sec full-span">
