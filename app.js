@@ -89,9 +89,9 @@
   var NAVS = [
     { href: 'index.html', match: /(^|\/)index\.html$/, label: '首页', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg>' },
     { href: 'index.html#products', match: null, label: '产品', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg>' },
+    { href: 'index.html#games', match: /game\.html$/, label: '桌游', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.4" fill="currentColor" stroke="none"/></svg>' },
     { href: 'syllabus.html', match: /syllabus\.html$/, label: '大纲', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M4 19a2 2 0 0 0 2 2h13"/><path d="M9 7h6M9 11h4"/></svg>' },
-    { href: 'tools.html', match: /tools\.html$/, label: '教具', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>' },
-    { href: 'game.html?id=party', match: null, label: '桌游', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.4" fill="currentColor" stroke="none"/></svg>' }
+    { href: 'index.html#buy', match: null, label: '咨询', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5Z"/><path d="M8.5 9.5h7M8.5 13h5"/></svg>' }
   ];
 
   function buildBottomNav() {
@@ -102,9 +102,10 @@
     var hash = location.hash;
     NAVS.forEach(function (n) {
       var on = n.match ? n.match.test(path) : false;
-      if (n.href === 'index.html' && on && !hash) on = true;
-      if (n.href === 'index.html#products' && hash === '#products') on = true;
-      else if (n.href === 'index.html#products') on = false;
+      if (n.href === 'index.html') on = (path === 'index.html' && !hash);
+      if (n.href === 'index.html#products') on = (hash === '#products');
+      if (n.href === 'index.html#games') on = (hash === '#games');
+      if (n.href === 'index.html#buy') on = (hash === '#buy');
       var a = document.createElement('a');
       a.href = n.href;
       a.className = on ? 'on' : '';
