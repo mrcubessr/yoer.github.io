@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v36';
+const VERSION = 'yoer-shop-v37';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -36,7 +36,7 @@ const PRECACHE = [
   'images/C01/tools/小鱼总动员卡牌.jpg', 'images/C01/tools/小鱼总动员棋子.jpg',
   'images/C01/tools/抢答铃.jpg',
   // L2
-  'images/C02/C02-main.jpg', 'images/C02/C02-products.jpg', 'images/C02/C02-course.jpg',
+  'images/C02/L2-cover.jpg', 'images/C02/C02-main.jpg', 'images/C02/C02-products.jpg', 'images/C02/C02-course.jpg',
   'images/C02/L2-main-01.jpg', 'images/C02/C02-2.jpg', 'images/C02/C02-3.jpg',
   // L2 图文详情长图切片（6 段）
   'images/C02/detail/C02-detail-01.jpg', 'images/C02/detail/C02-detail-02.jpg',
