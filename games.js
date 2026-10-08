@@ -16,17 +16,19 @@ const GAMES = {
     themeColorSoft: '#f0fdf4',
     cardImg: 'images/games/party/party-card.jpg',
     meta: ['3–5 岁', '2–4 人', '15 分钟/局', '5 大游戏机制', '8 节视频课'],
-    priceLabel: '399',
-    priceSuffix: '/套',
-    priceNote: '含桌游全套 + 8 节视频课 + 30 天陪跑',
+    priceLabel: '78',
+    priceSuffix: '',
+    priceNote: '参考价 · 含桌游全套 + 8 节视频课 + 30 天陪跑，最终活动价以直播间为准',
+    pricePrefix: '参考价',
     levelTag: '经典数学桌游',
+    introShort: '34 格螺旋棋盘、60 颗琉璃宝石、36 张接龙卡牌——把数感建立、20 以内加减、十进制进退位和乘法加倍启蒙，全部设计成一场"帮格米收集知识宝石、点亮派对烟花"的冒险。',
     desc: '一套经过上百家实体幼儿园验证的数学启蒙解决方案。34 格螺旋棋盘、60 颗琉璃宝石、36 张接龙卡牌——把数感建立、20 以内加减法、十进制进退位、乘法加倍启蒙，全部设计成一场"帮格米收集知识宝石、点亮派对烟花"的冒险。别人的桌游是"玩中学"，格米的数学派对是"学中玩"：先确定学什么，再设计怎么玩。',
     sellTags: [
       '上百家实体幼儿园真实教学场景打磨，收集 3–5 岁孩子学数学的 78 个常见问题，每一个游戏机制都对应一个教学痛点',
       '"学中玩"研发逻辑：不是好玩了再塞知识，而是从教学问题出发设计游戏机制——不理解进位制，就有了"10 颗宝石换 1 颗钻石"',
       '一盒系统覆盖数感、10/20 以内加减、十进制进退位、乘法加倍启蒙，对标《3-6 岁儿童学习与发展指南》与小学一年级课标',
       '60 颗可摸可数的琉璃宝石，让孩子亲手完成"10 个一 = 1 个十"的兑换，抽象的进位第一次变得看得见、摸得着',
-      '399 元 = 派对桌游全套 + 8 节系统视频课 + 30 天老师陪跑，买玩具送课程，买游戏送教学方案'
+      '参考价 78 元 = 派对桌游全套 + 8 节系统视频课 + 30 天老师陪跑，买玩具送课程，买游戏送教学方案'
     ],
     stats: [
       { n: '34 格', label: '螺旋派对棋盘' },
@@ -148,19 +150,44 @@ const GAMES = {
     ],
     contentsNote: '具体配置以产品包装实物为准。',
     purchase: [
-      '直播间日常价 399 元/套，含桌游全套、8 节视频课与 30 天陪跑',
+      '参考价 78 元/套，含桌游全套、8 节视频课与 30 天陪跑',
       '正品保障，支持开箱验收；配件缺损免费补发',
       '园所/机构引进（版权 + 师训 + 配套课程）请联系客服单独报价'
     ],
     gallery: [
-      'images/games/party/party-scene.jpg',
-      'images/games/party/party-main-01.jpg',
-      'images/games/party/party-main-02.jpg',
-      'images/games/party/party-main-03.jpg',
-      'images/games/party/party-main-04.jpg',
-      'images/games/party/party-main-05.jpg',
-      'images/games/party/party-detail.jpg'
-    ]
+      'images/games/party/party-r-hero.jpg',
+      'images/games/party/party-r-board.jpg',
+      'images/games/party/party-r-kit.jpg',
+      'images/games/party/party-r-cards.jpg',
+      'images/games/party/party-r-gems.jpg'
+    ],
+    /* 视觉化重排（game.html 中 g.visual 分支渲染）：以图为主、文字精简 */
+    visual: {
+      harvest: ['数感', '点数', '数量对应', '加减法', '进位和退位', '数字分解与组合'],
+      pillars: [
+        { n: '1', t: '紧扣学前教育指南', d: '游戏内容与 3–5 岁儿童数学发展目标高度契合，在玩中掌握学前必备的数学知识，为幼小衔接打下坚实基础。' },
+        { n: '2', t: '科学进阶 · 体系完整', d: '设计遵循由浅入深的认知规律：从"数物认知"到"数量对应"，再到"加减运算"，循序渐进，孩子跟得上、学得会。' },
+        { n: '3', t: '具象化数学思维', d: '把抽象的数学关系变成"收集宝石""点亮烟花"这些具体动作，让孩子亲手"看见"和"触摸"数学。' }
+      ],
+      modes: [
+        { name: '宝石矿工', tag: '棋盘玩法', img: 'images/games/party/party-r-m01.jpg',
+          d: '掷骰走格、沿路采矿：落在"+N"格就收 N 颗宝石。攒满 10 颗宝石亲手兑换 1 颗钻石——"10 个一 = 1 个十"第一次变成看得见的动作。' },
+        { name: '出7不易', tag: '卡牌玩法', img: 'images/games/party/party-r-m05.jpg',
+          d: '手牌接龙，相邻两张数字之和必须等于 7（1+6 / 2+5 / 3+4）才能连接，先出完手牌的一方为派对点亮烟花。拆数与凑数，在快乐里练熟。' }
+      ],
+      partyTitle: '派对主题 · 欢乐无穷',
+      partyDesc: '以"派对"为主题，营造轻松愉快的游戏氛围——让孩子感觉不是在"上课"，而是在参加一个好朋友的欢乐聚会。',
+      partyImg: 'images/games/party/party-r-kid.jpg',
+      howTitle: '一张图看懂怎么玩',
+      howImg: 'images/games/party/party-r-board.jpg',
+      toolsTitle: '看得见、摸得着的好教具',
+      tools: [
+        { img: 'images/games/party/party-r-cards.jpg', t: '数字接龙卡牌', d: '数量卡与数字卡一一对应，把"图形数量 ↔ 数字"的关联直接摆在眼前。' },
+        { img: 'images/games/party/party-r-gems.jpg', t: '琉璃宝石与钻石', d: '60 颗六色宝石 + 20 颗钻石可摸可数，抽象的进位变成手上的实物兑换。' }
+      ],
+      kitTitle: '开箱即玩 · 全家福',
+      kitImg: 'images/games/party/party-r-kit.jpg'
+    }
   },
 
   /* ---------- 疯狂大请客 ---------- */

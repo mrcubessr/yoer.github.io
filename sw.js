@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v38';
+const VERSION = 'yoer-shop-v39';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -71,6 +71,11 @@ const PRECACHE = [
   'images/games/party/party-main-01.jpg', 'images/games/party/party-main-02.jpg', 'images/games/party/party-main-03.jpg',
   'images/games/party/party-main-04.jpg', 'images/games/party/party-main-05.jpg', 'images/games/party/party-detail.jpg',
   'images/games/party/party-10.jpg',
+  // 格米的数学派对 · 视觉化重排素材（v39 新增：静物 5 张 + 机制演示 3 张）
+  'images/games/party/party-r-hero.jpg', 'images/games/party/party-r-board.jpg',
+  'images/games/party/party-r-kit.jpg', 'images/games/party/party-r-cards.jpg',
+  'images/games/party/party-r-gems.jpg', 'images/games/party/party-r-m01.jpg',
+  'images/games/party/party-r-m05.jpg', 'images/games/party/party-r-kid.jpg',
   // 经典桌游：智趣方格（15 张）
   'images/games/grid/grid-01.jpg', 'images/games/grid/grid-02.jpg', 'images/games/grid/grid-03.jpg',
   'images/games/grid/grid-04.jpg', 'images/games/grid/grid-05.jpg', 'images/games/grid/grid-06.jpg',
