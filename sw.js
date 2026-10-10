@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v40';
+const VERSION = 'yoer-shop-v41';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -21,6 +21,7 @@ const PRECACHE = [
   'icons/icon-192.png',
   'icons/icon-512.png',
   'icons/apple-touch-icon.png',
+  'images/wechat-qr.png',
   // L1（7 张新主图：封面 + 主图1-5 + 白底）
   'images/C01/L1-main-01.jpg', 'images/C01/L1-main-02.jpg', 'images/C01/L1-main-03.jpg',
   'images/C01/L1-main-04.jpg', 'images/C01/L1-main-05.jpg', 'images/C01/L1-main-06.jpg',

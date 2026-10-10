@@ -418,7 +418,7 @@ const GAMES = {
   /* ---------- 超级巴士 ---------- */
   bus: {
     id: 'bus',
-    name: '超级巴士',
+    coming: true,    name: '超级巴士',
     enName: 'SUPER BUS',
     tagline: '规则意识 · 数量认知 · 数物对应',
     themeColor: '#0369a1',
@@ -451,7 +451,7 @@ const GAMES = {
   /* ---------- 疯狂的长颈鹿 ---------- */
   giraffe: {
     id: 'giraffe',
-    name: '疯狂的长颈鹿',
+    coming: true,    name: '疯狂的长颈鹿',
     enName: 'CRAZY GIRAFFE',
     tagline: '儿童加减法趣味入门桌面游戏',
     themeColor: '#8b5cf6',
@@ -484,7 +484,7 @@ const GAMES = {
   /* ---------- 格米的草莓派对 ---------- */
   strawberry: {
     id: 'strawberry',
-    name: '格米的草莓派对',
+    coming: true,    name: '格米的草莓派对',
     enName: 'GEMI STRAWBERRY PARTY',
     tagline: '数感对应 · 数量对应 · 数字分合',
     themeColor: '#dc2626',
@@ -517,7 +517,7 @@ const GAMES = {
   /* ---------- 格米的逻辑派对 ---------- */
   logic: {
     id: 'logic',
-    name: '格米的逻辑派对',
+    coming: true,    name: '格米的逻辑派对',
     enName: 'GERMI LOGIC PARTY',
     tagline: '5 款游戏 1 盒搞定，逻辑思维入门到进阶',
     themeColor: '#be185d',
@@ -551,7 +551,7 @@ const GAMES = {
   /* ---------- 格米赛车手 ---------- */
   racer: {
     id: 'racer',
-    name: '格米赛车手',
+    coming: true,    name: '格米赛车手',
     enName: 'GERMI THE RACER',
     tagline: '感知数量 · 情境实景 · 互动性强',
     themeColor: '#c026d3',
@@ -585,7 +585,7 @@ const GAMES = {
   /* ---------- 航天小先锋 ---------- */
   space: {
     id: 'space',
-    name: '航天小先锋',
+    coming: true,    name: '航天小先锋',
     enName: 'SPACE PIONEER',
     tagline: '亲子互动 · 形状认知 · 观察能力 · 动手能力',
     themeColor: '#4f46e5',
@@ -618,7 +618,7 @@ const GAMES = {
   /* ---------- 小鱼总动员 ---------- */
   nemo: {
     id: 'nemo',
-    name: '小鱼总动员',
+    coming: true,    name: '小鱼总动员',
     enName: 'FINDING NEMO',
     tagline: '小鱼游游游，数感反应一起练',
     themeColor: '#0891b2',
@@ -684,7 +684,7 @@ const GAMES = {
   /* ---------- 超市购物（框架页） ---------- */
   market: {
     id: 'market',
-    name: '超市购物',
+    coming: true,    name: '超市购物',
     enName: 'GROW UP WITH GEMI',
     tagline: '和格米一起逛超市 · 生活认知启蒙桌游',
     themeColor: '#d97706',
@@ -716,7 +716,7 @@ const GAMES = {
   /* ---------- 揭秘海洋馆（框架页） ---------- */
   ocean: {
     id: 'ocean',
-    name: '揭秘海洋馆',
+    coming: true,    name: '揭秘海洋馆',
     enName: 'GROW UP WITH GEMI',
     tagline: '和格米一起潜入海底 · 海洋认知启蒙桌游',
     themeColor: '#0284c7',
@@ -748,7 +748,7 @@ const GAMES = {
   /* ---------- 丰收果园（框架页） ---------- */
   farm: {
     id: 'farm',
-    name: '丰收果园',
+    coming: true,    name: '丰收果园',
     enName: 'GROW UP WITH GEMI',
     tagline: '和格米一起去丰收果园 · 果园采摘启蒙桌游',
     themeColor: '#65a30d',
@@ -780,7 +780,7 @@ const GAMES = {
   /* ---------- 智趣逻辑王国（框架页） ---------- */
   kingdom: {
     id: 'kingdom',
-    name: '智趣逻辑王国',
+    coming: true,    name: '智趣逻辑王国',
     enName: 'Smart Yaoer',
     tagline: '益智卢梭 · 我说量维「数」「形」二合一',
     themeColor: '#2563eb',
