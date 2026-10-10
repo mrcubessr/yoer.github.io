@@ -102,14 +102,14 @@
 
 <div class="tools-hero">
   <h1>L1 教具图鉴 &amp; 课程材料明细</h1>
-  <p>17 件核心教具 · 32 个课程主题 · 每个游戏对应材料一目了然</p>
+  <p>18 件核心教具 · 32 个课程主题 · 每个游戏对应材料一目了然</p>
 </div>
 
 <a href="detail.html?id=C01" class="back-link">← 返回 L1 详情页</a>
 
 <!-- ===== 教具图鉴 ===== -->
 <div class="tools-section">
-  <h2>教具图鉴（17 件）</h2>
+  <h2>教具图鉴（18 件）</h2>
   <div class="tool-grid" id="toolGrid"></div>
 </div>
 
@@ -124,23 +124,24 @@
 <script>
 /* ===== 教具数据（从 xlsx 教学工具 sheet 提取） ===== */
 const TOOLS = [
-  { games: '糖果铺子、房子游戏板', aka: '糖果铺子正反面棋子一张、房子游戏板', name: '糖果铺子游戏板', img: 'images/C01/tools/糖果铺子游戏板.jpg' },
-  { games: '像素积木块、颜色积木、积木', aka: '积木块（颜色/形状）一套、颜色积木、积木', name: '像素积木块', img: 'images/C01/tools/像素积木块.jpg' },
-  { games: '十格阵游戏', aka: '磁扣/磁贴（红蓝）一套、磁扣', name: '磁力红蓝棋子', img: 'images/C01/tools/磁力红蓝棋子.jpg' },
+  { games: '糖果铺子、房子游戏板', aka: '糖果铺子正反面棋子一张、房子游戏板', name: '糖果铺子游戏板', img: 'images/C01/tools-hd/糖果铺子游戏板.jpg' },
+  { games: '像素积木块、颜色积木、积木', aka: '积木块（颜色/形状）一套、颜色积木、积木', name: '像素积木块', img: 'images/C01/tools-hd/堆高楼积木.jpg' },
+  { games: '十格阵游戏', aka: '磁扣/磁贴（红蓝）一套、磁扣', name: '磁力红蓝棋子', img: 'images/C01/tools-hd/磁力红蓝棋子.jpg' },
   { games: '磁扣/磁贴（卡通）', aka: '动物磁贴、卡通磁贴', name: '磁力实物棋子', img: 'images/C01/tools/磁力实物棋子.jpg' },
-  { games: '磁力白板', aka: '磁力白板一个、游戏板', name: '磁力白板', img: 'images/C01/tools/磁力白板.jpg' },
-  { games: '数字贴', aka: '数字贴（1-10）磁力数字贴一套、数字卡', name: '磁力数字贴', img: 'images/C01/tools/磁力数字贴.jpg' },
-  { games: '十格阵', aka: '十格阵磁力贴一套（两个）', name: '十格阵磁力贴', img: 'images/C01/tools/十格阵磁力贴.jpg' },
+  { games: '磁力白板、十格阵', aka: '磁力白板一个、十格阵磁力贴', name: '磁力白板', img: 'images/C01/tools-hd/白板与十格阵.jpg' },
+  { games: '数字贴', aka: '数字贴（1-10）磁力数字贴一套、数字卡', name: '磁力数字贴', img: 'images/C01/tools-hd/磁力数字贴.jpg' },
+  { games: '十格阵', aka: '十格阵磁力贴一套（两个）', name: '十格阵磁力贴', img: 'images/C01/tools-hd/白板与十格阵.jpg' },
   { games: '格米扑克牌、格米扑克', aka: '格米扑克牌一副', name: '格米扑克牌', img: 'images/C01/tools/格米扑克牌.jpg' },
-  { games: '城市飞行棋、城市飞行棋学具', aka: '城市飞行棋棋盘一个、城市飞行棋学具', name: '城市飞行棋棋盘', img: 'images/C01/tools/城市飞行棋棋盘.jpg' },
-  { games: '城市飞行棋', aka: '四种颜色汽车棋子四个', name: '汽车棋子', img: 'images/C01/tools/汽车棋子.jpg' },
-  { games: '城市飞行棋', aka: '飞行棋骰子一套（红黄绿骰子一个，数字骰子一个）', name: '飞行棋骰子', img: 'images/C01/tools/飞行棋骰子.jpg' },
-  { games: '形色碰碰、形状游戏板', aka: '形色碰碰棋盘四张', name: '形色碰碰棋盘', img: 'images/C01/tools/形色碰碰棋盘.jpg' },
-  { games: '形色碰碰', aka: '红黄蓝骰子一个、形状骰子一个（大骰子、小骰子）', name: '红黄蓝骰子', img: 'images/C01/tools/红黄蓝骰子.jpg' },
+  { games: '城市飞行棋、城市飞行棋学具', aka: '城市飞行棋棋盘一个、城市飞行棋学具', name: '城市飞行棋棋盘', img: 'images/C01/tools-hd/城市飞行棋套.jpg' },
+  { games: '城市飞行棋', aka: '四种颜色汽车棋子四个', name: '汽车棋子', img: 'images/C01/tools-hd/城市飞行棋套.jpg' },
+  { games: '城市飞行棋', aka: '飞行棋骰子一套（红黄绿骰子一个，数字骰子一个）', name: '飞行棋骰子', img: 'images/C01/tools-hd/骰子组.jpg' },
+  { games: '形色碰碰、形状游戏板', aka: '形色碰碰棋盘四张', name: '形色碰碰棋盘', img: 'images/C01/tools-hd/形色碰碰棋盘.jpg' },
+  { games: '形色碰碰', aka: '红黄蓝骰子一个、形状骰子一个（大骰子、小骰子）', name: '红黄蓝骰子', img: 'images/C01/tools-hd/骰子组.jpg' },
   { games: '疯狂大请客', aka: '疯狂大请客一套', name: '疯狂大请客卡牌', img: 'images/C01/tools/疯狂大请客卡牌.jpg' },
-  { games: '小鱼总动员', aka: '小鱼总动员卡牌一套、小鱼卡', name: '小鱼总动员卡牌', img: 'images/C01/tools/小鱼总动员卡牌.jpg' },
+  { games: '小鱼总动员、抢答', aka: '小鱼总动员卡牌一套、拍铃', name: '小鱼总动员卡牌', img: 'images/C01/tools-hd/小鱼卡牌与拍铃.jpg' },
   { games: '小鱼总动员', aka: '小鱼总动员棋子一套', name: '小鱼总动员棋子', img: 'images/C01/tools/小鱼总动员棋子.jpg' },
-  { games: '抢答铃', aka: '抢答铃一个', name: '抢答铃', img: 'images/C01/tools/抢答铃.jpg' }
+  { games: '抢答铃', aka: '抢答铃一个', name: '抢答铃', img: 'images/C01/tools-hd/小鱼卡牌与拍铃.jpg' },
+  { games: '空间几何、形状分类、搭积木', aka: '几何形状积木一套（圆/方/三角）', name: '形状积木块', img: 'images/C01/tools-hd/形状积木块.jpg' }
 ];
 
 /* ===== 课程主题数据（从 xlsx 主题列表 sheet 提取） ===== */

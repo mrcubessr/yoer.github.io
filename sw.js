@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v43';
+const VERSION = 'yoer-shop-v44';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -26,16 +26,14 @@ const PRECACHE = [
   'images/C01/L1-main-01.jpg', 'images/C01/L1-main-02.jpg', 'images/C01/L1-main-03.jpg',
   'images/C01/L1-main-04.jpg', 'images/C01/L1-main-05.jpg', 'images/C01/L1-main-06.jpg',
   'images/C01/L1-main-07.jpg',
-  // L1 教具图鉴
-  'images/C01/tools/糖果铺子游戏板.jpg', 'images/C01/tools/像素积木块.jpg',
-  'images/C01/tools/磁力红蓝棋子.jpg', 'images/C01/tools/磁力实物棋子.jpg',
-  'images/C01/tools/磁力白板.jpg', 'images/C01/tools/磁力数字贴.jpg',
-  'images/C01/tools/十格阵磁力贴.jpg', 'images/C01/tools/格米扑克牌.jpg',
-  'images/C01/tools/城市飞行棋棋盘.jpg', 'images/C01/tools/汽车棋子.jpg',
-  'images/C01/tools/飞行棋骰子.jpg', 'images/C01/tools/形色碰碰棋盘.jpg',
-  'images/C01/tools/红黄蓝骰子.jpg', 'images/C01/tools/疯狂大请客卡牌.jpg',
-  'images/C01/tools/小鱼总动员卡牌.jpg', 'images/C01/tools/小鱼总动员棋子.jpg',
-  'images/C01/tools/抢答铃.jpg',
+  // L1 教具图鉴（v44：13 张换成 HD 渲染图 + 新增形状积木块；4 张沿用原图）
+  'images/C01/tools/磁力实物棋子.jpg', 'images/C01/tools/格米扑克牌.jpg',
+  'images/C01/tools/疯狂大请客卡牌.jpg', 'images/C01/tools/小鱼总动员棋子.jpg',
+  'images/C01/tools-hd/糖果铺子游戏板.jpg', 'images/C01/tools-hd/堆高楼积木.jpg',
+  'images/C01/tools-hd/磁力红蓝棋子.jpg', 'images/C01/tools-hd/白板与十格阵.jpg',
+  'images/C01/tools-hd/磁力数字贴.jpg', 'images/C01/tools-hd/城市飞行棋套.jpg',
+  'images/C01/tools-hd/骰子组.jpg', 'images/C01/tools-hd/形色碰碰棋盘.jpg',
+  'images/C01/tools-hd/小鱼卡牌与拍铃.jpg', 'images/C01/tools-hd/形状积木块.jpg',
   // L2
   'images/C02/L2-cover.jpg', 'images/C02/C02-main.jpg', 'images/C02/C02-products.jpg', 'images/C02/C02-course.jpg',
   'images/C02/L2-main-01.jpg', 'images/C02/C02-2.jpg', 'images/C02/C02-3.jpg',
