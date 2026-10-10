@@ -15,26 +15,7 @@
   <link rel="stylesheet" href="desktop.css" data-page-node-id="O5agEhXubYfzUEaBEIuwIc">
   <script src="app.js" defer=""></script>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style>
-<style>
-  /* 加微信浮窗与弹层（与游戏页同一套引流入口） */
-  .wx-float { position: fixed; right: 15px; bottom: 74px; z-index: 900; display: inline-flex; align-items: center; gap: 6px;
-    background: #07C160; color: #fff; font-weight: 800; font-size: 13.5px; padding: 11px 15px; border-radius: 999px;
-    box-shadow: 0 10px 24px -8px rgba(7,193,96,.7); border: none; cursor: pointer; }
-  .wx-float svg { width: 17px; height: 17px; }
-  .wx-float:hover { background: #06ad56; }
-  .wx-mask { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
-  .wx-mask.show { display: flex; }
-  .wx-pop { position: relative; width: min(340px, 92vw); background: #fff; border-radius: 20px; padding: 26px 22px 22px; text-align: center; box-shadow: 0 30px 70px -20px rgba(0,0,0,.5); }
-  .wx-pop h3 { font-size: 18px; font-weight: 900; color: #111; }
-  .wx-pop .sub { font-size: 13px; color: #666; margin-top: 6px; line-height: 1.6; }
-  .wx-pop .qr { width: 200px; height: 200px; margin: 16px auto 12px; border-radius: 14px; border: 1px solid #eee; object-fit: cover; }
-  .wx-pop .wxid-box { display: inline-flex; align-items: center; gap: 8px; background: #f4faf6; border: 1px dashed #07C160; color: #0a8a47; font-weight: 800; font-size: 16px; padding: 9px 14px; border-radius: 12px; }
-  .wx-pop .wx-copy { margin-top: 12px; width: 100%; border: none; background: #07C160; color: #fff; font-weight: 800; font-size: 15px; padding: 12px; border-radius: 12px; cursor: pointer; }
-  .wx-pop .wx-copy:active { background: #06ad56; }
-  .wx-pop .note { font-size: 12px; color: #999; margin-top: 10px; line-height: 1.6; }
-  .wx-pop .close { position: absolute; top: 12px; right: 14px; width: 30px; height: 30px; border: none; background: #f0f0f0; border-radius: 50%; font-size: 18px; color: #888; cursor: pointer; line-height: 1; }
-  @media (min-width: 1000px) { .wx-float { bottom: 26px; } }
-</style></head>
+</head>
 <body data-page-node-id="Vrn51f5DeyUNTCA3iCYRVb" style="position: relative;">
   <header class="topbar" data-page-node-id="KBWwqrVsmk0E9VdF5LMB38">
     <div class="topbar-inner" data-page-node-id="wqGa830fygDpvsMjtH6BQS">
@@ -294,7 +275,7 @@
         <li data-page-node-id="cUKivTaAvFuyV9HCJJgcGW">全年三阶系统课：基于儿童脑科学研发，每天 5-15 分钟</li>
         <li data-page-node-id="ShO2bRGBFcddhQ229gF8g2" style="">园所采购：联系客服，量大优惠​​</li>
       </ul>
-      <span class="go" id="buyGo" data-page-node-id="W0teoV6zb8jpA1giVQ9UZK">加客服微信 · 咨询选购</span>
+      <span class="go" id="buyGo" data-wx-open data-page-node-id="W0teoV6zb8jpA1giVQ9UZK">加客服微信 · 咨询选购</span>
     </div>
   </section>
 
@@ -304,24 +285,7 @@
     </div>
   </footer>
 
-  <!-- 加微信浮窗按钮 -->
-  <button class="wx-float" id="wxFloat" aria-label="加客服微信">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
-    加客服微信
-  </button>
-
-  <!-- 加微信弹层 -->
-  <div class="wx-mask" id="wxMask">
-    <div class="wx-pop">
-      <button class="close" id="wxClose" aria-label="关闭">×</button>
-      <h3>加客服微信</h3>
-      <p class="sub">长按或截图保存二维码，微信扫一扫添加<br>备注「孩子年龄 + 产品名」优先通过</p>
-      <img class="qr" id="wxQr" src="images/wechat-qr.png" alt="客服微信二维码">
-      <div class="wxid-box">微信号：<span id="wxId">yoer4001087</span></div>
-      <button class="wx-copy" id="wxCopy">复制微信号</button>
-      <p class="note">添加后客服会发您产品详情、玩法视频与最新优惠</p>
-    </div>
-  </div>
+  <!-- 加微信浮窗按钮与弹层由 app.js 全站统一注入 -->
 
   <script src="products.js"></script>
   <script src="games.js"></script>
@@ -430,27 +394,6 @@
     window.addEventListener('online', syncTip);
     window.addEventListener('offline', syncTip);
     syncTip();
-
-    // ===== 加微信（全站统一引流入口） =====
-    const WECHAT_ID = 'yoer4001087';
-    const WECHAT_QR = 'images/wechat-qr.png';
-    const wxIdEl = document.getElementById('wxId');
-    const wxQrEl = document.getElementById('wxQr');
-    if (wxIdEl) wxIdEl.textContent = WECHAT_ID;
-    if (wxQrEl) wxQrEl.src = WECHAT_QR;
-    function openWechat() { const m = document.getElementById('wxMask'); if (m) m.classList.add('show'); }
-    function closeWechat() { const m = document.getElementById('wxMask'); if (m) m.classList.remove('show'); }
-    const wxMaskEl = document.getElementById('wxMask');
-    if (wxMaskEl) {
-      wxMaskEl.addEventListener('click', e => { if (e.target.id === 'wxMask' || e.target.id === 'wxClose') closeWechat(); });
-      document.getElementById('wxCopy').addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText(WECHAT_ID); }
-        catch (_) { const t = document.createElement('textarea'); t.value = WECHAT_ID; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (e) {} t.remove(); }
-        const b = document.getElementById('wxCopy'); const o = b.textContent; b.textContent = '已复制 ✓'; setTimeout(() => { b.textContent = o; }, 1500);
-      });
-    }
-    const wf = document.getElementById('wxFloat'); if (wf) wf.addEventListener('click', openWechat);
-    const buyGo = document.getElementById('buyGo'); if (buyGo) buyGo.addEventListener('click', openWechat);
   </script>
 
 

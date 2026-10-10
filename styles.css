@@ -1044,3 +1044,128 @@ body:has(.install-fab) .back-top.show { bottom: calc(var(--nav-h) + env(safe-are
   .hero h1 { font-size: 24px; }
   .p-card .foot { margin-top: 14px; }
 }
+
+/* =========================================================
+   全站客服微信引流模块（app.js 统一注入，所有页面生效）
+   ========================================================= */
+:root { --wx-green: #07C160; --wx-green-d: #06ad56; }
+
+/* --- 悬浮入口按钮：比返回顶部更高、视觉更强 --- */
+.wx-float {
+  position: fixed; right: 14px; z-index: 88;
+  bottom: calc(var(--nav-h, 62px) + env(safe-area-inset-bottom, 0px) + 74px);
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--wx-green); color: #fff;
+  border: none; cursor: pointer;
+  padding: 12px 17px 12px 14px; border-radius: 999px;
+  font-size: 15px; font-weight: 800; letter-spacing: .3px;
+  box-shadow: 0 10px 26px -6px rgba(7, 193, 96, .55), 0 0 0 0 rgba(7, 193, 96, .55);
+  animation: wxPulse 2.4s ease-out infinite;
+  transition: transform .18s, background .18s;
+}
+.wx-float svg { width: 19px; height: 19px; flex: none; }
+.wx-float:active { transform: scale(.94); background: var(--wx-green-d); }
+/* 未读脉冲点，强化「有人等你」的感觉 */
+.wx-float::after {
+  content: ''; position: absolute; top: -3px; right: -3px;
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #ff4d4f; border: 2px solid #fff;
+}
+@keyframes wxPulse {
+  0%   { box-shadow: 0 10px 26px -6px rgba(7,193,96,.55), 0 0 0 0 rgba(7,193,96,.5); }
+  70%  { box-shadow: 0 10px 26px -6px rgba(7,193,96,.55), 0 0 0 16px rgba(7,193,96,0); }
+  100% { box-shadow: 0 10px 26px -6px rgba(7,193,96,.55), 0 0 0 0 rgba(7,193,96,0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wx-float { animation: none; }
+}
+
+/* 桌面端：右下角悬浮，避让返回顶部 */
+@media (min-width: 900px) {
+  .wx-float { right: 26px; bottom: 84px; padding: 14px 22px 14px 18px; font-size: 16px; }
+}
+/* 返回顶部出现时，微信按钮上移错开 */
+body:has(.back-top.show) .wx-float {
+  bottom: calc(var(--nav-h, 62px) + env(safe-area-inset-bottom, 0px) + 128px);
+}
+@media (min-width: 900px) {
+  body:has(.back-top.show) .wx-float { bottom: 138px; }
+}
+
+/* --- 二维码弹层 --- */
+.wx-mask {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0, 0, 0, .58);
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.wx-mask.show { display: flex; }
+.wx-pop {
+  position: relative; width: min(348px, 92vw);
+  background: #fff; border-radius: 22px;
+  padding: 28px 24px 24px; text-align: center;
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .5);
+  animation: wxPop .26s cubic-bezier(.2, .9, .3, 1.2);
+  max-height: 90vh; overflow: auto;
+}
+@keyframes wxPop { from { transform: translateY(14px) scale(.96); opacity: 0; } }
+.wx-pop h3 { font-size: 19px; font-weight: 900; color: #111; margin: 0; }
+.wx-pop .sub { font-size: 13px; color: #666; margin-top: 7px; line-height: 1.65; }
+.wx-pop .qr {
+  width: 208px; height: 208px; margin: 16px auto 12px;
+  border-radius: 14px; border: 1px solid #eee; object-fit: cover; display: block;
+}
+.wx-pop .wxid-box {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #f4faf6; border: 1px dashed var(--wx-green);
+  color: #0a8a47; font-weight: 800; font-size: 16px;
+  padding: 9px 14px; border-radius: 12px;
+}
+.wx-pop .wx-copy {
+  margin-top: 13px; width: 100%; border: none;
+  background: var(--wx-green); color: #fff;
+  font-weight: 800; font-size: 15px; padding: 13px;
+  border-radius: 12px; cursor: pointer;
+}
+.wx-pop .wx-copy:active { background: var(--wx-green-d); }
+.wx-pop .note { font-size: 12px; color: #999; margin-top: 11px; line-height: 1.6; }
+.wx-pop .close {
+  position: absolute; top: 12px; right: 14px;
+  width: 30px; height: 30px; border: none;
+  background: #f0f0f0; border-radius: 50%;
+  font-size: 18px; color: #888; cursor: pointer; line-height: 1;
+}
+
+/* --- 导航栏「咨询选购」改为微信绿，直观表达去向 --- */
+a.nav-cta-wx {
+  background: var(--wx-green) !important;
+  color: #fff !important;
+  border-color: var(--wx-green) !important;
+}
+a.nav-cta-wx:hover { background: var(--wx-green-d) !important; }
+
+/* --- 移动端底部吸底咨询条：任何页面滚动到底都能立刻加微信 --- */
+.wx-bar {
+  position: fixed; left: 0; right: 0; z-index: 89;
+  bottom: calc(var(--nav-h, 62px) + env(safe-area-inset-bottom, 0px));
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px;
+  background: rgba(255, 255, 255, .97);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+  transform: translateY(110%);
+  transition: transform .3s cubic-bezier(.2, .9, .3, 1);
+}
+.wx-bar.show { transform: none; }
+.wx-bar .wx-bar-txt { flex: 1; min-width: 0; line-height: 1.3; }
+.wx-bar .wx-bar-txt b { display: block; font-size: 13.5px; color: var(--ink, #1f2937); }
+.wx-bar .wx-bar-txt span { font-size: 11.5px; color: var(--muted-2, #9aa0a6); }
+.wx-bar button {
+  flex: none; border: none; cursor: pointer;
+  background: var(--wx-green); color: #fff;
+  font-size: 14px; font-weight: 800;
+  padding: 11px 18px; border-radius: 999px;
+  box-shadow: 0 6px 16px -6px rgba(7, 193, 96, .6);
+}
+.wx-bar button:active { background: var(--wx-green-d); }
+@media (min-width: 900px) { .wx-bar { display: none; } }

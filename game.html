@@ -164,18 +164,6 @@
     .buybar .cta.wechat { background: #07C160; box-shadow: 0 6px 16px -6px rgba(7,193,96,.6); }
     .buybar .cta.wechat:hover { background: #06ad56; }
 
-    .wx-mask { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
-    .wx-mask.show { display: flex; }
-    .wx-pop { position: relative; width: min(340px, 92vw); background: #fff; border-radius: 20px; padding: 26px 22px 22px; text-align: center; box-shadow: 0 30px 70px -20px rgba(0,0,0,.5); }
-    .wx-pop h3 { font-size: 18px; font-weight: 900; color: #111; }
-    .wx-pop .sub { font-size: 13px; color: #666; margin-top: 6px; line-height: 1.6; }
-    .wx-pop .qr { width: 200px; height: 200px; margin: 16px auto 12px; border-radius: 14px; border: 1px solid #eee; object-fit: cover; }
-    .wx-pop .wxid-box { display: inline-flex; align-items: center; gap: 8px; background: #f4faf6; border: 1px dashed #07C160; color: #0a8a47; font-weight: 800; font-size: 16px; padding: 9px 14px; border-radius: 12px; }
-    .wx-pop .wx-copy { margin-top: 12px; width: 100%; border: none; background: #07C160; color: #fff; font-weight: 800; font-size: 15px; padding: 12px; border-radius: 12px; cursor: pointer; }
-    .wx-pop .wx-copy:active { background: #06ad56; }
-    .wx-pop .note { font-size: 12px; color: #999; margin-top: 10px; line-height: 1.6; }
-    .wx-pop .close { position: absolute; top: 12px; right: 14px; width: 30px; height: 30px; border: none; background: #f0f0f0; border-radius: 50%; font-size: 18px; color: #888; cursor: pointer; line-height: 1; }
-
     /* ===== 即将上架占位页（coming） ===== */
     .coming-page { max-width: 720px; margin: 0 auto; padding: 18px 16px 8px; }
     .coming-hero { position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(160deg, var(--brand), var(--brand-light)); padding: 26px 22px; color: #fff; text-align: center; }
@@ -217,23 +205,12 @@
         <div class="price" id="buybarPrice"></div>
         <em id="buybarNote"></em>
       </div>
-      <button class="cta wechat" id="buyBtn">加客服微信</button>
+      <button class="cta wechat" id="buyBtn" data-wx-open>加客服微信</button>
     </div>
   </div>
   <div class="toast" id="toast"></div>
 
-  <!-- 加微信弹层 -->
-  <div class="wx-mask" id="wxMask">
-    <div class="wx-pop">
-      <button class="close" id="wxClose" aria-label="关闭">×</button>
-      <h3>加客服微信</h3>
-      <p class="sub">长按或截图保存二维码，微信扫一扫添加<br>备注「孩子年龄 + 产品名」优先通过</p>
-      <img class="qr" id="wxQr" src="images/wechat-qr.png" alt="客服微信二维码">
-      <div class="wxid-box">微信号：<span id="wxId">yoer4001087</span></div>
-      <button class="wx-copy" id="wxCopy">复制微信号</button>
-      <p class="note">添加后客服会发您产品详情、玩法视频与最新优惠</p>
-    </div>
-  </div>
+  <!-- 加微信浮窗按钮与弹层由 app.js 全站统一注入 -->
 
   <script src="games.js"></script>
   <script>
@@ -251,25 +228,6 @@
 
     document.title = g.name + ' · 优尔经典桌游';
     document.getElementById('dTitle').textContent = g.name;
-
-    // ===== 加微信配置（替换真实二维码 / 微信号时只改这里） =====
-    const WECHAT_ID = 'yoer4001087';
-    const WECHAT_QR = 'images/wechat-qr.png';
-    const wxIdEl = document.getElementById('wxId');
-    const wxQrEl = document.getElementById('wxQr');
-    if (wxIdEl) wxIdEl.textContent = WECHAT_ID;
-    if (wxQrEl) wxQrEl.src = WECHAT_QR;
-    function openWechat() { const m = document.getElementById('wxMask'); if (m) m.classList.add('show'); }
-    function closeWechat() { const m = document.getElementById('wxMask'); if (m) m.classList.remove('show'); }
-    const wxMaskEl = document.getElementById('wxMask');
-    if (wxMaskEl) {
-      wxMaskEl.addEventListener('click', e => { if (e.target.id === 'wxMask' || e.target.id === 'wxClose') closeWechat(); });
-      document.getElementById('wxCopy').addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText(WECHAT_ID); }
-        catch (_) { const t = document.createElement('textarea'); t.value = WECHAT_ID; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (e) {} t.remove(); }
-        const b = document.getElementById('wxCopy'); const o = b.textContent; b.textContent = '已复制 ✓'; setTimeout(() => { b.textContent = o; }, 1500);
-      });
-    }
 
     // 有 visual 数据的产品走「视觉化重排」皮肤
     document.getElementById('detailRoot').classList.toggle('pv-page', !!g.visual);
@@ -290,7 +248,7 @@
         <div class="coming-card">
           <h2>本产品已规划完成，正在筹备上架</h2>
           <p>详细的玩法介绍、教具清单与购买信息正在制作中。<br>想第一时间收到上架提醒、先看实物预览？<br>加客服微信，备注「${g.name}」即可优先获取。</p>
-          <button class="cta-wechat" id="comingWechat">加客服微信 · 上架提醒</button>
+          <button class="cta-wechat" id="comingWechat" data-wx-open>加客服微信 · 上架提醒</button>
         </div>
         <div class="coming-games">
           <h3>看看其他已上架的游戏</h3>
@@ -698,9 +656,7 @@
     document.getElementById('buybarNote').textContent = g.coming ? '上架后第一时间在微信通知您' : (g.priceNote || '');
 
     // 加微信按钮（全站统一：购买栏 + 占位页内 CTA）
-    document.getElementById('buyBtn').addEventListener('click', openWechat);
-    const comingWechatBtn = document.getElementById('comingWechat');
-    if (comingWechatBtn) comingWechatBtn.addEventListener('click', openWechat);
+    // 加微信按钮已由 app.js 通过 data-wx-open 自动接管
 
     document.getElementById('backBtn').addEventListener('click', () => {
       if (document.referrer && document.referrer.includes(location.host)) history.back();
