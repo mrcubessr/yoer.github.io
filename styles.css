@@ -712,8 +712,8 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
 .course-box p { font-size: 13px; }
 .contents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .contents-grid span {  font-size: 12.5px; background: #f9fafb; border: 1px solid var(--line);
-  border-radius: 9px; padding: 7px 10px; text-align: center; color: #374151;
-}
+  border-radius: 9px; padding: 7px 10px; text-align: left; color: #374151;
+  display: flex; align-items: center; line-height: 1.5; }
 .long-img img { width: 100%; aspect-ratio: 3 / 2; object-fit: contain; background: #f7f7f8; border-radius: 10px; }
 .switch-row { display: flex; gap: 8px; }
 .switch-row a {
@@ -1169,3 +1169,25 @@ a.nav-cta-wx:hover { background: var(--wx-green-d) !important; }
 }
 .wx-bar button:active { background: var(--wx-green-d); }
 @media (min-width: 900px) { .wx-bar { display: none; } }
+
+/* =========================================================
+   布局健壮性：防止任何超长文案撑破页面
+   （2026-10-10 全站体检后加固）
+   ========================================================= */
+/* 中文/英文/数字混排的长串（含全角符号、型号、URL）允许在任意位置断行 */
+body {
+  overflow-wrap: break-word;
+  word-break: normal;
+  line-break: strict;
+}
+/* 不允许 flex/grid 子项把容器撑宽——这是横向溢出最常见的根因 */
+.d-sec, .contents-grid > *, .game-switch > *, .cols2 > *,
+.p-card, .tool-card, .syl-sec, .meta > * {
+  min-width: 0;
+}
+/* 长串（微信号、型号、英文词）兜底 */
+.wxid-box, .contents-grid span, .game-switch a span {
+  overflow-wrap: anywhere;
+}
+/* 二维码弹层在小屏也不溢出 */
+.wx-pop { max-width: calc(100vw - 32px); }
