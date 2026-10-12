@@ -1,6 +1,6 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v45';
+const VERSION = 'yoer-shop-v46';
 const PRECACHE = [
   'index.html',
   'detail.html',
@@ -103,7 +103,7 @@ const PRECACHE = [
   'images/games/feast/feast-card.jpg', 'images/games/grid/grid-card.jpg',
   'images/games/m24/m24-card.jpg', 'images/games/m24/m24-01.jpg', 'images/games/m24/m24-02.jpg',
   // 24算旗舰版（打包版）素材
-  'images/games/m24/flagship/flagship-card.jpg', 'images/games/m24/flagship/flagship-books.jpg',
+  'images/games/m24/flagship/flagship-main.jpg', 'images/games/m24/flagship/flagship-card.jpg', 'images/games/m24/flagship/flagship-books.jpg',
   'images/games/m24/flagship/flagship-book1.jpg', 'images/games/m24/flagship/flagship-book2.jpg',
   'images/games/m24/flagship/flagship-book1-back.jpg', 'images/games/m24/flagship/flagship-book2-back.jpg',
   'images/games/market/market-01.png', 'images/games/ocean/ocean-01.png',

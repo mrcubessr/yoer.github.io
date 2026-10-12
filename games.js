@@ -762,6 +762,7 @@ const GAMES = {
     ],
     contentsNote: '配置以产品包装实物为准；训练小程序需联网使用，具体权益以开通页面说明为准。',
     gallery: [
+      'images/games/m24/flagship/flagship-main.jpg',
       'images/games/m24/flagship/flagship-books.jpg',
       'images/games/m24/flagship/flagship-book1.jpg',
       'images/games/m24/flagship/flagship-book2.jpg',
