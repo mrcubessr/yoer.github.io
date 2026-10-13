@@ -1112,8 +1112,9 @@ body:has(.back-top.show) .wx-float {
 .wx-pop h3 { font-size: 19px; font-weight: 900; color: #111; margin: 0; }
 .wx-pop .sub { font-size: 13px; color: #666; margin-top: 7px; line-height: 1.65; }
 .wx-pop .qr {
-  width: 208px; height: 208px; margin: 16px auto 12px;
-  border-radius: 14px; border: 1px solid #eee; object-fit: cover; display: block;
+  width: min(280px, 100%); aspect-ratio: 1 / 1; height: auto; margin: 16px auto 12px;
+  padding: 9px; box-sizing: border-box; background: #fff;
+  border-radius: 14px; border: 1px solid #eee; object-fit: contain; display: block;
 }
 .wx-pop .wxid-box {
   display: inline-flex; align-items: center; gap: 8px;
