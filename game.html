@@ -60,6 +60,9 @@
     /* ===== 格米的数学派对 · 视觉化重排（pv-*，仅 .pv-page 生效） ===== */
     .pv-page { --pv-g1:#0e6b48; --pv-g2:#083b28; --pv-deep:#062e1f; --pv-cream:#f8f3e5;
       --pv-coral:#e8552f; --pv-gold:#f2c14e; --pv-ink:#12362a; }
+    /* 金色皮肤：24算系列（m24 / m24pro）复用同一套视觉骨架，仅换配色 */
+    .pv-gold { --pv-g1:#b45309; --pv-g2:#7c3f06; --pv-deep:#5a2d04; --pv-cream:#fdf6e9;
+      --pv-coral:#e8590c; --pv-gold:#f2b10b; --pv-ink:#3d2a08; }
     .pv-page .d-gallery { background: var(--pv-deep); }
     .pv-page .d-gallery .slides img { aspect-ratio: 4 / 3; object-fit: cover; background: var(--pv-deep); }
     .pv-page .d-intro .tagline { color: var(--pv-coral); }
@@ -152,12 +155,27 @@
     .pv-kitimg { width: 100%; display: block; border-radius: 14px; margin-top: 15px;
       border: 1px solid rgba(255,255,255,.16); }
 
+    /* 学员荣誉 */
+    .pv-awards .pv-pd { margin-bottom: 14px; }
+    .pv-award-grid { display: grid; gap: 12px; margin-top: 4px; }
+    .pv-award { background: #fffdf7; border: 1px solid #e8e1cb; border-radius: 13px; padding: 14px 15px;
+      position: relative; overflow: hidden; }
+    .pv-award::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+      background: linear-gradient(var(--pv-coral), var(--pv-gold)); }
+    .pv-achip { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .3px;
+      color: var(--pv-deep); background: var(--pv-gold); padding: 2px 9px; border-radius: 999px; }
+    .pv-award b { display: block; font-size: 15.5px; font-weight: 800; color: var(--pv-ink); margin: 7px 0 4px; }
+    .pv-ah { font-size: 12.8px; color: #9a6a12; font-weight: 700; margin: 0 0 4px; }
+    .pv-award p { font-size: 12.6px; color: #5a4a2e; line-height: 1.7; margin: 4px 0 0; }
+
     @media (min-width: 700px) {
       .pv-band, .pv-cream { padding: 32px 30px; }
       .pv-h, .pv-h2 { font-size: 24px; }
       .pv-sub { font-size: 14px; }
       .pv-mode-grid, .pv-tool-grid, .pv-mech { grid-template-columns: 1fr 1fr; }
       .pv-mech .pv-mech-item:last-child { grid-column: 1 / -1; }
+      .pv-award-grid { grid-template-columns: 1fr 1fr; }
+      .pv-award:last-child { grid-column: 1 / -1; }
     }
 
     /* ===== 加微信 CTA（全站统一引流，平台不直接成交） ===== */
@@ -231,6 +249,7 @@
 
     // 有 visual 数据的产品走「视觉化重排」皮肤
     document.getElementById('detailRoot').classList.toggle('pv-page', !!g.visual);
+    if (g.visual && g.visual.gold) document.getElementById('detailRoot').classList.add('pv-gold');
 
     const slides = g.gallery;
 
@@ -303,9 +322,9 @@
 
         <!-- ③ 双游戏模式 -->
         <section class="pv-band">
-          <div class="pv-script">Two in One</div>
+          <div class="pv-script">${g.visual.modeKicker || 'Two in One'}</div>
           <h2 class="pv-h">双游戏模式 · 乐趣加倍</h2>
-          <p class="pv-sub">内含"宝石矿工"和"出7不易"两种玩法，体验丰富不单调，极大提升游戏的重复可玩性</p>
+          <p class="pv-sub">${g.visual.modesDesc || '内含"宝石矿工"和"出7不易"两种玩法，体验丰富不单调，极大提升游戏的重复可玩性'}</p>
           <div class="pv-mode-grid">
             ${g.visual.modes.map(m => `
               <figure class="pv-mode">
@@ -317,7 +336,7 @@
 
         <!-- ④ 派对主题 -->
         <section class="pv-cream">
-          <div class="pv-script2">Party</div>
+          <div class="pv-script2">${g.visual.themeKicker || 'Party'}</div>
           <h2 class="pv-h2">${g.visual.partyTitle}</h2>
           <p class="pv-pd">${g.visual.partyDesc}</p>
           <img class="pv-partyimg" src="${g.visual.partyImg}" alt="派对主题插画" loading="lazy">
@@ -352,6 +371,21 @@
         <section class="pv-band">
           <h2 class="pv-h">${g.visual.kitTitle}</h2>
           <img class="pv-kitimg" src="${g.visual.kitImg}" alt="盒内配置全家福" loading="lazy">
+        </section>
+
+        <!-- ⑧ 学员荣誉（按真实项目如实标注，不混用学科） -->
+        <section class="pv-cream pv-awards">
+          <h2 class="pv-h2">优尔学员的硬核战绩 · 玩出来的实力</h2>
+          <p class="pv-pd">24 算、数独、魔方、升学——优尔教育体系的孩子们把"玩"变成了真本事（荣誉均按真实项目如实标注）。</p>
+          <div class="pv-award-grid">
+            ${g.visual.awards.map(a => `
+              <div class="pv-award">
+                <span class="pv-achip">${a.tag}</span>
+                <b>${a.name}</b>
+                <p class="pv-ah">${a.honor}</p>
+                <p>${a.d}</p>
+              </div>`).join('')}
+          </div>
         </section>
 
         <div class="d-sec full-span">
