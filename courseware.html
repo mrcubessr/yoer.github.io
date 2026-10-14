@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>配套课件教案 · 幼儿园版套装开箱即教 — 优尔数学思维启蒙盒</title>
+<meta name="description" content="优尔 L1/L2/L3 幼儿园版套装配套课件与教案：每课一套 Word 教案 + PPT 课件 + 学具清单，127 个主题、345 课时、159 份教案文档，附《城市飞行棋》完整示例课在线阅读。">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="theme-color" content="#ea580c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="优尔启蒙">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="desktop.css">
+<style>
+/* ===== 课件教案展示页专用样式 ===== */
+.cw-l1 { --lv: #ea580c; --lv-soft: #fff7ed; --lv-line: #fed7aa; }
+.cw-l2 { --lv: #16a34a; --lv-soft: #f0fdf4; --lv-line: #bbf7d0; }
+.cw-l3 { --lv: #dc2626; --lv-soft: #fef2f2; --lv-line: #fecaca; }
+
+.cw-wrap { max-width: 520px; margin: 0 auto; padding: 0 16px; }
+
+/* Hero */
+.cw-hero {
+  background: linear-gradient(160deg, #fff7ed 0%, #ffe4c7 100%);
+  padding: 30px 0 26px; text-align: center;
+}
+.cw-hero h1 { font-size: 25px; color: var(--ink); line-height: 1.4; }
+.cw-hero .sub { font-size: 13px; color: var(--ink-2); margin-top: 8px; line-height: 1.7; }
+.cw-hero .nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+.cw-hero .nums div {
+  background: #fff; border: 1px solid var(--lv-line); border-radius: 12px; padding: 10px 4px;
+}
+.cw-hero .nums b { display: block; font-size: 21px; color: var(--brand); line-height: 1.3; }
+.cw-hero .nums span { font-size: 11px; color: var(--ink-2); }
+
+/* 通用区块 */
+.cw-sec { margin-top: 22px; }
+.cw-sec > h2 {
+  font-size: 19px; color: var(--ink); margin-bottom: 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cw-sec > h2::before {
+  content: ""; width: 4px; height: 17px; border-radius: 2px;
+  background: linear-gradient(var(--brand-light), var(--brand));
+}
+.cw-sec > .tip { font-size: 12.5px; color: var(--ink-2); margin-bottom: 12px; }
+
+/* 三阶体系卡 */
+.cw-lv-grid { display: grid; gap: 12px; }
+.cw-lv-card {
+  display: block; background: #fff; border: 1px solid var(--lv-line);
+  border-radius: 16px; padding: 16px; box-shadow: var(--shadow);
+  transition: transform .18s, box-shadow .18s;
+}
+.cw-lv-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.cw-lv-card .hd { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.cw-lv-card .lv-tag {
+  flex: none; font-weight: 800; font-size: 13px; color: #fff;
+  background: var(--lv); padding: 4px 12px; border-radius: 999px;
+}
+.cw-lv-card .hd b { font-size: 16px; color: var(--ink); }
+.cw-lv-card .age { font-size: 12px; color: var(--ink-2); }
+.cw-lv-card .desc { font-size: 12.5px; color: #4b5563; line-height: 1.7; }
+.cw-lv-card .stat-row { display: flex; gap: 16px; margin-top: 10px; }
+.cw-lv-card .stat-row div { font-size: 11px; color: var(--ink-2); }
+.cw-lv-card .stat-row b { display: block; font-size: 16px; color: var(--lv); }
+
+/* 交付形态说明 */
+.cw-deliver { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cw-dv-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px;
+}
+.cw-dv-card .ico { font-size: 22px; }
+.cw-dv-card b { display: block; font-size: 14px; color: var(--ink); margin: 6px 0 4px; }
+.cw-dv-card p { font-size: 12px; color: var(--ink-2); line-height: 1.65; }
+
+/* 示例课区 */
+.cw-demo {
+  background: #fff; border: 1px solid var(--line); border-radius: 18px;
+  padding: 16px; box-shadow: var(--shadow);
+}
+.cw-demo-hd { display: flex; align-items: flex-start; gap: 10px; }
+.cw-demo-hd .badge {
+  flex: none; font-size: 11px; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, var(--brand-light), var(--brand));
+  padding: 4px 10px; border-radius: 999px; margin-top: 2px;
+}
+.cw-demo-hd b { font-size: 17px; color: var(--ink); display: block; }
+.cw-demo-hd .meta { font-size: 12px; color: var(--ink-2); margin-top: 3px; }
+
+/* 课时切换 */
+.cw-lesson-tabs {
+  display: flex; gap: 8px; margin-top: 14px; overflow-x: auto;
+  padding-bottom: 4px; scrollbar-width: none;
+}
+.cw-lesson-tabs::-webkit-scrollbar { display: none; }
+.cw-ltab {
+  flex: none; text-align: left; min-width: 104px;
+  background: #f9fafb; border: 1.5px solid var(--line); border-radius: 12px;
+  padding: 9px 12px; cursor: pointer; transition: all .15s;
+}
+.cw-ltab b { display: block; font-size: 13px; color: var(--ink); }
+.cw-ltab span { display: block; font-size: 11px; color: var(--ink-2); margin-top: 2px; }
+.cw-ltab.on { border-color: var(--brand); background: #fff7ed; }
+.cw-ltab.on b { color: var(--brand); }
+
+/* 视图 Tab */
+.cw-view-tabs { display: flex; gap: 8px; margin-top: 14px; }
+.cw-vtab {
+  flex: 1; text-align: center; padding: 10px 8px; border-radius: 12px;
+  background: #f9fafb; border: 1.5px solid var(--line); cursor: pointer;
+  font-size: 13.5px; font-weight: 700; color: var(--ink-2); transition: all .15s;
+}
+.cw-vtab.on { border-color: var(--brand); background: #fff7ed; color: var(--brand); }
+.cw-vtab small { display: block; font-size: 10.5px; font-weight: 500; margin-top: 2px; opacity: .8; }
+
+/* 教案阅读器 */
+.cw-plan { margin-top: 14px; }
+.cw-struct {
+  display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;
+  scrollbar-width: none; margin-bottom: 10px;
+}
+.cw-struct::-webkit-scrollbar { display: none; }
+.cw-stab {
+  flex: none; font-size: 11.5px; font-weight: 700; padding: 6px 12px;
+  background: #fff; border: 1px solid var(--line); border-radius: 999px;
+  color: var(--ink-2); cursor: pointer; transition: all .15s;
+}
+.cw-stab.on { background: var(--brand); border-color: var(--brand); color: #fff; }
+.cw-stage { position: relative; background: #f3f4f6; border-radius: 12px; overflow: hidden; }
+.cw-stage img { width: 100%; display: block; }
+.cw-pageview {
+  position: absolute; right: 10px; bottom: 10px; background: rgba(0,0,0,.55);
+  color: #fff; font-size: 11.5px; padding: 3px 11px; border-radius: 999px;
+}
+.cw-nav { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.cw-nav .pg { flex: 1; text-align: center; font-size: 12.5px; color: var(--ink-2); }
+.cw-nav .pg b { color: var(--ink); }
+.cw-arrow {
+  flex: none; width: 40px; height: 40px; border-radius: 12px;
+  background: #fff; border: 1px solid var(--line); color: var(--ink);
+  font-size: 18px; cursor: pointer; display: grid; place-items: center;
+  transition: all .15s;
+}
+.cw-arrow:hover { border-color: var(--brand); color: var(--brand); }
+.cw-arrow:disabled { opacity: .35; cursor: not-allowed; }
+.cw-thumbs {
+  display: flex; gap: 8px; overflow-x: auto; margin-top: 10px;
+  padding-bottom: 4px; scrollbar-width: none;
+}
+.cw-thumbs::-webkit-scrollbar { display: none; }
+.cw-thumb {
+  flex: none; width: 64px; border: 2px solid var(--line); border-radius: 8px;
+  overflow: hidden; cursor: pointer; background: #fff; padding: 0; position: relative;
+}
+.cw-thumb img { width: 100%; display: block; }
+.cw-thumb.on { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(234,88,12,.18); }
+.cw-thumb em {
+  position: absolute; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5);
+  color: #fff; font-size: 9.5px; font-style: normal; text-align: center; padding: 1px 0;
+}
+
+/* 课件放映器 */
+.cw-slide { margin-top: 14px; }
+.cw-slide-stage {
+  position: relative; background: #111; border-radius: 12px; overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+.cw-slide-stage img { width: 100%; height: 100%; object-fit: contain; }
+.cw-slide-btns {
+  position: absolute; right: 10px; bottom: 10px; display: flex; gap: 8px;
+}
+.cw-slide-btns button {
+  background: rgba(0,0,0,.55); color: #fff; border: none; cursor: pointer;
+  font-size: 12px; font-weight: 700; padding: 6px 13px; border-radius: 999px;
+}
+.cw-slide-btns button:hover { background: rgba(0,0,0,.75); }
+
+/* 下载按钮 */
+.cw-dl-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.cw-dl {
+  flex: 1; min-width: 140px; display: flex; align-items: center; justify-content: center; gap: 7px;
+  background: #fff7ed; border: 1px dashed var(--brand-light); color: var(--brand);
+  font-size: 13px; font-weight: 700; padding: 12px 10px; border-radius: 12px;
+  text-decoration: none; transition: all .15s;
+}
+.cw-dl:hover { background: #ffedd5; }
+.cw-dl small { font-weight: 500; opacity: .75; }
+
+/* 获取方式 */
+.cw-how { background: linear-gradient(160deg, #1f2937, #111827); border-radius: 18px; padding: 20px 18px; color: #fff; }
+.cw-how h2 { font-size: 18px; }
+.cw-how .steps { margin-top: 12px; display: grid; gap: 10px; }
+.cw-how .stp { display: flex; gap: 11px; align-items: flex-start; }
+.cw-how .stp .no {
+  flex: none; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--brand); color: #fff; font-weight: 800; font-size: 13px;
+  display: grid; place-items: center;
+}
+.cw-how .stp b { font-size: 14px; display: block; }
+.cw-how .stp p { font-size: 12px; color: rgba(255,255,255,.72); margin-top: 2px; line-height: 1.6; }
+.cw-how .cta {
+  margin-top: 16px; width: 100%; background: #07C160; color: #fff; border: none;
+  font-size: 15.5px; font-weight: 800; padding: 14px; border-radius: 14px; cursor: pointer;
+  box-shadow: 0 8px 20px -8px rgba(7,193,96,.7);
+}
+.cw-foot { text-align: center; font-size: 11.5px; color: var(--ink-2); padding: 22px 0 30px; }
+
+@media (min-width: 900px) {
+  .cw-wrap { max-width: 1080px; }
+  .cw-hero h1 { font-size: 30px; }
+  .cw-hero .sub { font-size: 14px; }
+  .cw-lv-grid { grid-template-columns: repeat(3, 1fr); }
+  .cw-deliver { grid-template-columns: repeat(4, 1fr); }
+  .cw-demo { padding: 24px 26px; }
+  .cw-plan-body { display: grid; grid-template-columns: 1fr 240px; gap: 18px; align-items: start; }
+  .cw-thumbs { flex-direction: column; max-height: 560px; overflow: auto; margin-top: 0; }
+  .cw-thumb { width: 100%; }
+  .cw-dl-row { flex-wrap: nowrap; }
+}
+</style>
+<script src="app.js" defer></script>
+</head>
+<body class="cw cw-l1">
+<div class="offline-tip" id="offlineTip">当前处于离线模式 · 内容已缓存</div>
+
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="logo">优</a>
+    <div class="titles">
+      <b>优尔思维启蒙商城</b>
+      <span>幼儿园版套装 · 课件教案</span>
+    </div>
+    <nav class="nav-menu">
+      <a href="index.html#products">产品总览</a>
+      <a href="index.html#games">经典桌游</a>
+      <a href="syllabus.html">课程大纲</a>
+      <a href="courseware.html">课件教案</a>
+      <a href="detail.html?id=C01">产品详情</a>
+      <a href="index.html#why">品牌背书</a>
+      <a href="javascript:void(0)" class="nav-cta nav-cta-wx" data-wx-open>咨询选购</a>
+    </nav>
+  </div>
+</nav>
+
+<header class="cw-hero">
+  <div class="cw-wrap">
+    <h1>幼儿园版套装 · 配套课件与教案</h1>
+    <p class="sub">买盒子只是开始，课上什么、怎么上，我们一课一备全都配好了<br>每课交付：Word 教案 + PPT 课件 + 学具清单，老师拿来就能直接上课</p>
+    <div class="nums">
+      <div><b>127</b><span>课程主题</span></div>
+      <div><b>345</b><span>总课时</span></div>
+      <div><b>159</b><span>教案文档</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="cw-wrap">
+
+  <!-- 三阶体系 -->
+  <section class="cw-sec">
+    <h2>L1 → L2 → L3 三阶配套</h2>
+    <p class="tip">同一套教具，按年龄分阶配套完整课程，点击卡片查看各阶段产品详情</p>
+    <div class="cw-lv-grid">
+      <a class="cw-lv-card cw-l1" href="detail.html?id=C01">
+        <div class="hd"><span class="lv-tag">L1</span><b>零基础启蒙盒</b><span class="age">2–4 岁</span></div>
+        <p class="desc">颜色 / 图形 / 点数 / 数量对应，游戏化认识数字 1–10，建立数感。</p>
+        <div class="stat-row">
+          <div><b>32</b>主题</div><div><b>156</b>课时</div><div><b>50</b>份教案</div>
+        </div>
+      </a>
+      <a class="cw-lv-card cw-l2" href="detail.html?id=C02">
+        <div class="hd"><span class="lv-tag">L2</span><b>进阶提升盒</b><span class="age">5–6 岁</span></div>
+        <p class="desc">凑十 / 破十 / 分合与加减运算，从"认识数字"进阶到"理解运算"。</p>
+        <div class="stat-row">
+          <div><b>64</b>主题</div><div><b>93</b>课时</div><div><b>69</b>份教案</div>
+        </div>
+      </a>
+      <a class="cw-lv-card cw-l3" href="detail.html?id=C03">
+        <div class="hd"><span class="lv-tag">L3</span><b>高阶拓展盒</b><span class="age">7–8 岁</span></div>
+        <p class="desc">24 算 / 主题算战 / 策略桌游，四则混合运算与博弈思维进阶。</p>
+        <div class="stat-row">
+          <div><b>31</b>主题</div><div><b>96</b>课时</div><div><b>40</b>份教案</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 每课一套交付形态 -->
+  <section class="cw-sec">
+    <h2>每课一套 · 拿来就能上课</h2>
+    <p class="tip">以《城市飞行棋》为例，一课的完整交付包含四件东西</p>
+    <div class="cw-deliver">
+      <div class="cw-dv-card"><div class="ico">📄</div><b>教案 Word</b><p>课前准备 / 教学目标 / 教学引入 / 教学过程 / 课程总结，五段式结构，新老师照稿就能讲。</p></div>
+      <div class="cw-dv-card"><div class="ico">📺</div><b>课件 PPT</b><p>大屏投影直接放，规则图、学具图、互动提问页都已画好，课前零准备。</p></div>
+      <div class="cw-dv-card"><div class="ico">🧩</div><b>学具清单</b><p>本课要用的棋盘、骰子、棋子逐项列明，配盒内实物一一对应。</p></div>
+      <div class="cw-dv-card"><div class="ico">🎯</div><b>目标能力</b><p>每课标注培养能力：数感、观察、策略、表达，成长效果看得见。</p></div>
+    </div>
+  </section>
+
+  <!-- 示例课 -->
+  <section class="cw-sec">
+    <h2>示例课 · 《城市飞行棋 1-5》</h2>
+    <p class="tip">完整一课包的在线预览：切换课时，左右翻页查看真实交付版式，同源文件可直接下载</p>
+    <div class="cw-demo">
+      <div class="cw-demo-hd">
+        <span class="badge">L1 · 主题 9</span>
+        <div>
+          <b>城市飞行棋 1-5</b>
+          <div class="meta">5 课 · 教具：飞行棋盘 ×1 / 数字卡 / 汽车棋子 / 点数骰子 · 培养：手口一致点数 · 数量对应</div>
+        </div>
+      </div>
+
+      <div class="cw-lesson-tabs" id="lessonTabs"></div>
+
+      <div class="cw-view-tabs">
+        <div class="cw-vtab on" data-v="plan">📄 教案阅读器<small>五段式结构 · 逐页翻阅</small></div>
+        <div class="cw-vtab" data-v="slide">📺 课件放映器<small>投影版式 · 自动播放</small></div>
+      </div>
+
+      <!-- 教案视图 -->
+      <div class="cw-plan" id="planView">
+        <div class="cw-struct" id="structNav"></div>
+        <div class="cw-plan-body">
+          <div>
+            <div class="cw-stage">
+              <img id="planImg" src="images/course/plan/p02.jpg" alt="教案页面">
+              <span class="cw-pageview" id="planPage">1 / 3</span>
+            </div>
+            <div class="cw-nav">
+              <button class="cw-arrow" id="planPrev" aria-label="上一页">‹</button>
+              <div class="pg" id="planInfo"></div>
+              <button class="cw-arrow" id="planNext" aria-label="下一页">›</button>
+            </div>
+          </div>
+          <div class="cw-thumbs" id="planThumbs"></div>
+        </div>
+      </div>
+
+      <!-- 课件视图 -->
+      <div class="cw-slide" id="slideView" style="display:none">
+        <div class="cw-slide-stage">
+          <img id="slideImg" src="images/course/slide/s02.jpg" alt="课件页面">
+          <div class="cw-slide-btns">
+            <button id="playBtn">▶ 播放</button>
+          </div>
+        </div>
+        <div class="cw-nav">
+          <button class="cw-arrow" id="slidePrev" aria-label="上一张">‹</button>
+          <div class="pg" id="slideInfo"></div>
+          <button class="cw-arrow" id="slideNext" aria-label="下一张">›</button>
+        </div>
+        <div class="cw-thumbs" id="slideThumbs"></div>
+      </div>
+
+      <div class="cw-dl-row">
+        <a class="cw-dl" href="images/course/files/lesson-plan-sample.docx" download>📄 下载教案示例 <small>Word · 5 课全</small></a>
+        <a class="cw-dl" href="images/course/files/slides-sample.pptx" download>📺 下载课件示例 <small>PPT · 40 页</small></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 获取方式 -->
+  <section class="cw-sec">
+    <div class="cw-how">
+      <h2>完整课件教案包 · 随盒交付</h2>
+      <div class="steps">
+        <div class="stp"><span class="no">1</span><div><b>选购幼儿园版套装</b><p>L1 / L2 / L3 任意级别，盒内即含对应阶段全部课程配套。</p></div></div>
+        <div class="stp"><span class="no">2</span><div><b>按课取用</b><p>教案打印或投屏，课件打开即用，每课 30–40 分钟标准课时。</p></div></div>
+        <div class="stp"><span class="no">3</span><div><b>申请试用</b><p>加客服微信，可先领取任一节课完整教案 + 课件试用，满意再成套采购。</p></div></div>
+      </div>
+      <button class="cta" data-wx-open>加客服微信 · 领取试用课件</button>
+    </div>
+  </section>
+
+  <div class="cw-foot">© 优尔教育 · 沈阳优尔教育集团 · 客服 400-108-1087</div>
+</main>
+
+<script>
+(function () {
+  /* ===== 示例课数据：课时 → 教案页 / 课件页 映射 ===== */
+  var LESSONS = [
+    { n: 1, tag: '学具组成', planStart: 2,  slideStart: 2  },
+    { n: 2, tag: '红绿灯规则', planStart: 5,  slideStart: 6  },
+    { n: 3, tag: '直通路线', planStart: 8,  slideStart: 14 },
+    { n: 4, tag: '路障规则', planStart: 11, slideStart: 22 },
+    { n: 5, tag: '综合复习', planStart: 14, slideStart: 32 }
+  ];
+  var STRUCT = ['课前准备', '教学目标', '教学引入', '教学过程', '课程总结'];
+  /* 每课 3 页教案中五个结构所在页（课内偏移，第 1 课的「教学过程」从第 1 页即开始） */
+  function structPage(lessonNo, idx) {
+    if (idx === 3) return lessonNo === 1 ? 0 : 1;   // 教学过程
+    if (idx === 4) return 2;                        // 课程总结
+    return 0;                                       // 准备/目标/引入
+  }
+  var PLAN_PAGES = 16, SLIDE_PAGES = 40, LESSON_PLAN_PAGES = 3;
+
+  var curLesson = 0, curPlan = 0, curSlide = 0, view = 'plan', playTimer = null;
+
+  function $(id) { return document.getElementById(id); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  /* ----- 课时切换条 ----- */
+  var tabsHtml = '';
+  LESSONS.forEach(function (L, i) {
+    tabsHtml += '<button class="cw-ltab' + (i === 0 ? ' on' : '') + '" data-i="' + i + '">'
+      + '<b>第 ' + L.n + ' 课</b><span>' + L.tag + '</span></button>';
+  });
+  $('lessonTabs').innerHTML = tabsHtml;
+  Array.prototype.forEach.call($('lessonTabs').children, function (b) {
+    b.addEventListener('click', function () { selectLesson(+b.dataset.i); });
+  });
+
+  /* ----- 教案结构导航 ----- */
+  var structHtml = '';
+  STRUCT.forEach(function (s, i) {
+    structHtml += '<button class="cw-stab" data-i="' + i + '">' + s + '</button>';
+  });
+  $('structNav').innerHTML = structHtml;
+  Array.prototype.forEach.call($('structNav').children, function (b) {
+    b.addEventListener('click', function () {
+      var L = LESSONS[curLesson];
+      curPlan = structPage(L.n, +b.dataset.i);
+      renderPlan();
+    });
+  });
+
+  /* ----- 视图切换 ----- */
+  Array.prototype.forEach.call(document.querySelectorAll('.cw-vtab'), function (t) {
+    t.addEventListener('click', function () {
+      view = t.dataset.v;
+      document.querySelectorAll('.cw-vtab').forEach(function (x) { x.classList.toggle('on', x === t); });
+      $('planView').style.display = view === 'plan' ? '' : 'none';
+      $('slideView').style.display = view === 'slide' ? '' : 'none';
+      stopPlay();
+    });
+  });
+
+  function selectLesson(i) {
+    curLesson = i;
+    curPlan = 0;
+    curSlide = 0;
+    Array.prototype.forEach.call($('lessonTabs').children, function (b) {
+      b.classList.toggle('on', +b.dataset.i === i);
+    });
+    buildThumbs();
+    renderPlan();
+    renderSlide();
+    stopPlay();
+  }
+
+  /* ----- 教案渲染 ----- */
+  function renderPlan() {
+    var L = LESSONS[curLesson];
+    var page = L.planStart + curPlan;
+    var img = $('planImg');
+    img.src = 'images/course/plan/p' + pad(page) + '.jpg';
+    $('planPage').textContent = (curPlan + 1) + ' / ' + LESSON_PLAN_PAGES;
+    $('planInfo').innerHTML = '第 <b>' + L.n + '</b> 课 · ' + L.tag + ' · 教案第 <b>' + page + '</b> 页';
+    $('planPrev').disabled = curPlan === 0;
+    $('planNext').disabled = curPlan === LESSON_PLAN_PAGES - 1;
+    /* 结构高亮：当前页命中的结构 */
+    Array.prototype.forEach.call($('structNav').children, function (b) {
+      b.classList.toggle('on', structPage(L.n, +b.dataset.i) === curPlan);
+    });
+    /* 缩略图高亮 */
+    Array.prototype.forEach.call($('planThumbs').children, function (t, i) {
+      t.classList.toggle('on', i === curPlan);
+    });
+  }
+
+  /* ----- 课件渲染 ----- */
+  function renderSlide() {
+    var L = LESSONS[curLesson];
+    var page = L.slideStart + curSlide;
+    var total = (function () {
+      var nx = LESSONS[curLesson + 1];
+      return (nx ? nx.slideStart : SLIDE_PAGES + 1) - L.slideStart;
+    })();
+    $('slideImg').src = 'images/course/slide/s' + pad(page) + '.jpg';
+    $('slideInfo').innerHTML = '第 <b>' + L.n + '</b> 课 · ' + L.tag + ' · 幻灯片 <b>' + (curSlide + 1) + '</b> / ' + total
+      + '（总第 ' + page + ' 页）';
+    $('slidePrev').disabled = curSlide === 0;
+    $('slideNext').disabled = curSlide === total - 1;
+    Array.prototype.forEach.call($('slideThumbs').children, function (t, i) {
+      t.classList.toggle('on', i === curSlide);
+      if (i === curSlide) t.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    });
+  }
+
+  function slideTotal() {
+    var nx = LESSONS[curLesson + 1];
+    return (nx ? nx.slideStart : SLIDE_PAGES + 1) - LESSONS[curLesson].slideStart;
+  }
+
+  /* ----- 缩略图条 ----- */
+  function buildThumbs() {
+    var L = LESSONS[curLesson];
+    var ph = '', sh = '';
+    for (var i = 0; i < LESSON_PLAN_PAGES; i++) {
+      var p = L.planStart + i;
+      ph += '<button class="cw-thumb" data-i="' + i + '"><img src="images/course/plan/p' + pad(p)
+        + '.jpg" alt="教案第 ' + p + ' 页" loading="lazy"><em>' + p + '</em></button>';
+    }
+    for (var j = 0; j < slideTotal(); j++) {
+      var s = L.slideStart + j;
+      sh += '<button class="cw-thumb" data-i="' + j + '"><img src="images/course/slide/s' + pad(s)
+        + '.jpg" alt="幻灯片第 ' + s + ' 页" loading="lazy"><em>' + s + '</em></button>';
+    }
+    $('planThumbs').innerHTML = ph;
+    $('slideThumbs').innerHTML = sh;
+    Array.prototype.forEach.call($('planThumbs').children, function (t) {
+      t.addEventListener('click', function () { curPlan = +t.dataset.i; renderPlan(); });
+    });
+    Array.prototype.forEach.call($('slideThumbs').children, function (t) {
+      t.addEventListener('click', function () { curSlide = +t.dataset.i; renderSlide(); });
+    });
+  }
+
+  /* ----- 翻页 ----- */
+  $('planPrev').addEventListener('click', function () { if (curPlan > 0) { curPlan--; renderPlan(); } });
+  $('planNext').addEventListener('click', function () { if (curPlan < LESSON_PLAN_PAGES - 1) { curPlan++; renderPlan(); } });
+  $('slidePrev').addEventListener('click', function () { if (curSlide > 0) { curSlide--; renderSlide(); } });
+  $('slideNext').addEventListener('click', function () { if (curSlide < slideTotal() - 1) { curSlide++; renderSlide(); } });
+
+  /* ----- 播放 ----- */
+  function stopPlay() {
+    if (playTimer) { clearInterval(playTimer); playTimer = null; $('playBtn').textContent = '▶ 播放'; }
+  }
+  $('playBtn').addEventListener('click', function () {
+    if (playTimer) { stopPlay(); return; }
+    $('playBtn').textContent = '⏸ 暂停';
+    playTimer = setInterval(function () {
+      if (curSlide < slideTotal() - 1) { curSlide++; renderSlide(); }
+      else { curSlide = 0; renderSlide(); }
+    }, 4000);
+  });
+
+  /* ----- 键盘翻页 ----- */
+  document.addEventListener('keydown', function (e) {
+    if (view === 'plan') {
+      if (e.key === 'ArrowLeft' && curPlan > 0) { curPlan--; renderPlan(); }
+      if (e.key === 'ArrowRight' && curPlan < LESSON_PLAN_PAGES - 1) { curPlan++; renderPlan(); }
+    } else {
+      if (e.key === 'ArrowLeft' && curSlide > 0) { curSlide--; renderSlide(); }
+      if (e.key === 'ArrowRight' && curSlide < slideTotal() - 1) { curSlide++; renderSlide(); }
+    }
+  });
+
+  buildThumbs();
+  renderPlan();
+  renderSlide();
+
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+  if (navigator.onLine === false) $('offlineTip').style.display = 'block';
+  window.addEventListener('online', function () { $('offlineTip').style.display = 'none'; });
+  window.addEventListener('offline', function () { $('offlineTip').style.display = 'block'; });
+})();
+</script>
+</body>
+</html>

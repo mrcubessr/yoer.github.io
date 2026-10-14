@@ -1,11 +1,12 @@
 /* 优尔启蒙商城 Service Worker：预缓存全部资源，离线可浏览
    版本约定：改任何被预缓存的文件，必须 bump VERSION，否则老用户拿不到更新 */
-const VERSION = 'yoer-shop-v54';
+const VERSION = 'yoer-shop-v55';
 const PRECACHE = [
   'index.html',
   'detail.html',
   'game.html',
   'syllabus.html',
+  'courseware.html',
   'tools.html',
   'tools-l2.html',
   'tools-l3.html',
@@ -107,7 +108,16 @@ const PRECACHE = [
   'images/games/m24/flagship/flagship-book1.jpg', 'images/games/m24/flagship/flagship-book2.jpg',
   'images/games/m24/flagship/flagship-book1-back.jpg', 'images/games/m24/flagship/flagship-book2-back.jpg',
   'images/games/market/market-01.png', 'images/games/ocean/ocean-01.png',
-  'images/games/farm/farm-01.jpg', 'images/games/kingdom/kingdom-01.jpg'
+  'images/games/farm/farm-01.jpg', 'images/games/kingdom/kingdom-01.jpg',
+  // 课件教案展示页：示例课《城市飞行棋 1-5》教案 16 页 + 课件 40 页 + 同源文件
+  'images/course/plan/p01.jpg', 'images/course/plan/p02.jpg', 'images/course/plan/p03.jpg',
+  'images/course/plan/p04.jpg', 'images/course/plan/p05.jpg', 'images/course/plan/p06.jpg',
+  'images/course/plan/p07.jpg', 'images/course/plan/p08.jpg', 'images/course/plan/p09.jpg',
+  'images/course/plan/p10.jpg', 'images/course/plan/p11.jpg', 'images/course/plan/p12.jpg',
+  'images/course/plan/p13.jpg', 'images/course/plan/p14.jpg', 'images/course/plan/p15.jpg',
+  'images/course/plan/p16.jpg'
+  // 说明：课件 40 张（images/course/slide/*.jpg）与 Word/PPT 源文件体积较大，
+  // 不进入预缓存，由运行时 stale-while-revalidate 按需拉取并落缓存
 ];
 
 self.addEventListener('install', (e) => {
