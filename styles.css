@@ -687,6 +687,7 @@ body.d-c03 { --brand: #dc2626; --brand-light: #f87171; --brand-bg: #fef2f2; }
 .cmp-table td.kinder-c::before { background: #2563eb; }
 
 .d-sec p { font-size: 14px; color: #4b5563; text-align: justify; }
+.d-sec p + .stats-grid { margin-top: 14px; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chips span {
   font-size: 13px; color: #9a3412; background: #fff1e2;
