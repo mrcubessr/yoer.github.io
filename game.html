@@ -366,21 +366,24 @@
       <div class="wrap g-body">
         ${g.visual ? `
         <!-- ① 一套游戏 · 多重收获 -->
+        ${g.visual.harvest ? `
         <section class="pv-band">
           <h2 class="pv-h">一套游戏 · 多重收获</h2>
           <div class="pv-points">${g.visual.harvest.map(p => `<span>${p}</span>`).join('')}</div>
-        </section>
+        </section>` : ''}
 
         <!-- ② 三大支柱 -->
+        ${g.visual.pillars ? `
         <section class="pv-cream pv-pillars">
           ${g.visual.pillars.map(p => `
             <div class="pv-pillar">
               <div class="pv-no">${p.n}</div>
               <div class="pv-ptxt"><b>${p.t}</b><p>${p.d}</p></div>
             </div>`).join('')}
-        </section>
+        </section>` : ''}
 
         <!-- ③ 双游戏模式 -->
+        ${g.visual.modes ? `
         <section class="pv-band">
           <div class="pv-script">${g.visual.modeKicker || 'Two in One'}</div>
           <h2 class="pv-h">双游戏模式 · 乐趣加倍</h2>
@@ -392,32 +395,35 @@
                 <figcaption><span class="pv-chip">${m.tag}</span><b>${m.name}</b><p>${m.d}</p></figcaption>
               </figure>`).join('')}
           </div>
-        </section>
+        </section>` : ''}
 
         <!-- ④ 派对主题 -->
+        ${g.visual.partyTitle ? `
         <section class="pv-cream">
           <div class="pv-script2">${g.visual.themeKicker || 'Party'}</div>
           <h2 class="pv-h2">${g.visual.partyTitle}</h2>
           <p class="pv-pd">${g.visual.partyDesc}</p>
-          <img class="pv-partyimg" src="${g.visual.partyImg}" alt="派对主题插画" loading="lazy">
-        </section>
+          ${g.visual.partyImg ? `<img class="pv-partyimg" src="${g.visual.partyImg}" alt="派对主题插画" loading="lazy">` : ''}
+        </section>` : ''}
 
         <!-- ⑤ 一张图看懂怎么玩 -->
+        ${(g.visual.howTitle || g.visual.howImg || g.modules) ? `
         <section class="pv-band">
-          <h2 class="pv-h">${g.visual.howTitle}</h2>
-          <img class="pv-howimg" src="${g.visual.howImg}" alt="派对棋盘全貌" loading="lazy">
+          <h2 class="pv-h">${g.visual.howTitle || '一张图看懂怎么玩'}</h2>
+          ${g.visual.howImg ? `<img class="pv-howimg" src="${g.visual.howImg}" alt="玩法全貌" loading="lazy">` : ''}
           <div class="pv-mech">
-            ${g.modules.map((m, i) => `
+            ${(g.modules || []).map((m, i) => `
               <div class="pv-mech-item">
                 <span class="pv-mn">${i + 1}</span>
                 <div><b>${m.name}</b><em>${m.em}</em><p>${m.items}</p></div>
               </div>`).join('')}
           </div>
-        </section>
+        </section>` : ''}
 
         <!-- ⑥ 好教具 -->
+        ${g.visual.tools ? `
         <section class="pv-cream">
-          <h2 class="pv-h2">${g.visual.toolsTitle}</h2>
+          <h2 class="pv-h2">${g.visual.toolsTitle || '好教具'}</h2>
           <div class="pv-tool-grid">
             ${g.visual.tools.map(t => `
               <figure class="pv-tool">
@@ -425,17 +431,19 @@
                 <figcaption><b>${t.t}</b><p>${t.d}</p></figcaption>
               </figure>`).join('')}
           </div>
-        </section>
+        </section>` : ''}
 
         <!-- ⑦ 全家福 -->
+        ${(g.visual.kitTitle || g.visual.kitImg) ? `
         <section class="pv-band">
-          <h2 class="pv-h">${g.visual.kitTitle}</h2>
-          <img class="pv-kitimg" src="${g.visual.kitImg}" alt="盒内配置全家福" loading="lazy">
-        </section>
+          <h2 class="pv-h">${g.visual.kitTitle || '盒内配置全家福'}</h2>
+          ${g.visual.kitImg ? `<img class="pv-kitimg" src="${g.visual.kitImg}" alt="盒内配置全家福" loading="lazy">` : ''}
+        </section>` : ''}
 
         <!-- ⑧ 学员荣誉（均来自 24 算真实赛事，按真实项目如实标注） -->
+        ${g.visual.awards ? `
         <section class="pv-cream pv-awards">
-          <h2 class="pv-h2">优尔 24 算学员的硬核战绩 · 玩出来的实力</h2>
+          <h2 class="pv-h2">${g.visual.awardsTitle || '优尔学员的硬核战绩 · 玩出来的实力'}</h2>
           <p class="pv-pd">百万悬赏连续三年零败绩、市级 45 枚奖牌、全国 12 个组别夺冠——优尔 24 算学员把"玩"变成了真本事（以下战绩均来自 24 算赛事本身，如实标注）。</p>
           <div class="pv-award-grid">
             ${g.visual.awards.map(a => `
@@ -446,7 +454,7 @@
                 <p>${a.d}</p>
               </div>`).join('')}
           </div>
-        </section>
+        </section>` : ''}
 
         <div class="d-sec full-span">
           <h2>${g.stepsTitle}</h2>
